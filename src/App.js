@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 
 import { Flex, Inline, curry } from 'jsxstyle';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
+import Product_Card from './components/Product_Card.js';
 
 
 const Container = curry(Flex, {
@@ -25,6 +28,9 @@ class App extends Component {
         <Flex>
           <Heading color="#fff">Member Application</Heading>
         </Flex>
+        <MuiThemeProvider>
+          <Product_Card img="" title="Test" subText="subText" buttonText="button" buttonColor="#3d917b" backgroundColor="white"/>
+        </MuiThemeProvider>
       </Container>
     );
   }
