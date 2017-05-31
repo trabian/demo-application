@@ -12,16 +12,17 @@ const flexstyle = {
 
 const buttonStyle = {
   height: '6vh',
-  verticalAlign: 'middle'
-}
+  marginBottom: '10px'
+};
 
 const Product_Card = (props)=>{
-  console.log(props.img);
   return(
-    <Col alignItems='center' justifyContent='space-around' style={{paddingLeft: '20px',paddingRight: '20px', width: '250px', height: '350px', backgroundColor: props.backgroundColor, marginRight: '2vw', marginLeft: '2vw' }}>
-      <img src={props.img} alt="Insert image here" width="100px" height="100px"/>
-      <Flex style={{ flexDirection: 'column', alignItems: 'center' }}>
+    <Col alignItems='center' justifyContent='space-between' style={{paddingLeft: '20px',paddingRight: '20px', width: '250px', height: '350px', backgroundColor: props.backgroundColor, marginRight: '2vw', marginLeft: '2vw' }}>
+      <Flex style={{ flexDirection:'column', alignItems: 'center'}}>
+        <img src={props.img} alt="Insert image here" width="100px" height="100px"/>
         <h2>{props.title}</h2>
+      </Flex>
+      <Flex style={{ flexDirection: 'column', alignItems: 'center' }}>
         <p>{props.subText}</p>
       </Flex>
       <RaisedButton
