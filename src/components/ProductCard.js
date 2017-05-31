@@ -2,13 +2,14 @@ import React from 'react';
 import { RaisedButton } from 'material-ui';
 import { Col, Flex } from 'jsxstyle';
 
+import * as colors from '../colors.js';
 
 const buttonText = {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
   justifyContent: 'center',
-  color: '#fff'
+  color: colors.primary_text
 };
 
 const buttonStyle = {
@@ -28,22 +29,22 @@ const wrapperStyles = {
 const Product_Card = (props)=>{
   return(
     <Col alignItems='center' style={{...wrapperStyles, backgroundColor: props.backgroundColor}}>
-      <Flex style={{ flexDirection:'column', alignItems: 'center' }}>
-        <img src={props.img} height='95px' alt='Insert image here' style={{ marginTop: 15 }}/>
-      </Flex>
+      <Col alignItems='center'>
+        <img src={props.img} style={{ marginTop: 15, height: 95 }}/>
+      </Col>
 
-      <Flex style={{ marginTop: 25, flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', height: 200}}>
-        <h3 style={{color: '#3c3c3c'}}>{props.title}</h3>
-        <p style={{color: '#707275', fontSize: '0.9em', margin: 0, padding: 0}}>{props.subText}</p>
+      <Flex flexDirection='column' alignItems='center' justifyContent='flex-start' style={{ marginTop: 25, height: 200}}>
+        <h3 style={{color: colors.card_title}}>{props.title}</h3>
+        <p style={{color: colors.card_subtext, fontSize: '0.9em', margin: 0, padding: 0}}>{props.subText}</p>
       </Flex>
 
       <RaisedButton
-        fullWidth={true}
-        backgroundColor={props.buttonColor}
+        fullWidth
+        backgroundColor={colors.unseleted_button}
         style={buttonStyle}
       >
           <div style={{...buttonText, width: '100%', height: '100%'}}>
-           {props.buttonText}
+           Add To My Selection
           </div>
       </RaisedButton>
     </Col>
