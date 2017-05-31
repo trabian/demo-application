@@ -29,11 +29,10 @@ const Product_Card = (props)=>{
   return(
     <Col alignItems='center' style={{...wrapperStyles, backgroundColor: props.backgroundColor}}>
       <Flex style={{ flexDirection:'column', alignItems: 'center' }}>
-        <img src={props.img} height="95px" alt="Insert image here" style={{ marginTop: '10px' }}/>
+        <img src={props.img} height='95px' alt='Insert image here' style={{ marginTop: '10px' }}/>
       </Flex>
 
-      <Flex style={{ flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', height: 200}}>
-        <br />
+      <Flex style={{ marginTop: 10, flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start', height: 200}}>
         <h3 style={{color: '#3c3c3c'}}>{props.title}</h3>
         <p style={{color: '#707275', fontSize: '0.9em', margin: 0, padding: 0}}>{props.subText}</p>
       </Flex>
@@ -43,7 +42,7 @@ const Product_Card = (props)=>{
         backgroundColor={props.buttonColor}
         style={buttonStyle}
       >
-          <div style={{ width: '100%', height: '100%', ...buttonText}}>
+          <div style={{...buttonText, width: '100%', height: '100%'}}>
            {props.buttonText}
           </div>
       </RaisedButton>
