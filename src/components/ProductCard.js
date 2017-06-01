@@ -13,7 +13,7 @@ const buttonText = {
 };
 
 const buttonStyle = {
-  height: '6vh',
+  height: 50,
   marginBottom: 10
 };
 
