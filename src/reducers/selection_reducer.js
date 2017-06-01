@@ -1,4 +1,5 @@
 import { SavingsCard, SpendingCard, CreditCard } from '../cards.js';
+import { unseleted_button, selected_button } from '../colors.js';
 import { select } from '../action_types.js';
 
 export default (state={}, action)=>{
@@ -35,4 +36,6 @@ state = {
 Questions:
 -Should I use state['SavingsCard'] or should I just hardcode the initial values
 ex: state = {savingsCard: ... , spendingCard ...}
+
+-How will text be changed?
 */

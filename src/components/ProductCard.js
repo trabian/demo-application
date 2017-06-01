@@ -52,3 +52,10 @@ const Product_Card = (props)=>{
 }
 
 export default Product_Card;
+
+
+/*
+Question:
+-How will I set the backgroundColor of each button based on the state?
+ Each card needs someway to use its title as a property of the state object returned by the selection_reducer.
+*/
