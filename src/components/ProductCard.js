@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 import { Col, Flex } from 'jsxstyle';
 
-import UnselectedButton from './UnselectedButton.js';
-import SelectedButton from './SelectedButton.js';
-import RemoveButton from './RemoveButton.js';
+import { SelectButton, UNSELECTED, SELECTED_UNHOVERED, SELECTED_HOVERED } from './SelectButton';
 
 import { connect } from 'react-redux';
 
 import * as actions from '../actions';
 import * as colors from '../colors.js';
-
 
 const wrapperStyles = {
   padding: 20,
@@ -19,7 +16,6 @@ const wrapperStyles = {
   marginRight: '2vw',
   marginLeft: '2vw'
 };
-
 
 class ProductCard extends Component{
   constructor(props){
@@ -37,19 +33,18 @@ class ProductCard extends Component{
   }
 
   displayButton(){
-    if(this.props.selected.includes(this.props.title)){
-      if(this.state.hover){
-        return <RemoveButton onClick={this.handleButtonClick}
-                  onMouseLeave={this.setHoverState.bind(this, false)}
-                />
-      }
-      return (<SelectedButton onClick={this.handleButtonClick}
-              onMouseEnter={this.setHoverState.bind(this, true)}
-              />);
-    }
-    else{
-      return <UnselectedButton onClick={this.handleButtonClick}/>
-    }
+    const buttonType = this.props.selected.includes(this.props.title)
+      ? (this.state.hover ? SELECTED_HOVERED : SELECTED_UNHOVERED)
+      : UNSELECTED;
+
+    return (
+      <SelectButton
+        onClick={this.handleButtonClick}
+        onMouseEnter={this.setHoverState.bind(this, true)}
+        onMouseLeave={this.setHoverState.bind(this, false)}
+        buttonType={buttonType}
+      />
+    );
   }
 
   render(){
