@@ -11,7 +11,6 @@ import * as actions from '../actions';
 import * as colors from '../colors.js';
 
 
-
 const wrapperStyles = {
   padding: 20,
   paddingBottom:10,
@@ -49,9 +48,9 @@ class ProductCard extends Component{
   }
 
   render(){
-    const {img, backgroundColor, title, subText} = this.props;
+    const { img, backgroundColor, title, subText, selected } = this.props;
     return(
-      <Col alignItems='center' style={{...wrapperStyles, backgroundColor: backgroundColor}}>
+      <Col alignItems='center' border={'5px solid ' + ((selected.includes(title)) ? colors.selected_button : colors.primary_text )} style={{...wrapperStyles, backgroundColor: backgroundColor}}>
         <Col alignItems='center'>
           <img src={img} alt='' style={{ marginTop: 15, height: 95 }}/>
         </Col>
@@ -60,6 +59,8 @@ class ProductCard extends Component{
           <h3 style={{color: colors.card_title}}>{title}</h3>
           <p style={{color: colors.card_subtext, fontSize: '0.9em', margin: 0, padding: 0}}>{subText}</p>
         </Flex>
+
+        {this.displayButton()}
 
       </Col>
     );
