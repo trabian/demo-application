@@ -25,6 +25,7 @@ const Heading = curry(Inline, {
 class App extends Component {
   render() {
     return (
+
       <Container>
 
         <Heading>Member Application</Heading>
