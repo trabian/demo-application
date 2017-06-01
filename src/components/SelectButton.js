@@ -3,6 +3,7 @@ import { RaisedButton } from 'material-ui';
 
 import * as colors from '../colors';
 
+
 export const UNSELECTED = 'ADD TO MY COLLECTION';
 export const SELECTED_UNHOVERED = 'SELECTED';
 export const SELECTED_HOVERED = 'REMOVE';
@@ -36,6 +37,8 @@ export const SelectButton = ({buttonType, onClick, onMouseEnter, onMouseLeave}) 
     case SELECTED_HOVERED:
       backgroundColor = colors.remove_button;
       break;
+
+    default:
   }
 
   return (

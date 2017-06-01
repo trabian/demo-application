@@ -25,6 +25,8 @@ class ProductCard extends Component{
   }
 
   handleButtonClick(){
+    // manually set hover state to ensure that the button originally shows "SELECTED" right after it's clicked
+    this.setHoverState(false);
     this.props.selectAction(this.props.title);
   }
 
