@@ -22,6 +22,7 @@ const UnselectedButton = (props)=>{
       backgroundColor={ colors.unseleted_button }
       style={buttonStyle}
       onClick={props.onClick}
+      
     >
         <div style={{...buttonText, width: '100%', height: '100%'}}>
          ADD TO MY SELECTION

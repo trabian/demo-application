@@ -22,6 +22,7 @@ const SelectedButton = (props)=>{
       backgroundColor={ colors.selected_button }
       style={buttonStyle}
       onClick={ props.onClick }
+      onMouseEnter={props.onMouseEnter}
     >
         <div style={{...buttonText, width: '100%', height: '100%'}}>
          SELECTED

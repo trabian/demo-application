@@ -32,14 +32,19 @@ class ProductCard extends Component{
     this.props.selectAction(this.props.title);
   }
 
+  setHoverState(bool){
+    this.setState({hover: bool});
+  }
+
   displayButton(){
     if(this.props.selected.includes(this.props.title)){
       if(this.state.hover){
-        return <RemoveButton onClick={this.handleButtonClick}/>
+        return <RemoveButton onClick={this.handleButtonClick}
+                  onMouseLeave={this.setHoverState.bind(this, false)}
+                />
       }
       return (<SelectedButton onClick={this.handleButtonClick}
-              onMouseEnter={()=> console.log('hovered!!!!')}
-              onMouseLeave={()=> this.setState({hover: false})}
+              onMouseEnter={this.setHoverState.bind(this, true)}
               />);
     }
     else{
@@ -59,9 +64,7 @@ class ProductCard extends Component{
           <h3 style={{color: colors.card_title}}>{title}</h3>
           <p style={{color: colors.card_subtext, fontSize: '0.9em', margin: 0, padding: 0}}>{subText}</p>
         </Flex>
-
         {this.displayButton()}
-
       </Col>
     );
   }
@@ -73,6 +76,5 @@ const mapStateToProps = (state)=>{
     selected: state.selected
   };
 };
-
 
 export default connect(mapStateToProps, actions)(ProductCard);

@@ -22,6 +22,7 @@ const RemoveButton = (props)=>{
       backgroundColor={ colors.remove_button }
       style={buttonStyle}
       onClick={props.onClick}
+      onMouseLeave={props.onMouseLeave}
     >
         <div style={{...buttonText, width: '100%', height: '100%'}}>
          REMOVE
