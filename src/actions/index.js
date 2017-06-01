@@ -1,7 +1,8 @@
 import { select } from '../action_types.js';
-export const select = (cardTitle)=>{
+
+export const selectAction = (cardTitle)=>{
   return {
     type: select,
-    payload: cardTitle
+    title: cardTitle
   };
 };
