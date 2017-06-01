@@ -30,7 +30,7 @@ const Product_Card = (props)=>{
   return(
     <Col alignItems='center' style={{...wrapperStyles, backgroundColor: props.backgroundColor}}>
       <Col alignItems='center'>
-        <img src={props.img} style={{ marginTop: 15, height: 95 }}/>
+        <img src={props.img} alt='' style={{ marginTop: 15, height: 95 }}/>
       </Col>
 
       <Flex flexDirection='column' alignItems='center' justifyContent='flex-start' style={{ marginTop: 25, height: 200}}>
