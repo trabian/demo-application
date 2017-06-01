@@ -1,17 +1,25 @@
-import {SavingsCard, SpendingCard, CreditCard} from '../cards.js';
+import { SavingsCard, SpendingCard, CreditCard } from '../cards.js';
+import { select } from '../action_types.js';
 
-export default (state, action)=>{
-  if(action.type === 'select'){  //all action types will be exported as constants in another file.
+export default (state={}, action)=>{
+  if(action.type === select){
     switch(action.payload){
       case SavingsCard:
+      break;
 
       case SpendingCard:
+      break;
 
       case CreditCard:
+      break;
+
+      default:
+      return state;
     }
   }
 
   return state;
+
 };
 
 

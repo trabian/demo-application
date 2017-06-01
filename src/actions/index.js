@@ -1,6 +1,7 @@
+import { select } from '../action_types.js';
 export const select = (cardTitle)=>{
   return {
-    type: 'select', //all action types will be exported as constants in another file.
+    type: select,
     payload: cardTitle
-  }
+  };
 };
