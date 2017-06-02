@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import { Col, Flex } from 'jsxstyle';
-
-
-import { SelectButton, UNSELECTED, SELECTED_UNHOVERED, SELECTED_HOVERED } from './SelectButton';
 
 import { connect } from 'react-redux';
+import { Col, Flex } from 'jsxstyle';
 
+import { SelectButton, UNSELECTED, SELECTED_UNHOVERED, SELECTED_HOVERED } from './SelectButton';
 import * as actions from '../actions';
 import * as colors from '../colors.js';
 
@@ -31,8 +29,8 @@ class ProductCard extends Component{
     this.props.selectAction(this.props.title);
   }
 
-  setHoverState(bool){
-    this.setState({hover: bool});
+  setHoverState(hover){
+    this.setState({ hover });
   }
 
   displayButton(){
@@ -62,7 +60,9 @@ class ProductCard extends Component{
           <h3 style={{color: colors.card_title}}>{title}</h3>
           <p style={{color: colors.card_subtext, fontSize: '0.9em', margin: 0, padding: 0}}>{subText}</p>
         </Flex>
+
         {this.displayButton()}
+
       </Col>
     );
   }

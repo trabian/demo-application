@@ -13,6 +13,5 @@ export default (state=[], action)=>{
       return [...state, action.title];
     }
   }
-
   return state;
 };
