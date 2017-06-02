@@ -19,6 +19,7 @@ const CoreRouter = () => {
       <ConnectedRouter history={history}>
         <Switch>
           <Route exact path='/' component={IndexPage} />
+          <Route exact path='/apply' component={IndexPage} />
           <Route path='*' component={NotFound} />
         </Switch>
       </ConnectedRouter>
