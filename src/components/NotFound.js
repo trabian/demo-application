@@ -5,7 +5,7 @@ import  { Container, Heading } from '../helpers/container';
 const NotFound = () => {
   return (
     <Container>
-      <Heading>Member Application</Heading>
+      <Heading>Not Found</Heading>
     </Container>
   );
 }
