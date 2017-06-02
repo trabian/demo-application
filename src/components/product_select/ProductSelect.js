@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { RaisedButton } from 'material-ui';
-import ArrowForward from 'material-ui/svg-icons/navigation/arrow-forward.js';
+import SvgIcon from 'material-ui/SvgIcon';
 
 import Stepper from '../../Stepper';
 import { Flex, Row } from 'jsxstyle';
@@ -24,18 +24,31 @@ const ApplyButton = connect(mapState)(({selected}) => {
     ? {disabled: false, color: colors.selected_button}
     : {disabled: true, color: colors.disabled_button};
 
+  const buttonTextStyle = {
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      fontSize: 18,
+      color: colors.primary_text,
+      width: '100%',
+      height: '100%',
+  };
+
   return (
     <div style={{textAlign: 'center'}}>
       <RaisedButton
         backgroundColor={color}
         disabled={disabled}
-        labelPosition='before'
-        label='APPLY NOW'
-        labelColor={colors.primary_text}
         style={{marginTop: 26, width: 275, height: 50, marginBottom: 10}}
-        labelStyle={{fontSize: 18, fontWeight: active ? 'bold' : 'normal'}}
-        icon={<ArrowForward />}
-      />
+      >
+        <div style={{...buttonTextStyle, fontWeight: active ? 'bold' : 'normal'}}>
+          APPLY NOW
+          <SvgIcon style={{color: colors.primary_text}}>
+             <path d={'M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z'} />
+          </SvgIcon>
+        </div>
+      </RaisedButton>
     </div>
   );
 });
