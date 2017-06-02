@@ -1,30 +1,22 @@
 import React from 'react';
 import { Route, Switch } from 'react-router';
-import { ConnectedRouter, routerMiddleware } from 'react-router-redux';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import createHistory from 'history/createBrowserHistory';
+import { ConnectedRouter} from 'react-router-redux';
 
-import reducers from './reducers';
 import IndexPage from './components/product_select/ProductSelect';
+import Apply from './components/apply/Apply';
 import NotFound from './components/NotFound';
 
-const history = createHistory();
-const middleware = routerMiddleware(history);
-const store = createStore(reducers, applyMiddleware(middleware));
+export const PRODUCT_SELECT = '/';
+export const APPLY = '/apply';
 
-const CoreRouter = () => {
+export const CoreRouter = ({history}) => {
   return (
-    <Provider store={store}>
-      <ConnectedRouter history={history}>
-        <Switch>
-          <Route exact path='/' component={IndexPage} />
-          <Route exact path='/apply' component={IndexPage} />
-          <Route path='*' component={NotFound} />
-        </Switch>
-      </ConnectedRouter>
-    </Provider>
+    <ConnectedRouter history={history}>
+      <Switch>
+        <Route exact path={PRODUCT_SELECT} component={IndexPage} />
+        <Route exact path={APPLY} component={Apply} />
+        <Route path='*' component={NotFound} />
+      </Switch>
+    </ConnectedRouter>
   );
 };
-
-export default CoreRouter;
