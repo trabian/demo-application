@@ -11,7 +11,7 @@ import NotFound from './components/NotFound';
 
 const history = createHistory();
 const middleware = routerMiddleware(history);
-const store = createStore(reducers,applyMiddleware(middleware));
+const store = createStore(reducers, applyMiddleware(middleware));
 
 const CoreRouter = () => {
   return (

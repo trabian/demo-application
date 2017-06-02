@@ -69,8 +69,8 @@ class ProductCard extends Component{
 }
 
 
-const mapStateToProps = (state)=>{
-  return{
+const mapStateToProps = (state) => {
+  return {
     selected: state.selected
   };
 };
