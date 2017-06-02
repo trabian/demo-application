@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { RaisedButton } from 'material-ui';
+import ArrowForward from 'material-ui/svg-icons/navigation/arrow-forward.js';
 
 import Stepper from '../../Stepper';
 import { Flex, Row } from 'jsxstyle';
@@ -28,9 +29,12 @@ const ApplyButton = connect(mapState)(({selected}) => {
       <RaisedButton
         backgroundColor={color}
         disabled={disabled}
+        labelPosition='before'
         label='APPLY NOW'
-        style={{marginTop: '26px', width: '275px', height: 50, marginBottom: 10}}
-        labelStyle={{fontSize: '18px', fontWeight: active ? 'bold' : 'normal'}}
+        labelColor={colors.primary_text}
+        style={{marginTop: 26, width: 275, height: 50, marginBottom: 10}}
+        labelStyle={{fontSize: 18, fontWeight: active ? 'bold' : 'normal'}}
+        icon={<ArrowForward />}
       />
     </div>
   );
