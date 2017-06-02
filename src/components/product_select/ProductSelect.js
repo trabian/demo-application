@@ -62,6 +62,7 @@ class ProductSelect extends Component {
         <Heading>Member Application</Heading>
 
         <Stepper
+          style={{marginTop: 15}}
           steps={ [{title: 'SELECT PRODUCTS'}, {title: 'APPLY'}, {title: 'DISCLOSURES'}, {title: 'WRAP UP'}] }
           activeStep={ 1 }
           defaultTitleColor='white'
@@ -73,16 +74,20 @@ class ProductSelect extends Component {
           defaultOpacity='0.5'
         />
 
-        <Flex flexDirection='column' alignItems='center' style={{color: colors.primary_text}}>
+        <Flex flexDirection='column' alignItems='center' style={{color: colors.primary_text, marginTop: 25}}>
           <b style={{ fontSize: '1.5em' }}>Select your products</b>
           <p>Which products would you like?</p>
         </Flex>
 
-        <Row alignSelf='center'>
+        <Row alignSelf='center' style={{marginTop: 10}}>
           <SavingsCard />
           <SpendingCard />
           <CreditCard />
         </Row>
+
+        <Flex alignSelf="center" style={{color: colors.primary_text, marginTop: 20}}>
+        {"Once you submit your online application, we\'ll contact you within one business day to complete the membership process."}
+        </Flex>
 
         <ApplyButton />
 
