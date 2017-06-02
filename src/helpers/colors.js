@@ -7,3 +7,6 @@ export const selected_button = '#64ac31';
 export const remove_button = '#d40f61';
 export const disabled_button = '#555';
 export const transparent = 'transparent';
+
+// Apply Step
+export const formBackground = '#d3e4df';
