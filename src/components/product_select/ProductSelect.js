@@ -65,12 +65,12 @@ class ProductSelect extends Component {
           style={{marginTop: 15}}
           steps={ [{title: 'SELECT PRODUCTS'}, {title: 'APPLY'}, {title: 'DISCLOSURES'}, {title: 'WRAP UP'}] }
           activeStep={ 1 }
-          defaultTitleColor='white'
-          activeTitleColor='white'
-          completeTitleColor='white'
-          defaultColor='white'
-          completeColor='white'
-          activeColor='transparent'
+          defaultTitleColor={colors.primary_text}
+          activeTitleColor={colors.primary_text}
+          completeTitleColor={colors.primary_text}
+          defaultColor={colors.primary_text}
+          completeColor={colors.primary_text}
+          activeColor={colors.transparent}
           defaultOpacity='0.5'
         />
 
