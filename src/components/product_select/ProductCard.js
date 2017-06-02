@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { Col, Flex } from 'jsxstyle';
 
 import { SelectButton, UNSELECTED, SELECTED_UNHOVERED, SELECTED_HOVERED } from './SelectButton';
-import * as actions from '../actions';
-import * as colors from '../colors.js';
+import * as actions from '../../actions';
+import * as colors from '../../helpers/colors.js';
 
 const wrapperStyles = {
   padding: 20,

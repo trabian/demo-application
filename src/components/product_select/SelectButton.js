@@ -2,7 +2,7 @@ import React from 'react';
 import { RaisedButton } from 'material-ui';
 import SvgIcon from 'material-ui/SvgIcon';
 
-import * as colors from '../colors';
+import * as colors from '../../helpers/colors';
 
 export const UNSELECTED = 'ADD TO MY COLLECTION';
 export const SELECTED_UNHOVERED = 'SELECTED';
