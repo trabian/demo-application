@@ -3,13 +3,12 @@ import { connect } from 'react-redux';
 import { RaisedButton } from 'material-ui';
 import { Link } from 'react-router-dom';
 
-import { Flex, Row } from 'jsxstyle';
+import { Flex, Row, Col } from 'jsxstyle';
 
 import SavingsCard from './SavingsCard.js';
 import SpendingCard from './SpendingCard.js';
 import CreditCard from './CreditCard.js';
 
-import { Container, Heading } from '../../helpers/container';
 import * as colors from '../../helpers/colors.js';
 
 const mapState = state => {
@@ -56,9 +55,7 @@ class ProductSelect extends Component {
   render() {
     //const stepOneTitle = (this.props.currentStep === 0) ? 'SELECT PRODUCTS' : ('SELECT PRODUCTS ('+this.props.selected.length+')');
     return (
-      <Container>
-
-        <Heading>Member Application</Heading>
+      <Col>
 
         <Flex flexDirection='column' alignItems='center' style={{color: colors.primary_text, marginTop: 25}}>
           <b style={{ fontSize: '1.5em' }}>Select your products</b>
@@ -72,12 +69,12 @@ class ProductSelect extends Component {
         </Row>
 
         <Flex alignSelf="center" style={{color: colors.primary_text, marginTop: 20}}>
-          {"Once you submit your online application, we\'ll contact you within one business day to complete the membership process."}
+          {"Once you submit your online application, we'll contact you within one business day to complete the membership process."}
         </Flex>
 
         <ApplyButton />
 
-      </Container>
+      </Col>
     );
   }
 }
