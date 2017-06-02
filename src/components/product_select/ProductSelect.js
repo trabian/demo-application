@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { RaisedButton } from 'material-ui';
-import SvgIcon from 'material-ui/SvgIcon';
 import { Link } from 'react-router-dom';
 
 import Stepper from '../../Stepper';
@@ -18,10 +17,10 @@ const mapState = state => {
   return {selected: state.selected};
 };
 
-const ForwardIcon = () => (
+const ForwardIcon = ({active}) => (
   <i
     className="material-icons"
-    style={{display: 'inline-flex', marginBottom: '5px', verticalAlign: 'middle', fontSize: '28px'}}
+    style={{display: 'inline-flex', marginBottom: 5, verticalAlign: 'middle', fontSize: 28, color: (active ? colors.primary_text : '')}}
   >
     forward
   </i>
@@ -29,27 +28,18 @@ const ForwardIcon = () => (
 
 const ApplyButton = connect(mapState)(({selected}) => {
   const active = selected.length !== 0;
-  const {disabled, color} = active
-    ? {disabled: false, color: colors.selected_button}
+  const {disabled, color, fontColor} = active
+    ? {disabled: false, color: colors.selected_button, fontColor: colors.primary_text}
     : {disabled: true, color: colors.disabled_button};
 
-  const buttonTextStyle = {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontSize: 18,
-    color: colors.primary_text,
-    width: '100%',
-    height: '100%',
-  };
 
   const buttonInner = (
     <RaisedButton
       backgroundColor={color}
       disabled={disabled}
-      icon={<ForwardIcon />}
+      icon={<ForwardIcon active={active}/>}
       label='APPLY NOW'
+      labelColor={fontColor}
       labelPosition='before'
       style={{width: '275px', marginBottom: 10, height: 50}}
       labelStyle={{fontSize: '18px', fontWeight: active ? 'bold' : 'normal'}}
