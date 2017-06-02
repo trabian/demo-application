@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Stepper from 'react-stepper-horizontal';
+import Stepper from '../../Stepper';
 import { Flex, Row } from 'jsxstyle';
 
 import SavingsCard from './SavingsCard.js';
@@ -27,6 +27,7 @@ class ProductSelect extends Component {
           defaultColor='white'
           completedColor='white'
           activeColor='transparent'
+          defaultOpacity='0.4'
         />
 
         <Flex flexDirection='column' alignItems='center' style={{color: colors.primary_text}}>
