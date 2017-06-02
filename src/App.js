@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import Stepper from 'react-stepper-horizontal';
 import { Flex, Inline, curry, Row} from 'jsxstyle';
 
 import SavingsCard from './components/SavingsCard.js';
@@ -11,7 +12,7 @@ import * as colors from './colors.js';
 const Container = curry(Flex, {
   paddingTop: 30,
   flexDirection: 'column',
-  justifyContent: 'flex-start',
+  justifyContent: 'space-between',
   width: '80vw',
   margin: '0 auto',
 });
@@ -29,6 +30,17 @@ class App extends Component {
       <Container>
 
         <Heading>Member Application</Heading>
+
+          <Stepper
+          steps={ [{title: 'SELECT PRODUCTS'}, {title: 'APPLY'}, {title: 'DISCLOSURES'}, {title: 'WRAP UP'}] }
+          activeStep={ 0 }
+          defaultTitleColor='white'
+          activeTitleColor='white'
+          completeTitleColor='white'
+          defaultColor='white'
+          completedColor='white'
+          activeColor='transparent'
+          />
 
         <Flex flexDirection='column' alignItems='center' style={{color: colors.primary_text}}>
             <b style={{ fontSize: '1.5em' }}>Select your products</b>
