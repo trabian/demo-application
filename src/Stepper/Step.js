@@ -27,14 +27,18 @@ export default class Step extends Component {
         width: size,
         height: size,
         margin: '0 auto',
-        backgroundColor: defaultColor,
+        backgroundColor: 'transparent',
         borderRadius: '50%',
+        borderWidth: 3,
+        borderStyle: 'solid',
+        borderColor: '#fff',
         textAlign: 'center',
         padding:1,
         fontSize: circleFontSize,
         color: circleFontColor,
         display: 'block',
-        opacity: defaultOpacity
+        opacity: defaultOpacity,
+
       },
       activeCircle: {
         backgroundColor: activeColor,
@@ -42,7 +46,7 @@ export default class Step extends Component {
       },
       completedCircle: {
         backgroundColor: completeColor,
-        opacity: completeOpactiy
+        opacity: completeOpactiy,
       },
       index: {
         lineHeight: `${size + circleFontSize / 4}px`,
@@ -69,28 +73,28 @@ export default class Step extends Component {
         position: 'absolute',
         top: circleTop + size / 2,
         height: 1,
-        borderTopStyle: 'solid',
+        borderTopStyle: 'dashed',
         borderTopWidth: 1,
         borderTopColor: defaultColor,
         left: 0,
         right: '50%',
-        marginRight: size / 2 + 1,
+        marginRight: size / 2 + 5,
         opacity: defaultOpacity
       },
       rightBar: {
         position: 'absolute',
         top: circleTop + size / 2,
         height: 1,
-        borderTopStyle: 'solid',
+        borderTopStyle: 'dashed',
         borderTopWidth: 1,
         borderTopColor: defaultColor,
         right: 0,
         left: '50%',
-        marginLeft: size / 2 + 1,
+        marginLeft: size / 2 + 5,
         opacity: defaultOpacity
       },
       completedBar: {
-        borderTopStyle: 'solid',
+        borderTopStyle: 'dashed',
         borderTopWidth: 1,
         borderTopColor: completeColor,
         opacity: completeOpactiy

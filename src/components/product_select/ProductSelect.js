@@ -38,22 +38,22 @@ const ApplyButton = connect(mapState)(({selected}) => {
 
 class ProductSelect extends Component {
   render() {
+    //const stepOneTitle = (this.props.currentStep === 0) ? 'SELECT PRODUCTS' : ('SELECT PRODUCTS ('+this.props.selected.length+')');
     return (
-
       <Container>
 
         <Heading>Member Application</Heading>
 
         <Stepper
           steps={ [{title: 'SELECT PRODUCTS'}, {title: 'APPLY'}, {title: 'DISCLOSURES'}, {title: 'WRAP UP'}] }
-          activeStep={ 0 }
+          activeStep={ 1 }
           defaultTitleColor='white'
           activeTitleColor='white'
           completeTitleColor='white'
           defaultColor='white'
-          completedColor='white'
+          completeColor='white'
           activeColor='transparent'
-          defaultOpacity='0.4'
+          defaultOpacity='0.5'
         />
 
         <Flex flexDirection='column' alignItems='center' style={{color: colors.primary_text}}>
