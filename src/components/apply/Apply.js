@@ -1,20 +1,11 @@
 import React from 'react';
 
-import IdentificationForm from './IdentificationForm';
-import ContactInfo from './ContactInfo';
+import ApplicantForm from './ApplicantForm';
 
-const Apply = () => {
-  return (
-    <div>
-      <h2>Your Identity</h2>
-      <IdentificationForm />
-      <br />
-
-      <h2>Contact Information and Address</h2>
-      <ContactInfo />
-
-    </div>
-  );
-}
+const Apply = () => (
+  <div>
+    <ApplicantForm />
+  </div>
+);
 
 export default Apply;
