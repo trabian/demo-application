@@ -5,7 +5,7 @@ import { PRODUCT_SELECT, APPLY } from '../router';
 import * as colors from '../helpers/colors.js';
 import Stepper from '../Stepper';
 
-const LocationStepper = ({location}) => {
+const LocationStepper = ({location, selectedProducts}) => {
   console.log('location', location);
   let activeStep;
   switch(location) {
@@ -20,10 +20,12 @@ const LocationStepper = ({location}) => {
     default:
   }
 
+  const stepOneTitle = activeStep === 0 ? 'SELECT PRODUCTS' : `SELECT PRODUCTS (${selectedProducts.length})`;
+
   return (
     <Stepper
       style={{marginTop: 15}}
-      steps={ [{title: 'SELECT PRODUCTS'}, {title: 'APPLY'}, {title: 'DISCLOSURES'}, {title: 'WRAP UP'}] }
+      steps={ [{title: stepOneTitle}, {title: 'APPLY'}, {title: 'DISCLOSURES'}, {title: 'WRAP UP'}] }
       activeStep={activeStep}
       defaultTitleColor={colors.primary_text}
       activeTitleColor={colors.primary_text}
@@ -38,7 +40,10 @@ const LocationStepper = ({location}) => {
 
 const mapState = state => {
   const pathname = state.router && state.router.location ? state.router.location.pathname : '/';
-  return {location: pathname};
+  return {
+    location: pathname,
+    selectedProducts: state.selected,
+  };
 };
 
 export default connect(mapState)(LocationStepper);
