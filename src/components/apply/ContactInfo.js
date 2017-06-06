@@ -1,10 +1,7 @@
 import React from 'react';
 import { Card, CardText } from 'material-ui/Card';
-import { Field } from 'redux-form';
-import { TextField } from 'redux-form-material-ui';
 import { Row, Col } from 'jsxstyle';
 
-import * as colors from '../../helpers/colors';
 import usStates from '../../data/usStates';
 
 import { StyledTextField, StyledDropdownField, cardStyle } from './form_styles';
