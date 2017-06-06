@@ -2,6 +2,7 @@ import React from 'react';
 import { TextField, SelectField } from 'redux-form-material-ui';
 import MenuItem from 'material-ui/MenuItem';
 import { Field } from 'redux-form';
+// import _ from 'lodash';
 
 import * as colors from '../../helpers/colors';
 
@@ -74,6 +75,7 @@ export const StyledTextField = ({ hintText, name, width, label='', type='text', 
     style={textFieldStyle(width)}
     inputStyle={{marginTop: 0}}
     errorStyle={errorStyle}
+    normalize={normalize || (value => value)}
     props={{
       hintText,
       hintStyle,

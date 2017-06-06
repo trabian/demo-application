@@ -5,12 +5,19 @@ import { Row, Col } from 'jsxstyle';
 import usStates from '../../data/usStates';
 
 import { StyledTextField, StyledDropdownField, cardStyle } from './form_styles';
+import { normalizePhoneNumber } from './form_normalizers';
 
 const LeftInput = () => (
   <Col style={{borderRight: '2px solid #999'}}>
     <Row>
       <Col>
-        <StyledTextField name='phoneNumber' label='Phone Number' hintText='(###) ###-####' width={250} />
+        <StyledTextField
+          name='phoneNumber'
+          label='Phone Number'
+          hintText='(###) ###-####'
+          width={250}
+          normalize={normalizePhoneNumber}
+        />
       </Col>
       <Col>
         <StyledDropdownField
