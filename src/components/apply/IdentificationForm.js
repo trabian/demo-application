@@ -2,29 +2,25 @@ import React from 'react';
 import { Card } from 'material-ui/Card';
 import { Row, Col, curry } from 'jsxstyle';
 
-import { StyledTextField } from './form_fields';
-import * as colors from '../../helpers/colors';
+import { StyledTextField, cardStyle } from './form_styles';
 
-const CenterRow = curry(Row,{ justifyContent: 'center' });
+// const CenterRow = curry(Row,{ justifyContent: 'left' });
 
-const IdentificationForm = (props)=>{
-  return(
-    <Card style={{backgroundColor: colors.form_background, padding: 30}}>
-      <Col>
-          <CenterRow justifyContent='center'>
-            {/* Add label as prop to Field in StyledTextField */}
-            <StyledTextField hintText='First Name' name='firstName' width={250}/>
-            <StyledTextField hintText='Middle Initial' name='middleInitial' width={126} />
-            <StyledTextField hintText='Last Name' name='lastName' width={250}/>
-          </CenterRow>
-          <CenterRow justifyContent='center'>
-            <StyledTextField hintText='###-##-####' name='soc' width={250} />
-            <StyledTextField hintText='MM/DD/YYYY' name='dob' width={250} type='date'/>
-          </CenterRow>
-        </Col>
-    </Card>
-
-  );
-};
+const IdentificationForm = () => (
+  <Card style={cardStyle}>
+    <Col>
+      <Row>
+        {/* Add label as prop to Field in StyledTextField */}
+        <StyledTextField label = 'Name' hintText='First Name' name='firstName' width={250}/>
+        <StyledTextField hintText='Middle Initial' name='middleInitial' width={94} />
+        <StyledTextField hintText='Last Name' name='lastName' width={400}/>
+      </Row>
+      <Row>
+        <StyledTextField label='Social Security Number' hintText='###-##-####' name='soc' width={250} />
+        <StyledTextField label='Date of Birth' name='dob' width={160} type='date'/>
+      </Row>
+    </Col>
+  </Card>
+);
 
 export default IdentificationForm;

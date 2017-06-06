@@ -2,34 +2,58 @@ import React from 'react';
 import { Card, CardText } from 'material-ui/Card';
 import { Field } from 'redux-form';
 import { TextField } from 'redux-form-material-ui';
-import { Row } from 'jsxstyle';
+import { Row, Col } from 'jsxstyle';
 
 import * as colors from '../../helpers/colors';
+import usStates from '../../data/usStates';
 
-import { StyledTextField, StyledDropdownField } from './form_fields';
+import { StyledTextField, StyledDropdownField, cardStyle } from './form_styles';
 
 const LeftInput = () => (
-  <div style={{borderRight: '2px solid #999'}}>
-    <StyledTextField name='phoneNumber' hintText='(###) ###-####' width={250} />
-    <StyledDropdownField
-      name='phoneNumberType'
-      hintText='Phone Type'
-      width={148}
-      children={['Home', 'Phone', 'Work']}
-    />
-    <br />
-    <StyledTextField name='emailAddress' hintText='Email Address' width={250} />
-  </div>
+  <Col style={{borderRight: '2px solid #999'}}>
+    <Row>
+      <Col>
+        <StyledTextField name='phoneNumber' label='Phone Number' hintText='(###) ###-####' width={250} />
+      </Col>
+      <Col>
+        <StyledDropdownField
+          name='phoneNumberType'
+          hintText='Phone Type'
+          width={148}
+          children={['Home', 'Phone', 'Work']}
+        />
+      </Col>
+    </Row>
+
+    <Row>
+      <StyledTextField name='emailAddress' label='Email Address' hintText='you@amazing.rad' width={444} />
+    </Row>
+  </Col>
 );
 
 const RightInput = () => (
-  <div>
-    Right Input
-  </div>
+  <Col>
+    <Row>
+      <Col>
+        <StyledTextField name='address' label='Physical Address' hintText='1600 Pennsylvania Ave' width={400} />
+      </Col>
+    </Row>
+    <Row>
+      <Col>
+        <StyledTextField name='city' label='City Name' hintText='Washington DC' width={175} />
+      </Col>
+      <Col>
+        <StyledDropdownField name='state' label='State' hintText='DC' width={60} children={usStates} />
+      </Col>
+      <Col>
+        <StyledTextField name='zipCode' label='Zip Code' hintText='20500' width={75} type='number' />
+      </Col>
+    </Row>
+  </Col>
 );
 
 const ContactInfo = () => (
-  <Card style={{backgroundColor: colors.form_background}}>
+  <Card style={cardStyle}>
     <CardText>
       <Row>
         <LeftInput />
