@@ -7,6 +7,19 @@ import { SelectButton, UNSELECTED, SELECTED_UNHOVERED, SELECTED_HOVERED } from '
 import * as actions from '../actions';
 import * as colors from '../colors.js';
 
+const buttonText = {
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+  color: colors.primary_text
+};
+
+const buttonStyle = {
+  height: 50,
+  marginBottom: 10
+};
+
 const wrapperStyles = {
   padding: 20,
   paddingBottom:10,
