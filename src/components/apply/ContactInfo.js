@@ -21,7 +21,7 @@ const RightInput = () => (
 );
 
 const ContactInfo = () => (
-  <Card style={{backgroundColor: colors.formBackground}}>
+  <Card style={{backgroundColor: colors.form_background}}>
     <CardText>
       <Row>
         <LeftInput />

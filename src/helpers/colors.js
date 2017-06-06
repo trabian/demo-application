@@ -9,4 +9,4 @@ export const disabled_button = '#555';
 export const transparent = 'transparent';
 
 // Apply Step
-export const formBackground = '#d3e4df';
+export const form_background = '#d3e4df';

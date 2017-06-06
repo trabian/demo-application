@@ -6,5 +6,5 @@ import selection_reducer from './selection_reducer.js';
 export default combineReducers({
   selected: selection_reducer,
   router: routerReducer,
-  applicationForm: formReducer,
+  form: formReducer,
 });
