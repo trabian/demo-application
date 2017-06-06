@@ -17,10 +17,27 @@ const formatPhoneNumber = chars => {
 export const normalizePhoneNumber = (input, prevInput='') => {
   const chars = stripPhoneNumber(input).split('');
   // handle backspacing with formatting characters
-  if(input.length < prevInput.length && _.replace(_.last(prevInput), stripPhoneNumber, '') == '') {
+  if(input.length < prevInput.length && _.replace(_.last(prevInput), stripPhoneNumber, '') === '') {
     return formatPhoneNumber(_.initial(chars));
   }
 
-  const count = chars.length < 10 ? chars.length : 10;
   return formatPhoneNumber(chars);
 }
+
+export const middleInitial = (input, prevInput)=>(input.length > 1 ? prevInput : input);
+
+
+export const socialDash = (input, prevInput='') =>{
+      
+      if(input.length > 11){
+          return prevInput;
+      }
+      if(input.length < prevInput.length){
+          return input;
+      }
+      if((input.length % 3 === 0) && input.length !== 9){
+          return input+'-';
+      }
+
+      return input;
+};

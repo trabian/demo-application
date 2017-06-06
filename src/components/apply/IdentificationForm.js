@@ -3,22 +3,8 @@ import { Card } from 'material-ui/Card';
 import { Row, Col } from 'jsxstyle';
 
 import { StyledTextField, cardStyle } from './form_styles';
-
-const middleInitial = (value, previousValue)=>(value.length > 1 ? previousValue: value);
-const socialDash = (value, previousValue) =>{
-  if(value){
-    if(value.length > 11){
-      return  previousValue;
-    }
-    if(previousValue && value.length < previousValue.length){
-      return value;
-    }
-    else if((value.length % 3 === 0) && value.length !== 9){
-      return value+'-';
-    }
-  }
-  return value;
-};
+import { middleInitial, socialDash } from './form_normalizers';
+import { verifyDate } from './form_validators';
 
 const IdentificationForm = () => (
   <Card style={cardStyle}>
@@ -43,7 +29,14 @@ const IdentificationForm = () => (
           normalize={socialDash}
           required
         />
-        <StyledTextField label='Date of Birth' name='dob' width={160} type='date'/>
+        <StyledTextField
+          label='Date of Birth'
+          name='dob'
+          width={160}
+          type='date'
+          validators={[verifyDate]}
+          required
+        />
       </Row>
     </Col>
   </Card>

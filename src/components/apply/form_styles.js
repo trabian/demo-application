@@ -5,7 +5,7 @@ import { Field } from 'redux-form';
 import _ from 'lodash';
 
 import * as colors from '../../helpers/colors';
-import { required as requiredValidator, validateDate } from './form_validators';
+import { required as requiredValidator } from './form_validators';
 
 /**
  * Applies all the provided validator functions to the input, returning the first rejection.
@@ -77,7 +77,6 @@ export const StyledTextField = ({ hintText, name, width, label='', type='text', 
     style={textFieldStyle(width)}
     inputStyle={{marginTop: 0}}
     errorStyle={errorStyle}
-    normalize={normalize || (value => value)}
     props={{
       hintText,
       hintStyle,
