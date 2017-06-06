@@ -6,6 +6,10 @@ import { Field } from 'redux-form';
 import * as colors from '../../helpers/colors';
 
 const required = value => (value == null ? 'Required' : undefined);
+const verifyDate = value => {
+  let ageMs = Date.now() - new Date(value).getTime();
+  return (new Date(ageMs).getUTCFullYear() - 1970) >= 18 ? undefined : 'Must be 18 or older.';
+};
 
 const sharedStyle = {
   height: 30,
@@ -50,7 +54,6 @@ const labelStyle = label => {
     floatingLabelStyle: {
       left: 0,
       top: 3,
-      // bottom: 38,
       fontSize: '13pt',
       color: '#555'
     }
@@ -59,7 +62,7 @@ const labelStyle = label => {
 
 const underlineStyle = {display: 'none'};
 
-export const StyledTextField = ({ hintText, name, width, label='', type='text' })=>(
+export const StyledTextField = ({ hintText, name, width, label='', type='text', normalize })=>(
   <Field
     name={name}
     component={TextField}
@@ -67,17 +70,18 @@ export const StyledTextField = ({ hintText, name, width, label='', type='text' }
     {...labelStyle(label)}
     underlineStyle={underlineStyle}
     validate={required}
+    normalize={normalize}
     style={textFieldStyle(width)}
     inputStyle={{marginTop: 0}}
     errorStyle={errorStyle}
     props={{
       hintText,
-      hintStyle
+      hintStyle,
     }}
   />
 );
 
-export const StyledDropdownField = ({ name, hintText, children, width, type, label=' ' }) => {
+export const StyledDropdownField = ({ name, hintText, children, width, type, label=' '}) => {
   const childrenItems = children.map(child => <MenuItem key={child} value={child} primaryText={child} />);
 
   return (
