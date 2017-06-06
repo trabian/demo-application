@@ -13,13 +13,13 @@ const IdentificationForm = (props)=>{
       <Col>
           <CenterRow justifyContent='center'>
                 {/* Add label as prop to Field in StyledTextField */}
-                <StyledTextField placeholder='First Name' name='firstName' width={250}/>
-                <StyledTextField placeholder='Middle Initial' name='middleInitial' width={100} />
-                <StyledTextField placeholder='Last Name' name='lastName' width={250}/>
+                <StyledTextField hintText='First Name' name='firstName' width={250}/>
+                <StyledTextField hintText='Middle Initial' name='middleInitial' width={100} />
+                <StyledTextField hintText='Last Name' name='lastName' width={250}/>
           </CenterRow>
           <CenterRow justifyContent='center'>
-            <StyledTextField placeholder='###-##-####' name='soc' width={250} />
-            <StyledTextField placeholder='MM/DD/YYYY' name='dob' width={250} type='date'/>
+            <StyledTextField hintText='###-##-####' name='soc' width={250} />
+            <StyledTextField hintText='MM/DD/YYYY' name='dob' width={250} type='date'/>
           </CenterRow>
         </Col>
     </Card>

@@ -7,12 +7,12 @@ import { Field } from 'redux-form';
 import * as colors from '../../helpers/colors';
 
 const required = value => (value == null ? 'Required' : undefined);
-export const StyledTextField = ({ placeholder, name, width, type })=>(
+export const StyledTextField = ({ hintText, name, width, type })=>(
   <Field
     name={name}
     component={TextField}
     type={type}
-    placeholder={placeholder}
+    placeholder={hintText}
     underlineStyle={{display: 'none'}}
     validate={required}
     style={{
@@ -23,7 +23,10 @@ export const StyledTextField = ({ placeholder, name, width, type })=>(
       width: width,
       height: 30,
       margin:10,
+      paddingLeft: 10
     }}
-    props={{}}
+    props={{
+
+    }}
   />
 );
