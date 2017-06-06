@@ -12,10 +12,10 @@ const IdentificationForm = (props)=>{
     <Card style={{backgroundColor: colors.form_background, padding: 30}}>
       <Col>
           <CenterRow justifyContent='center'>
-                {/* Add label as prop to Field in StyledTextField */}
-                <StyledTextField hintText='First Name' name='firstName' width={250}/>
-                <StyledTextField hintText='Middle Initial' name='middleInitial' width={100} />
-                <StyledTextField hintText='Last Name' name='lastName' width={250}/>
+            {/* Add label as prop to Field in StyledTextField */}
+            <StyledTextField hintText='First Name' name='firstName' width={250}/>
+            <StyledTextField hintText='Middle Initial' name='middleInitial' width={126} />
+            <StyledTextField hintText='Last Name' name='lastName' width={250}/>
           </CenterRow>
           <CenterRow justifyContent='center'>
             <StyledTextField hintText='###-##-####' name='soc' width={250} />

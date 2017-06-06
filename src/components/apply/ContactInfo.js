@@ -6,11 +6,19 @@ import { Row } from 'jsxstyle';
 
 import * as colors from '../../helpers/colors';
 
-const required = value => (value == null ? 'Required' : undefined);
+import { StyledTextField, StyledDropdownField } from './form_fields';
 
 const LeftInput = () => (
   <div style={{borderRight: '2px solid #999'}}>
-    <Field name='phoneNumber' component={TextField} hintText='(###) ###-####' validate={required} />
+    <StyledTextField name='phoneNumber' hintText='(###) ###-####' width={250} />
+    <StyledDropdownField
+      name='phoneNumberType'
+      hintText='Phone Type'
+      width={148}
+      children={['Home', 'Phone', 'Work']}
+    />
+    <br />
+    <StyledTextField name='emailAddress' hintText='Email Address' width={250} />
   </div>
 );
 
