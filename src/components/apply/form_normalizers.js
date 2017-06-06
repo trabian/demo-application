@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-const rgx = new RegExp('[\\(\\)\\-\\ ]', 'g');
+export const stripPhoneNumber = input => _.replace(input, new RegExp('[\\(\\)\\-\\ ]', 'g'), '');
 
 const formatPhoneNumber = chars => {
   const flattened = _.flatten([
@@ -15,9 +15,9 @@ const formatPhoneNumber = chars => {
 }
 
 export const normalizePhoneNumber = (input, prevInput='') => {
-  const chars = _.replace(input, rgx, '').split('');
+  const chars = stripPhoneNumber(input).split('');
   // handle backspacing with formatting characters
-  if(input.length < prevInput.length && _.replace(_.last(prevInput), rgx, '') == '') {
+  if(input.length < prevInput.length && _.replace(_.last(prevInput), stripPhoneNumber, '') == '') {
     return formatPhoneNumber(_.initial(chars));
   }
 

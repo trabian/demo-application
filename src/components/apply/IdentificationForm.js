@@ -24,12 +24,13 @@ const IdentificationForm = () => (
   <Card style={cardStyle}>
     <Col>
       <Row>
-        <StyledTextField label = 'Name' hintText='First Name' name='firstName' width={250}/>
+        <StyledTextField label = 'Name' hintText='First Name' name='firstName' width={250} required />
         <StyledTextField
           hintText='Middle Initial'
           name='middleInitial'
           width={94}
           normalize={middleInitial}
+          required
         />
         <StyledTextField hintText='Last Name' name='lastName' width={400}/>
       </Row>
@@ -40,6 +41,7 @@ const IdentificationForm = () => (
           name='soc'
           width={250}
           normalize={socialDash}
+          required
         />
         <StyledTextField label='Date of Birth' name='dob' width={160} type='date'/>
       </Row>

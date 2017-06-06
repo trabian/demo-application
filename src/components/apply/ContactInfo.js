@@ -6,6 +6,7 @@ import usStates from '../../data/usStates';
 
 import { StyledTextField, StyledDropdownField, cardStyle } from './form_styles';
 import { normalizePhoneNumber } from './form_normalizers';
+import { validateEmail, validatePhoneNumber } from './form_validators';
 
 const LeftInput = () => (
   <Col style={{borderRight: '2px solid #999'}}>
@@ -17,6 +18,8 @@ const LeftInput = () => (
           hintText='(###) ###-####'
           width={250}
           normalize={normalizePhoneNumber}
+          validators={[validatePhoneNumber]}
+          required
         />
       </Col>
       <Col>
@@ -25,12 +28,20 @@ const LeftInput = () => (
           hintText='Phone Type'
           width={148}
           children={['Home', 'Phone', 'Work']}
+          required
         />
       </Col>
     </Row>
 
     <Row>
-      <StyledTextField name='emailAddress' label='Email Address' hintText='you@amazing.rad' width={444} />
+      <StyledTextField
+        name='emailAddress'
+        label='Email Address'
+        hintText='you@amazing.rad'
+        width={444}
+        validators={[validateEmail]}
+        required
+      />
     </Row>
   </Col>
 );
@@ -39,18 +50,44 @@ const RightInput = () => (
   <Col>
     <Row>
       <Col>
-        <StyledTextField name='address' label='Physical Address' hintText='1600 Pennsylvania Ave' width={400} />
+        <StyledTextField
+          name='address'
+          label='Physical Address'
+          hintText='1600 Pennsylvania Ave'
+          width={400}
+          required
+        />
       </Col>
     </Row>
     <Row>
       <Col>
-        <StyledTextField name='city' label='City Name' hintText='Washington DC' width={175} />
+        <StyledTextField
+          name='city'
+          label='City Name'
+          hintText='Washington DC'
+          width={175}
+          required
+        />
       </Col>
       <Col>
-        <StyledDropdownField name='state' label='State' hintText='DC' width={60} children={usStates} />
+        <StyledDropdownField
+          name='state'
+          label='State'
+          hintText='DC'
+          width={60}
+          children={usStates}
+          required
+        />
       </Col>
       <Col>
-        <StyledTextField name='zipCode' label='Zip Code' hintText='20500' width={75} type='number' />
+        <StyledTextField
+          name='zipCode'
+          label='Zip Code'
+          hintText='20500'
+          width={75}
+          type='number'
+          required
+        />
       </Col>
     </Row>
   </Col>

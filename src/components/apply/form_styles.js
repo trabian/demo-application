@@ -2,15 +2,17 @@ import React from 'react';
 import { TextField, SelectField } from 'redux-form-material-ui';
 import MenuItem from 'material-ui/MenuItem';
 import { Field } from 'redux-form';
-// import _ from 'lodash';
+import _ from 'lodash';
 
 import * as colors from '../../helpers/colors';
+import { required as requiredValidator, validateDate } from './form_validators';
 
-const required = value => (value == null ? 'Required' : undefined);
-const verifyDate = value => {
-  let ageMs = Date.now() - new Date(value).getTime();
-  return (new Date(ageMs).getUTCFullYear() - 1970) >= 18 ? undefined : 'Must be 18 or older.';
-};
+/**
+ * Applies all the provided validator functions to the input, returning the first rejection.
+ */
+const applyValidators = validators => (input, lastInput) => {
+  return _.find(_.map(validators, validator => validator(input, lastInput)));
+}
 
 const sharedStyle = {
   height: 30,
@@ -63,14 +65,14 @@ const labelStyle = label => {
 
 const underlineStyle = {display: 'none'};
 
-export const StyledTextField = ({ hintText, name, width, label='', type='text', normalize })=>(
+export const StyledTextField = ({ hintText, name, width, label='', type='text', normalize, validators=[], required=false })=>(
   <Field
     name={name}
     component={TextField}
     type={type}
     {...labelStyle(label)}
     underlineStyle={underlineStyle}
-    validate={required}
+    validate={applyValidators(required ? [requiredValidator, ...validators] : validators)}
     normalize={normalize}
     style={textFieldStyle(width)}
     inputStyle={{marginTop: 0}}
@@ -83,7 +85,7 @@ export const StyledTextField = ({ hintText, name, width, label='', type='text', 
   />
 );
 
-export const StyledDropdownField = ({ name, hintText, children, width, type, label=' '}) => {
+export const StyledDropdownField = ({ name, hintText, children, width, type, label=' ', validators=[], required=false }) => {
   const childrenItems = children.map(child => <MenuItem key={child} value={child} primaryText={child} />);
 
   return (
@@ -91,7 +93,7 @@ export const StyledDropdownField = ({ name, hintText, children, width, type, lab
       name={name}
       component={SelectField}
       {...labelStyle(label)}
-      validate={required}
+      validate={applyValidators(required ? [requiredValidator, ...validators] : validators)}
       type={type}
       underlineStyle={underlineStyle}
       style={selectFieldStyle(width)}
