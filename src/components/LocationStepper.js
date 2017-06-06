@@ -6,7 +6,6 @@ import * as colors from '../helpers/colors.js';
 import Stepper from '../Stepper';
 
 const LocationStepper = ({location, selectedProducts}) => {
-  console.log('location', location);
   let activeStep;
   switch(location) {
     case PRODUCT_SELECT:

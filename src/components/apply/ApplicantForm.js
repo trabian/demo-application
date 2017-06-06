@@ -1,5 +1,5 @@
 import React from 'react';
-import { reduxForm, Field } from 'redux-form'
+import { reduxForm } from 'redux-form'
 
 import IdentificationForm from './IdentificationForm';
 import ContactInfo from './ContactInfo';
