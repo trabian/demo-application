@@ -22,30 +22,24 @@ const Heading = curry(Inline, {
   alignSelf: 'flex-start'
 });
 
-class App extends Component {
-  render() {
-    return (
+const App = ()=>(
+  <Container>
 
-      <Container>
+    <Heading>Member Application</Heading>
 
-        <Heading>Member Application</Heading>
+    <Flex flexDirection='column' alignItems='center' style={{color: colors.basic}}>
+        <b style={{ fontSize: '1.5em' }}>Select your products</b>
+        <p>Which products would you like?</p>
+    </Flex>
 
-        <Flex flexDirection='column' alignItems='center' style={{color: colors.basic}}>
-            <b style={{ fontSize: '1.5em' }}>Select your products</b>
-            <p>Which products would you like?</p>
-        </Flex>
+    <Row alignSelf='center'>
+      <SavingsCard />
+      <SpendingCard />
+      <CreditCard />
+    </Row>
 
-        <Row alignSelf='center'>
-          <SavingsCard />
-          <SpendingCard />
-          <CreditCard />
-        </Row>
+  </Container>
+);
 
-
-
-      </Container>
-    );
-  }
-}
 
 export default App;
