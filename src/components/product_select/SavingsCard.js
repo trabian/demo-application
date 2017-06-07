@@ -1,8 +1,8 @@
 import React from 'react';
 
-import ProductCard from './ProductCard.js';
+import ProductCard from './ProductCard';
 import savingsImage from '../images/savings.svg';
-import * as colors from '../../helpers/colors.js';
+import * as colors from '../../helpers/colors';
 
 const SavingsCard = () => {
   return(

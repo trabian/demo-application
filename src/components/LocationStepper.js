@@ -5,22 +5,14 @@ import { PRODUCT_SELECT, APPLY } from '../router';
 import * as colors from '../helpers/colors';
 import Stepper from '../Stepper';
 
+const stepMap = {
+  [PRODUCT_SELECT]: 0,
+  [APPLY]: 1
+};
+
 const LocationStepper = ({location, selectedProducts}) => {
-  console.log('location', location);
-  let activeStep;
-  switch(location) {
-    case PRODUCT_SELECT:
-      activeStep = 0;
-      break;
-
-    case APPLY:
-      activeStep = 1;
-      break;
-
-    default:
-  }
-
-  const stepOneTitle = activeStep === 0 ? 'SELECT PRODUCTS' : `SELECT PRODUCTS (${selectedProducts.length})`;
+  const activeStep = stepMap[location];
+  const stepOneTitle = activeStep === PRODUCT_SELECT ? 'SELECT PRODUCTS' : `SELECT PRODUCTS (${selectedProducts.length})`;
 
   return (
     <Stepper
@@ -38,7 +30,7 @@ const LocationStepper = ({location, selectedProducts}) => {
   );
 }
 
-const mapState = state => {
+const mapStateToProps = state => {
   const pathname = state.router && state.router.location ? state.router.location.pathname : '/';
   return {
     location: pathname,
@@ -46,4 +38,4 @@ const mapState = state => {
   };
 };
 
-export default connect(mapState)(LocationStepper);
+export default connect(mapStateToProps)(LocationStepper);

@@ -5,11 +5,11 @@ import { Link } from 'react-router-dom';
 
 import { Flex, Row, Col } from 'jsxstyle';
 
-import SavingsCard from './SavingsCard.js';
-import SpendingCard from './SpendingCard.js';
-import CreditCard from './CreditCard.js';
+import SavingsCard from './SavingsCard';
+import SpendingCard from './SpendingCard';
+import CreditCard from './CreditCard';
 
-import * as colors from '../../helpers/colors.js';
+import * as colors from '../../helpers/colors';
 
 const mapState = state => {
   return {selected: state.selected};
@@ -17,7 +17,7 @@ const mapState = state => {
 
 const ForwardIcon = ({active}) => (
   <i
-    className="material-icons"
+    className='material-icons'
     style={{display: 'inline-flex', marginBottom: 5, verticalAlign: 'middle', fontSize: 28, color: (active ? colors.basic : '')}}
   >
     forward
@@ -39,13 +39,13 @@ const ApplyButton = connect(mapState)(({selected}) => {
       label='APPLY NOW'
       labelColor={fontColor}
       labelPosition='before'
-      style={{width: '275px', marginBottom: 10, height: 50}}
-      labelStyle={{fontSize: '18px', fontWeight: active ? 'bold' : 'normal'}}
+      style={{width: 275, marginBottom: 10, height: 50}}
+      labelStyle={{fontSize: 18, fontWeight: active ? 'bold' : 'normal'}}
     />
   );
 
   return (
-    <div style={{textAlign: 'center', marginTop: '26px'}}>
+    <div style={{textAlign: 'center', marginTop: 26}}>
       {active ? <Link to='/apply'>{buttonInner}</Link> : buttonInner}
     </div>
   );
@@ -53,7 +53,6 @@ const ApplyButton = connect(mapState)(({selected}) => {
 
 class ProductSelect extends Component {
   render() {
-    //const stepOneTitle = (this.props.currentStep === 0) ? 'SELECT PRODUCTS' : ('SELECT PRODUCTS ('+this.props.selected.length+')');
     return (
       <Col>
 
@@ -68,7 +67,7 @@ class ProductSelect extends Component {
           <CreditCard />
         </Row>
 
-        <Flex alignSelf="center" style={{color: colors.basic, marginTop: 20}}>
+        <Flex alignSelf='center' style={{color: colors.basic, marginTop: 20}}>
           {"Once you submit your online application, we'll contact you within one business day to complete the membership process."}
         </Flex>
 

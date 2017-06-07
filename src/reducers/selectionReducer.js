@@ -27,7 +27,7 @@ const stateTransitions = {
     [HOVERED]: SELECTED,
     [SELECTED]: SELECTED,
   }
-}
+};
 
 const initialState = {
   savings: UNSELECTED,

@@ -6,7 +6,7 @@ import { Col, Flex } from 'jsxstyle';
 import SelectButton from './SelectButton';
 import { UNSELECTED } from '../../reducers/selectionReducer';
 
-import * as colors from '../../helpers/colors.js';
+import * as colors from '../../helpers/colors';
 
 const wrapperStyles = {
   padding: 20,
