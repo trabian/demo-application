@@ -6,7 +6,7 @@ import usStates from '../../data/usStates';
 
 import { StyledTextField, StyledDropdownField, cardStyle } from './form_styles';
 import { normalizePhoneNumber } from './form_normalizers';
-import { validateEmail, validatePhoneNumber } from './form_validators';
+import { validateEmail, validatePhoneNumber, validateZipCode } from './form_validators';
 
 const LeftInput = () => (
   <Col style={{borderRight: '2px solid #999'}}>
@@ -86,6 +86,7 @@ const RightInput = () => (
           hintText='20500'
           width={75}
           type='number'
+          validators={[validateZipCode]}
           required
         />
       </Col>
