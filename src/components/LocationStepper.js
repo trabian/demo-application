@@ -1,6 +1,8 @@
 import React from 'react';
+import _ from 'lodash';
 import { connect } from 'react-redux';
 
+import { SELECTED, HOVERED } from '../reducers/selectionReducer';
 import { PRODUCT_SELECT, APPLY } from '../router';
 import * as colors from '../helpers/colors';
 import Stepper from '../Stepper';
@@ -10,9 +12,19 @@ const stepMap = {
   [APPLY]: 1
 };
 
+const getSelectedProducts = (selectedProducts) => {
+  return _.reduce(selectedProducts, (result, state)=>{
+    if(state === SELECTED || state === HOVERED){
+      return result + 1;
+    }
+    return result;
+  }, 0);
+};
+
 const LocationStepper = ({location, selectedProducts}) => {
   const activeStep = stepMap[location];
-  const stepOneTitle = activeStep === PRODUCT_SELECT ? 'SELECT PRODUCTS' : `SELECT PRODUCTS (${selectedProducts.length})`;
+  const numOfProducts = getSelectedProducts(selectedProducts);
+  const stepOneTitle = (location === PRODUCT_SELECT) ? 'SELECT PRODUCTS' : `SELECT PRODUCTS (${numOfProducts})`;
 
   return (
     <Stepper
