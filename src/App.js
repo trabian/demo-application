@@ -17,7 +17,7 @@ const Container = curry(Flex, {
 });
 
 const Heading = curry(Inline, {
-  color: colors.primary_text,
+  color: colors.basic,
   fontSize: '2.8em',
   alignSelf: 'flex-start'
 });
@@ -30,7 +30,7 @@ class App extends Component {
 
         <Heading>Member Application</Heading>
 
-        <Flex flexDirection='column' alignItems='center' style={{color: colors.primary_text}}>
+        <Flex flexDirection='column' alignItems='center' style={{color: colors.basic}}>
             <b style={{ fontSize: '1.5em' }}>Select your products</b>
             <p>Which products would you like?</p>
         </Flex>
