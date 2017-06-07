@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import { Flex, Inline, curry, Row} from 'jsxstyle';
 
@@ -17,32 +17,29 @@ const Container = curry(Flex, {
 });
 
 const Heading = curry(Inline, {
-  color: colors.primary_text,
+  color: colors.basic,
   fontSize: '2.8em',
   alignSelf: 'flex-start'
 });
 
-class App extends Component {
-  render() {
-    return (
-      <Container>
+const App = ()=>(
+  <Container>
 
-        <Heading>Member Application</Heading>
+    <Heading>Member Application</Heading>
 
-        <Flex flexDirection='column' alignItems='center' style={{color: colors.primary_text}}>
-            <b style={{ fontSize: '1.5em' }}>Select your products</b>
-            <p>Which products would you like?</p>
-        </Flex>
+    <Flex flexDirection='column' alignItems='center' style={{color: colors.basic}}>
+        <b style={{ fontSize: '1.5em' }}>Select your products</b>
+        <p>Which products would you like?</p>
+    </Flex>
 
-        <Row alignSelf='center'>
-          <SavingsCard />
-          <SpendingCard />
-          <CreditCard />
-        </Row>
+    <Row alignSelf='center'>
+      <SavingsCard />
+      <SpendingCard />
+      <CreditCard />
+    </Row>
 
-      </Container>
-    );
-  }
-}
+  </Container>
+);
+
 
 export default App;

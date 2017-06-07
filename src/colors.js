@@ -1,7 +1,7 @@
-export const primary_text = '#fff';
-export const card_title = '#3c3c3c';
-export const card_subtext = '#707275';
+export const basic = '#fff';
+export const heading = '#3c3c3c';
+export const subHeading = '#707275';
 
-export const unseleted_button = '#3d917b';
-export const selected_button = '#64ac31';
-export const remove_button = '#d40f61';
+export const primary = '#3d917b';
+export const success = '#64ac31';
+export const danger = '#d40f61';
