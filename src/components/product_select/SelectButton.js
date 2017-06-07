@@ -1,12 +1,17 @@
 import React from 'react';
+import _ from 'lodash';
+import { connect } from 'react-redux';
 import { RaisedButton } from 'material-ui';
 import SvgIcon from 'material-ui/SvgIcon';
 
-import * as colors from '../../helpers/colors';
+import { UNSELECTED, SELECTED, HOVERED } from '../../reducers/selectionReducer';
+import { selectAction, hoverInAction, hoverOutAction } from '../../actions';
+import * as colors from '../../helpers/colors.js';
 
-export const UNSELECTED = 'ADD TO MY COLLECTION';
-export const SELECTED_UNHOVERED = 'SELECTED';
-export const SELECTED_HOVERED = 'REMOVE';
+
+const removeIcon = 'M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z';
+const selectedIcon = 'M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z';
+const addIcon = 'M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z';
 
 const buttonStyle = {
   height: 50,
@@ -18,48 +23,44 @@ const buttonTextStyle = {
   flexDirection: 'row',
   alignItems: 'center',
   justifyContent: 'center',
-  color: colors.primary_text,
+  color: colors.basic,
   width: '100%',
   height: '100%',
 };
 
-export const SelectButton = ({buttonType, onClick, onMouseEnter, onMouseLeave}) => {
-  let backgroundColor;
-  let iconPath;
-  switch(buttonType) {
-    case UNSELECTED:
-      backgroundColor = colors.unselected_button;
-      iconPath = 'M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z';
-      break;
+const cardInfo = {
+  [SELECTED]: { backgroundColor: colors.success, iconPath: selectedIcon, buttonTitle:'SELECTED' },
+  [UNSELECTED]: { backgroundColor: colors.primary, iconPath: addIcon, buttonTitle: 'ADD TO MY COLLECTION' },
+  [HOVERED]: { backgroundColor: colors.danger, iconPath: removeIcon, buttonTitle: 'REMOVE' }
+};
 
-    case SELECTED_UNHOVERED:
-      backgroundColor = colors.selected_button;
-      iconPath = 'M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z';
-      break;
 
-    case SELECTED_HOVERED:
-      backgroundColor = colors.remove_button;
-      iconPath = 'M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z';
-      break;
-
-    default:
-  }
-
+const SelectButton = ({ selected, cardId, selectAction, hoverInAction, hoverOutAction }) => {
+  const { backgroundColor, iconPath, buttonTitle } = cardInfo[selected[cardId]];
   return (
     <RaisedButton
       fullWidth
       backgroundColor={backgroundColor}
       style={buttonStyle}
-      onClick={onClick}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
+      onClick={ _.partial(selectAction, cardId) }
+      onMouseEnter={ _.partial(hoverInAction, cardId) }
+      onMouseLeave={ _.partial(hoverOutAction, cardId) }
     >
       <div style={buttonTextStyle}>
-        <SvgIcon style={{color: colors.primary_text}}>
+        <SvgIcon style={{color: colors.basic}}>
            <path d={iconPath} />
         </SvgIcon>
-        {buttonType}
+        {buttonTitle}
       </div>
     </RaisedButton>
   );
-}
+};
+
+const mapStateToProps = (state) => {
+  return{
+    selected: state.selected
+  };
+};
+
+
+export default connect(mapStateToProps, { selectAction, hoverInAction, hoverOutAction })(SelectButton);

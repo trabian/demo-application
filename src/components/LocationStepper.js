@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { PRODUCT_SELECT, APPLY } from '../router';
-import * as colors from '../helpers/colors.js';
+import * as colors from '../helpers/colors';
 import Stepper from '../Stepper';
 
 const LocationStepper = ({location, selectedProducts}) => {
@@ -27,11 +27,11 @@ const LocationStepper = ({location, selectedProducts}) => {
       style={{marginTop: 15}}
       steps={ [{title: stepOneTitle}, {title: 'APPLY'}, {title: 'DISCLOSURES'}, {title: 'WRAP UP'}] }
       activeStep={activeStep}
-      defaultTitleColor={colors.primary_text}
-      activeTitleColor={colors.primary_text}
-      completeTitleColor={colors.primary_text}
-      defaultColor={colors.primary_text}
-      completeColor={colors.primary_text}
+      defaultTitleColor={colors.basic}
+      activeTitleColor={colors.basic}
+      completeTitleColor={colors.basic}
+      defaultColor={colors.basic}
+      completeColor={colors.basic}
       activeColor={colors.transparent}
       defaultOpacity='0.5'
     />

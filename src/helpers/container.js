@@ -11,7 +11,7 @@ export const Container = curry(Flex, {
 });
 
 export const Heading = curry(Inline, {
-  color: colors.primary_text,
+  color: colors.basic,
   fontSize: '2.8em',
   alignSelf: 'flex-start'
 });

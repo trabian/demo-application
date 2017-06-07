@@ -1,8 +1,9 @@
 import { combineReducers } from 'redux';
+
 import { routerReducer } from 'react-router-redux';
-import selection_reducer from './selection_reducer.js';
+import selectionReducer from './selectionReducer';
 
 export default combineReducers({
-  selected: selection_reducer,
+  selected: selectionReducer,
   router: routerReducer,
 });

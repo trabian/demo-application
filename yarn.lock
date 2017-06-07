@@ -6448,3 +6448,7 @@ yargs@~3.10.0:
     cliui "^2.1.0"
     decamelize "^1.0.0"
     window-size "0.1.0"
+
+zaphod@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/zaphod/-/zaphod-0.2.1.tgz#3193bf66a2cdfb6b4a2943512947d902f11b427b"
