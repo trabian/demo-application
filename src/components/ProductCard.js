@@ -5,7 +5,7 @@ import { Col, Flex } from 'jsxstyle';
 
 import SelectButton from './SelectButton';
 import { UNSELECTED } from '../reducers/selectionReducer';
-import * as actions from '../actions';
+
 import * as colors from '../colors.js';
 
 const wrapperStyles = {
@@ -42,4 +42,4 @@ const mapStateToProps = (state)=>{
   };
 };
 
-export default connect(mapStateToProps, actions)(ProductCard);
+export default connect(mapStateToProps)(ProductCard);
