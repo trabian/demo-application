@@ -3,10 +3,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Col, Flex } from 'jsxstyle';
 
-import SelectButton from './SelectButton';
-import { UNSELECTED } from '../../reducers/selectionReducer';
+import SelectButton from 'src/components/product_select/SelectButton';
+import { UNSELECTED } from 'src/reducers/selectionReducer';
 
-import * as colors from '../../helpers/colors';
+import * as colors from 'src/helpers/colors';
 
 const wrapperStyles = {
   padding: 20,

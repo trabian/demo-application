@@ -6,13 +6,13 @@ import _ from 'lodash';
 
 import { Flex, Row, Col } from 'jsxstyle';
 
-import { SELECTED, HOVERED } from '../../reducers/selectionReducer';
-import ContinueButton from '../ContinueButton';
-import SavingsCard from './SavingsCard';
-import SpendingCard from './SpendingCard';
-import CreditCard from './CreditCard';
+import { SELECTED, HOVERED } from 'src/reducers/selectionReducer';
+import ContinueButton from 'src/components/ContinueButton';
+import SavingsCard from 'src/components/product_select/SavingsCard';
+import SpendingCard from 'src/components/product_select/SpendingCard';
+import CreditCard from 'src/components/product_select/CreditCard';
 
-import * as colors from '../../helpers/colors';
+import * as colors from 'src/helpers/colors';
 
 const getSelectedProductCount = (selectedProducts) => {
   return _.reduce(selectedProducts, (result, state) => {

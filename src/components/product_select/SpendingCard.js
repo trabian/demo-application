@@ -1,8 +1,8 @@
 import React from 'react';
 
-import ProductCard from './ProductCard.js';
-import spendingImage from '../images/spending.svg';
-import * as colors from '../../helpers/colors';
+import ProductCard from 'src/components/product_select/ProductCard.js';
+import spendingImage from 'src/components/images/spending.svg';
+import * as colors from 'src/helpers/colors';
 
 const SpendingCard = () => (
   <ProductCard
