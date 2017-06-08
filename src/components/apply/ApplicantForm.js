@@ -1,5 +1,5 @@
 import React from 'react';
-import { reduxForm } from 'redux-form'
+import { reduxForm } from 'redux-form';
 
 import IdentificationForm from './IdentificationForm';
 import ContactInfo from './ContactInfo';
@@ -13,7 +13,7 @@ const headingStyle = {
   fontWeight: 'bold'
 };
 
-const SectionHeading = ({children}) => <div style={headingStyle}>{children}</div>;
+const SectionHeading = ({ children }) => <div style={headingStyle}>{children}</div>;
 
 const ApplicantForm = ({ handleSubmit }) => {
   return (
@@ -27,6 +27,6 @@ const ApplicantForm = ({ handleSubmit }) => {
       <button type='submit'>Click me</button>
     </form>
   );
-}
+};
 
 export default reduxForm({form: 'apply'})(ApplicantForm);

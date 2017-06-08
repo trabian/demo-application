@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-export const stripPhoneNumber = input => _.replace(input, new RegExp('[\\(\\)\\-\\ ]', 'g'), '');
+export const stripPhoneNumber = input => _.replace(input, new RegExp('[^0-9]+', 'g'), '');
 export const stripSocialSec = input => _.replace(input, new RegExp('-','g'), '');
 
 const formatPhoneNumber = chars => {
@@ -19,7 +19,7 @@ export const normalizePhoneNumber = (input, prevInput='') => {
   const chars = stripPhoneNumber(input).split('');
   // handle backspacing with formatting characters
 
-  if(input.length < prevInput.length && _.replace(_.last(prevInput), stripPhoneNumber, '') === '') {
+  if(input.length < prevInput.length && _.replace(_.last(prevInput), /[^0-9]+/, '') === '') {
     return formatPhoneNumber(_.initial(chars));
   }
 
@@ -28,21 +28,26 @@ export const normalizePhoneNumber = (input, prevInput='') => {
 
 export const middleInitial = (input, prevInput)=>(input.length > 1 ? prevInput : input);
 
+export const socialDash = (input, prevInput='') => {
+  if(input.length > 11){
+      return prevInput;
+  }
+  if(isNaN(stripSocialSec(input))){
+    return prevInput;
+  }
 
-export const socialDash = (input, prevInput='') =>{
-
-      if(input.length > 11){
-          return prevInput;
-      }
-      if(isNaN(stripSocialSec(input))){
-        return prevInput;
-      }
-
-      if(input.length < prevInput.length){
-          return input;
-      }
-      if((input.length % 3 === 0) && input.length !== 9){
-          return input+'-';
-      }
+  if(input.length < prevInput.length){
       return input;
+  }
+  if((input.length % 3 === 0) && input.length !== 9){
+      return input+'-';
+  }
+  return input;
 };
+
+export const normalizeZipCode = (input, prevInput) => {
+  if(input.length > 5) {
+    return prevInput;
+  }
+  return input;
+}

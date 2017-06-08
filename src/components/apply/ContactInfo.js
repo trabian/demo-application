@@ -5,7 +5,7 @@ import { Row, Col } from 'jsxstyle';
 import usStates from '../../data/usStates';
 
 import { StyledTextField, StyledDropdownField, cardStyle } from './form_styles';
-import { normalizePhoneNumber } from './form_normalizers';
+import { normalizePhoneNumber, normalizeZipCode } from './form_normalizers';
 import { validateEmail, validatePhoneNumber, validateZipCode } from './form_validators';
 
 const LeftInput = () => (
@@ -85,6 +85,7 @@ const RightInput = () => (
           label='Zip Code'
           hintText='20500'
           width={75}
+          normalize={normalizeZipCode}
           type='number'
           validators={[validateZipCode]}
           required
