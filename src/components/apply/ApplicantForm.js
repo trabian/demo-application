@@ -3,6 +3,7 @@ import { reduxForm } from 'redux-form';
 
 import IdentificationForm from './IdentificationForm';
 import ContactInfo from './ContactInfo';
+import ContinueButton from '../ContinueButton';
 
 const headingStyle = {
   fontSize: '18pt',
@@ -15,8 +16,8 @@ const headingStyle = {
 
 const SectionHeading = ({ children }) => <div style={headingStyle}>{children}</div>;
 
-const ApplicantForm = ({ handleSubmit }) => {
-  return (
+const ApplicantForm = ({ handleSubmit }) => (
+  <div style={{marginBottom: 12}}>
     <form onSubmit={handleSubmit((values)=>console.log(values))}>
       <SectionHeading>Your Identity</SectionHeading>
       <IdentificationForm />
@@ -24,9 +25,9 @@ const ApplicantForm = ({ handleSubmit }) => {
 
       <SectionHeading>Contact Information and Address</SectionHeading>
       <ContactInfo />
-      <button type='submit'>Click me</button>
+      <center><ContinueButton title='KEEP GOING' buttonProps={{type: 'submit'}} /></center>
     </form>
-  );
-};
+  </div>
+);
 
 export default reduxForm({form: 'apply'})(ApplicantForm);
