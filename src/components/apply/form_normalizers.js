@@ -1,6 +1,7 @@
 import _ from 'lodash';
 
 export const stripPhoneNumber = input => _.replace(input, new RegExp('[\\(\\)\\-\\ ]', 'g'), '');
+export const stripSocialSec = input => _.replace(input, new RegExp('-','g'), '');
 
 const formatPhoneNumber = chars => {
   const flattened = _.flatten([
@@ -28,16 +29,19 @@ export const middleInitial = (input, prevInput)=>(input.length > 1 ? prevInput :
 
 
 export const socialDash = (input, prevInput='') =>{
-      
+
       if(input.length > 11){
           return prevInput;
       }
+      if(isNaN(stripSocialSec(input))){
+        return prevInput;
+      }
+
       if(input.length < prevInput.length){
           return input;
       }
       if((input.length % 3 === 0) && input.length !== 9){
           return input+'-';
       }
-
       return input;
 };

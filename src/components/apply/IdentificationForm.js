@@ -4,7 +4,7 @@ import { Row, Col } from 'jsxstyle';
 
 import { StyledTextField, cardStyle } from './form_styles';
 import { middleInitial, socialDash } from './form_normalizers';
-import { verifyDate } from './form_validators';
+import { valiDate, validateSocialSec } from './form_validators';
 
 const IdentificationForm = () => (
   <Card style={cardStyle}>
@@ -27,6 +27,7 @@ const IdentificationForm = () => (
           name='soc'
           width={250}
           normalize={socialDash}
+          validators={[validateSocialSec]}
           required
         />
         <StyledTextField
@@ -34,7 +35,7 @@ const IdentificationForm = () => (
           name='dob'
           width={160}
           type='date'
-          validators={[verifyDate]}
+          validators={[valiDate]}
           required
         />
       </Row>
