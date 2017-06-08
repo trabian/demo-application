@@ -6,7 +6,6 @@ export const UNSELECTED = 'UNSELECTED';
 export const SELECTED = 'SELECTED';
 export const HOVERED = 'HOVERED';
 
-
 // This is a state machine.
 // First level is the action.
 // Then it is the current state.

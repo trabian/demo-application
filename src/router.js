@@ -9,14 +9,12 @@ import NotFound from './components/NotFound';
 export const PRODUCT_SELECT = '/';
 export const APPLY = '/apply';
 
-export const CoreRouter = ({history}) => {
-  return (
-    <ConnectedRouter history={history}>
-      <Switch>
-        <Route exact path={PRODUCT_SELECT} component={IndexPage} />
-        <Route exact path={APPLY} component={Apply} />
-        <Route path='*' component={NotFound} />
-      </Switch>
-    </ConnectedRouter>
-  );
-};
+export const CoreRouter = ({history}) => (
+  <ConnectedRouter history={history}>
+    <Switch>
+      <Route exact path={PRODUCT_SELECT} component={IndexPage} />
+      <Route exact path={APPLY} component={Apply} />
+      <Route path='*' component={NotFound} />
+    </Switch>
+  </ConnectedRouter>
+);
