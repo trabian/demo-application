@@ -10,7 +10,7 @@ const formatPhoneNumber = chars => {
     chars.length > 2 ? ') ' : '',
     _.slice(chars, 3, 6),
     chars.length > 5 ? '-' : '',
-    _.slice(chars, 6, chars.length)
+    _.slice(chars, 6, 10)
   ]);
   return _.join(flattened, '');
 }
@@ -18,6 +18,7 @@ const formatPhoneNumber = chars => {
 export const normalizePhoneNumber = (input, prevInput='') => {
   const chars = stripPhoneNumber(input).split('');
   // handle backspacing with formatting characters
+
   if(input.length < prevInput.length && _.replace(_.last(prevInput), stripPhoneNumber, '') === '') {
     return formatPhoneNumber(_.initial(chars));
   }
