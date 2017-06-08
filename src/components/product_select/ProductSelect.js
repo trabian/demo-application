@@ -2,53 +2,37 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { RaisedButton } from 'material-ui';
 import { Link } from 'react-router-dom';
+import _ from 'lodash';
 
 import { Flex, Row, Col } from 'jsxstyle';
 
+import { SELECTED, HOVERED } from '../../reducers/selectionReducer';
+import ContinueButton from '../ContinueButton';
 import SavingsCard from './SavingsCard';
 import SpendingCard from './SpendingCard';
 import CreditCard from './CreditCard';
 
 import * as colors from '../../helpers/colors';
 
-const mapState = state => {
-  return {selected: state.selected};
+const getSelectedProductCount = (selectedProducts) => {
+  return _.reduce(selectedProducts, (result, state) => {
+    if(state === SELECTED || state === HOVERED){
+      return result + 1;
+    }
+    return result;
+  }, 0);
 };
 
-const ForwardIcon = ({active}) => (
-  <i
-    className='material-icons'
-    style={{display: 'inline-flex', marginBottom: 5, verticalAlign: 'middle', fontSize: 28, color: (active ? colors.basic : '')}}
-  >
-    forward
-  </i>
-);
+const mapStateToProps = state => {
+  return {
+    selected: state.selected,
+  };
+};
 
-const ApplyButton = connect(mapState)(({selected}) => {
-  const active = selected.length !== 0;
-  const {disabled, color, fontColor} = active
-    ? {disabled: false, color: colors.success, fontColor: colors.basic}
-    : {disabled: true, color: colors.primary};
-
-
-  const buttonInner = (
-    <RaisedButton
-      backgroundColor={color}
-      disabled={disabled}
-      icon={<ForwardIcon active={active}/>}
-      label='APPLY NOW'
-      labelColor={fontColor}
-      labelPosition='before'
-      style={{width: 275, marginBottom: 10, height: 50}}
-      labelStyle={{fontSize: 18, fontWeight: active ? 'bold' : 'normal'}}
-    />
-  );
-
-  return (
-    <div style={{textAlign: 'center', marginTop: 26}}>
-      {active ? <Link to='/apply'>{buttonInner}</Link> : buttonInner}
-    </div>
-  );
+const ApplyButton = connect(mapStateToProps)(({selected}) => {
+  const disabled = getSelectedProductCount(selected) === 0;
+  const button = <ContinueButton title='APPLY NOW' disabled={disabled} />
+  return disabled ? button : <Link to='/apply'>{button}</Link>;
 });
 
 class ProductSelect extends Component {
@@ -72,7 +56,6 @@ class ProductSelect extends Component {
         </Flex>
 
         <ApplyButton />
-
       </Col>
     );
   }
