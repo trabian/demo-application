@@ -1,111 +1,107 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-export default class Step extends Component {
-  constructor() {
-    super();
-    this.getStyles = this.getStyles.bind(this);
-  }
 
-  getStyles() {
+
+export default const Step = (props) => {
+  const getStyles = () => {
     const {
       activeColor, completeColor, defaultColor, circleFontColor,
       activeTitleColor, completeTitleColor, defaultTitleColor,
       size, circleFontSize, titleFontSize,
       circleTop, titleTop, width, completeOpactiy, defaultOpacity, activeOpacity
-    } = this.props;
+    } = props;
+    return(
+      {
+        step: {
+          width: `${width}%`,
+          display: 'table-cell',
+          position: 'relative',
+          paddingTop: circleTop,
+        },
+
+        circle: {
+          width: size,
+          height: size,
+          margin: '0 auto',
+          backgroundColor: 'transparent',
+          borderRadius: '50%',
+          borderWidth: 3,
+          borderStyle: 'solid',
+          borderColor: '#fff',
+          textAlign: 'center',
+          padding:1,
+          fontSize: circleFontSize,
+          color: circleFontColor,
+          display: 'block',
+          opacity: defaultOpacity,
+        },
+        activeCircle: {
+          backgroundColor: activeColor,
+          opacity: activeOpacity
+        },
+        completedCircle: {
+          backgroundColor: completeColor,
+          opacity: completeOpactiy,
+        },
+        index: {
+          lineHeight: `${size + circleFontSize / 4}px`,
+          color: circleFontColor
+        },
+        title: {
+          marginTop: titleTop,
+          fontSize: titleFontSize,
+          fontWeight: '300',
+          textAlign: 'center',
+          display: 'block',
+          color: defaultTitleColor,
+          opacity: defaultOpacity
+        },
+        activeTitle: {
+          color: activeTitleColor,
+          opacity: activeOpacity
+        },
+        completedTitle: {
+          color: completeTitleColor,
+          opacity: completeOpactiy
+        },
+        leftBar: {
+          position: 'absolute',
+          top: circleTop + size / 2,
+          height: 1,
+          borderTopStyle: 'dashed',
+          borderTopWidth: 1,
+          borderTopColor: defaultColor,
+          left: 0,
+          right: '50%',
+          marginRight: size / 2 + 5,
+          opacity: defaultOpacity
+        },
+        rightBar: {
+          position: 'absolute',
+          top: circleTop + size / 2,
+          height: 1,
+          borderTopStyle: 'dashed',
+          borderTopWidth: 1,
+          borderTopColor: defaultColor,
+          right: 0,
+          left: '50%',
+          marginLeft: size / 2 + 5,
+          opacity: defaultOpacity
+        },
+        completedBar: {
+          borderTopStyle: 'dashed',
+          borderTopWidth: 1,
+          borderTopColor: completeColor,
+          opacity: completeOpactiy
+        },
+      }
+    );
+  };
 
 
-    return {
-      step: {
-        width: `${width}%`,
-        display: 'table-cell',
-        position: 'relative',
-        paddingTop: circleTop,
-      },
-
-      circle: {
-        width: size,
-        height: size,
-        margin: '0 auto',
-        backgroundColor: 'transparent',
-        borderRadius: '50%',
-        borderWidth: 3,
-        borderStyle: 'solid',
-        borderColor: '#fff',
-        textAlign: 'center',
-        padding:1,
-        fontSize: circleFontSize,
-        color: circleFontColor,
-        display: 'block',
-        opacity: defaultOpacity,
-
-      },
-      activeCircle: {
-        backgroundColor: activeColor,
-        opacity: activeOpacity
-      },
-      completedCircle: {
-        backgroundColor: completeColor,
-        opacity: completeOpactiy,
-      },
-      index: {
-        lineHeight: `${size + circleFontSize / 4}px`,
-        color: circleFontColor
-      },
-      title: {
-        marginTop: titleTop,
-        fontSize: titleFontSize,
-        fontWeight: '300',
-        textAlign: 'center',
-        display: 'block',
-        color: defaultTitleColor,
-        opacity: defaultOpacity
-      },
-      activeTitle: {
-        color: activeTitleColor,
-        opacity: activeOpacity
-      },
-      completedTitle: {
-        color: completeTitleColor,
-        opacity: completeOpactiy
-      },
-      leftBar: {
-        position: 'absolute',
-        top: circleTop + size / 2,
-        height: 1,
-        borderTopStyle: 'dashed',
-        borderTopWidth: 1,
-        borderTopColor: defaultColor,
-        left: 0,
-        right: '50%',
-        marginRight: size / 2 + 5,
-        opacity: defaultOpacity
-      },
-      rightBar: {
-        position: 'absolute',
-        top: circleTop + size / 2,
-        height: 1,
-        borderTopStyle: 'dashed',
-        borderTopWidth: 1,
-        borderTopColor: defaultColor,
-        right: 0,
-        left: '50%',
-        marginLeft: size / 2 + 5,
-        opacity: defaultOpacity
-      },
-      completedBar: {
-        borderTopStyle: 'dashed',
-        borderTopWidth: 1,
-        borderTopColor: completeColor,
-        opacity: completeOpactiy
-      },
-    };
-  }
-
-  render() {
-    const { title, index, active, completed, first, isLast, href, onClick } = this.props;
-
+  return() {
+    const { title, index, active, completed, first, isLast, href, onClick } = props;
     const styles = this.getStyles();
     const circleStyle = Object.assign(
       styles.circle,
@@ -140,7 +136,7 @@ export default class Step extends Component {
       </div>
     );
   }
-}
+};
 
 Step.defaultProps = {
   activeColor: '#5096FF',
