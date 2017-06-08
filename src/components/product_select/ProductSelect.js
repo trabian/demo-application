@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { RaisedButton } from 'material-ui';
 import { Link } from 'react-router-dom';
 import _ from 'lodash';
 

@@ -2,9 +2,9 @@ import React from 'react';
 import { Route, Switch } from 'react-router';
 import { ConnectedRouter} from 'react-router-redux';
 
-import IndexPage from './components/product_select/ProductSelect';
-import Apply from './components/apply/Apply';
-import NotFound from './components/NotFound';
+import IndexPage from 'src/components/product_select/ProductSelect';
+import Apply from 'src/components/apply/Apply';
+import NotFound from 'src/components/NotFound';
 
 export const PRODUCT_SELECT = '/';
 export const APPLY = '/apply';

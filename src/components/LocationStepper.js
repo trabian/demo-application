@@ -1,11 +1,9 @@
 import React from 'react';
-import _ from 'lodash';
 import { connect } from 'react-redux';
 
-import { SELECTED, HOVERED } from '../reducers/selectionReducer';
-import { PRODUCT_SELECT, APPLY } from '../router';
-import * as colors from '../helpers/colors';
-import Stepper from '../Stepper';
+import { PRODUCT_SELECT, APPLY } from 'src/router';
+import * as colors from 'src/helpers/colors';
+import Stepper from 'src/Stepper';
 
 const stepMap = {
   [PRODUCT_SELECT]: 0,

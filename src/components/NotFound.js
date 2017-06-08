@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Container, Heading } from '../helpers/container';
+import { Container, Heading } from 'src/helpers/container';
 
 const NotFound = () => (
   <Container>
