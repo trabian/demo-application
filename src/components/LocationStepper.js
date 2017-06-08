@@ -13,7 +13,7 @@ const stepMap = {
 };
 
 const getSelectedProducts = (selectedProducts) => {
-  return _.reduce(selectedProducts, (result, state)=>{
+  return _.reduce(selectedProducts, (result, state) => {
     if(state === SELECTED || state === HOVERED){
       return result + 1;
     }
