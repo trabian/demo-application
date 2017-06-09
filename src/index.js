@@ -23,7 +23,7 @@ const store = createStore(
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
-const Root = ()=>{
+const Root = () => {
   return (
     <MuiThemeProvider>
       <Provider store={store}>
