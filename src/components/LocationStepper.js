@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { SELECTED, HOVERED } from '../reducers/selectionReducer';
 import { PRODUCT_SELECT, APPLY } from '../router';
 import * as colors from '../helpers/colors';
-import Stepper from '../Stepper';
+import Stepper from 'react-stepper-horizontal';
 
 const stepMap = {
   [PRODUCT_SELECT]: 0,
