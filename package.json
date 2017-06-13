@@ -17,7 +17,7 @@
     "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.6.0",
     "zaphod": "^0.2.1",
-    "react-stepper":"trabian/react-stepper"
+    "react-stepper": "mu29/react-stepper"
   },
   "devDependencies": {
     "react-scripts": "1.0.7"

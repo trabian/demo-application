@@ -34,10 +34,20 @@ const LocationStepper = ({location, selectedProducts}) => {
       defaultTitleColor={colors.basic}
       activeTitleColor={colors.basic}
       completeTitleColor={colors.basic}
-      defaultColor={colors.basic}
+      defaultColor={colors.transparent}
+      defaultBorderColor={colors.basic}
+      defaultBorderStyle='solid'
+      activeBorderColor={colors.basic}
+      activeBorderStyle='solid'
+      completeBorderColor={colors.basic}
+      completeBorderStyle='solid'
       completeColor={colors.basic}
       activeColor={colors.transparent}
       defaultOpacity='0.5'
+      defaultTitleOpacity='0.5'
+      barStyle='dashed'
+      completeBarColor={colors.basic}
+      defaultBarColor={colors.basic}
     />
   );
 }
