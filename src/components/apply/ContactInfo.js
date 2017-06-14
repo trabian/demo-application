@@ -9,7 +9,7 @@ import { normalizePhoneNumber, normalizeZipCode } from './form_normalizers';
 import { validateEmail, validatePhoneNumber, validateZipCode } from './form_validators';
 
 const LeftInput = () => (
-  <Col style={{borderRight: '2px solid #999'}}>
+  <Col style={{borderRight: '2px solid #999', height: 130, paddingBottom: 0}}>
     <Row>
       <Col>
         <StyledTextField
@@ -47,7 +47,7 @@ const LeftInput = () => (
 );
 
 const RightInput = () => (
-  <Col>
+  <Col style={{height: 130}}>
     <Row>
       <Col>
         <StyledTextField
@@ -97,12 +97,10 @@ const RightInput = () => (
 
 const ContactInfo = () => (
   <Card style={cardStyle}>
-    <CardText>
-      <Row>
+      <Row style={{paddingBottom: 20, paddingTop: 10}}>
         <LeftInput />
         <RightInput />
       </Row>
-    </CardText>
   </Card>
 );
 
