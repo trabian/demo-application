@@ -39,8 +39,8 @@ const buttonStyle = disabled => {
   }
 };
 
-export default ({ disabled=false, title, buttonProps={}, onClick }) => (
-  <div style={{textAlign: 'center', marginTop: '26px'}}>
+export default ({ disabled=false, title, buttonProps={}, onClick, marginTop }) => (
+  <div style={{textAlign: 'center', marginTop: marginTop || 26}}>
     <InnerButton {...buttonStyle(disabled)} title={title} buttonProps={buttonProps} onClick={onClick} />
   </div>
 );

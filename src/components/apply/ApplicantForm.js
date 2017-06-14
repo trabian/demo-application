@@ -24,18 +24,17 @@ const ApplicantForm = ({ handleSubmit }) => (
     <form onSubmit={handleSubmit((values)=>console.log(values))} style={{display:'flex', flexDirection: 'column', alignItems: 'center'}}>
       <SectionHeading>Your Identity</SectionHeading>
       <IdentificationForm />
-      <br />
 
       <SectionHeading>Contact Information and Address</SectionHeading>
       <ContactInfo />
-      <Flex alignSelf='center' width='40%' style={{marginLeft: 60}}>
+      <Flex alignSelf='center' width='40%' style={{marginLeft: 60, marginBottom: 0, marginTop: 30}}>
         <Checkbox
           label="Add joint applicant to my membership application"
           labelStyle={{color: colors.primary_text}}
           iconStyle={{fill: colors.primary_text}}
         />
       </Flex>
-      <center><ContinueButton title='KEEP GOING' buttonProps={{type: 'submit'}} /></center>
+      <center><ContinueButton title='KEEP GOING' buttonProps={{type: 'submit'}} marginTop={5}/></center>
     </form>
   </div>
 );
