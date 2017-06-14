@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { RaisedButton } from 'material-ui';
 import { Link } from 'react-router-dom';
@@ -51,9 +51,7 @@ const ApplyButton = connect(mapState)(({selected}) => {
   );
 });
 
-class ProductSelect extends Component {
-  render() {
-    return (
+const ProductSelect = () =>(
       <Col>
 
         <Flex flexDirection='column' alignItems='center' style={{color: colors.basic, marginTop: 25}}>
@@ -74,8 +72,7 @@ class ProductSelect extends Component {
         <ApplyButton />
 
       </Col>
-    );
-  }
-}
+);
+
 
 export default ProductSelect;
