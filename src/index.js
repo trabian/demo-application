@@ -8,10 +8,10 @@ import createHistory from 'history/createBrowserHistory';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
-import registerServiceWorker from './registerServiceWorker';
-import './index.css';
-import reducers from './reducers';
-import ApplicationPage from './components/ApplicationPage';
+import registerServiceWorker from 'src/registerServiceWorker';
+import 'src/index.css';
+import reducers from 'src/reducers';
+import ApplicationPage from 'src/components/ApplicationPage';
 
 injectTapEventPlugin(); //needed for material-ui
 
