@@ -5,3 +5,5 @@ export const transparent = 'transparent';
 export const primary = '#3d917b';
 export const success = '#64ac31';
 export const danger = '#d40f61';
+
+export const formBackground = '#d3e4df';
