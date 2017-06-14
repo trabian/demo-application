@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { RaisedButton } from 'material-ui';
 import { Link } from 'react-router-dom';
 
 import { Flex, Row, Col } from 'jsxstyle';
 
-import SavingsCard from './SavingsCard';
-import SpendingCard from './SpendingCard';
-import CreditCard from './CreditCard';
+import SavingsCard from 'src/components/product_select/SavingsCard';
+import SpendingCard from 'src/components/product_select/SpendingCard';
+import CreditCard from 'src/components/product_select/CreditCard';
 
-import * as colors from '../../helpers/colors';
+import * as colors from 'src/helpers/colors';
 
 const mapState = state => {
   return {selected: state.selected};
@@ -51,9 +51,7 @@ const ApplyButton = connect(mapState)(({selected}) => {
   );
 });
 
-class ProductSelect extends Component {
-  render() {
-    return (
+const ProductSelect = () =>(
       <Col>
 
         <Flex flexDirection='column' alignItems='center' style={{color: colors.basic, marginTop: 25}}>
@@ -74,8 +72,7 @@ class ProductSelect extends Component {
         <ApplyButton />
 
       </Col>
-    );
-  }
-}
+);
+
 
 export default ProductSelect;
