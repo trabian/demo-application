@@ -35,7 +35,6 @@ export const socialDash = (input, prevInput='') => {
   if(isNaN(stripSocialSec(input))){
     return prevInput;
   }
-
   if(input.length < prevInput.length){
       return input;
   }
