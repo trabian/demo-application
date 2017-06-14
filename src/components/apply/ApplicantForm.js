@@ -2,9 +2,9 @@ import React from 'react';
 import { reduxForm } from 'redux-form';
 
 // Will be added in the future
-// import IdentificationForm from './IdentificationForm';
-// import ContactInfo from './ContactInfo';
-// import ContinueButton from '../ContinueButton';
+// import IdentificationForm from 'src/components/apply/IdentificationForm';
+// import ContactInfo from 'src/components/apply/ContactInfo';
+// import ContinueButton from 'src/components/ContinueButton';
 
 const headingStyle = {
   fontSize: '18pt',
