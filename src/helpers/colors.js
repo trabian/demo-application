@@ -7,3 +7,4 @@ export const success = '#64ac31';
 export const danger = '#d40f61';
 
 export const formBackground = '#d3e4df';
+export const inactive = '#333';

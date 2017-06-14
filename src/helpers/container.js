@@ -1,6 +1,6 @@
 import { curry, Inline, Flex } from 'jsxstyle';
 
-import * as colors from './colors';
+import * as colors from 'src/helpers/colors';
 
 export const Container = curry(Flex, {
   paddingTop: 30,
