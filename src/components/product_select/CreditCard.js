@@ -1,8 +1,8 @@
 import React from 'react';
 
 import ProductCard from './ProductCard.js';
-import cardImage from './images/card.svg';
-import * as colors from '../colors.js';
+import cardImage from '../images/card.svg';
+import * as colors from '../../helpers/colors.js';
 
 const CreditCard = () => {
   return(

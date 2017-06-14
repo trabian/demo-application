@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { Col, Flex } from 'jsxstyle';
 
 import SelectButton from './SelectButton';
-import { UNSELECTED } from '../reducers/selectionReducer';
+import { UNSELECTED } from '../../reducers/selectionReducer';
 
-import * as colors from '../colors.js';
+import * as colors from '../../helpers/colors';
 
 const wrapperStyles = {
   padding: 20,
@@ -36,8 +36,8 @@ const ProductCard = ({ img, backgroundColor, title, subText, selected, cardId })
   );
 };
 
-const mapStateToProps = (state)=>{
-  return{
+const mapStateToProps = (state) => {
+  return {
     selected: state.selected
   };
 };
