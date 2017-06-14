@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardText } from 'material-ui/Card';
+import { Card } from 'material-ui/Card';
 import { Row, Col } from 'jsxstyle';
 
 import usStates from '../../data/usStates';
@@ -9,7 +9,7 @@ import { normalizePhoneNumber, normalizeZipCode } from './form_normalizers';
 import { validateEmail, validatePhoneNumber, validateZipCode } from './form_validators';
 
 const LeftInput = () => (
-  <Col style={{borderRight: '2px solid #999', height: 130, paddingBottom: 0}}>
+  <Col style={{borderRight: '2px solid #999', height: 140, paddingBottom: 0}}>
     <Row>
       <Col>
         <StyledTextField
@@ -47,7 +47,7 @@ const LeftInput = () => (
 );
 
 const RightInput = () => (
-  <Col style={{height: 130}}>
+  <Col style={{height: 140}}>
     <Row>
       <Col>
         <StyledTextField
