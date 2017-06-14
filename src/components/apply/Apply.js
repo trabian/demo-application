@@ -1,5 +1,11 @@
 import React from 'react';
 
-const Apply = () => { return <div>TODO</div>; }
+import ApplicantForm from 'src/components/apply/ApplicantForm';
+
+const Apply = () => (
+  <div>
+    <ApplicantForm />
+  </div>
+);
 
 export default Apply;
