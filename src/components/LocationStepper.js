@@ -43,7 +43,7 @@ const LocationStepper = ({location, selectedProducts}) => {
       completeBorderStyle='solid'
       completeColor={colors.basic}
       activeColor={colors.transparent}
-      defaultOpacity='0.5'
+      defaultOpcaity='0.5'
       defaultTitleOpacity='0.5'
       barStyle='dashed'
       completeBarColor={colors.basic}
