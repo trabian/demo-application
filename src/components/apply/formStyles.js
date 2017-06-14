@@ -47,16 +47,15 @@ const errorStyle = {
   lineHeight: '24px',
 };
 
-const labelStyle = label => ({
-  floatingLabelText: label,
+const labelStyle = {
   floatingLabelFixed: true,
   floatingLabelStyle: {
     left: 0,
     top: 3,
     fontSize: '13pt',
     color: '#555',
-  },
-});
+  }
+};
 
 const underlineStyle = {
   display: 'none',
@@ -67,7 +66,8 @@ export const StyledTextField = ({ hintText, name, width, label=' ', type='text',
     name={name}
     component={TextField}
     type={type}
-    {...labelStyle(label)}
+    floatingLabelText={label}
+    {...labelStyle}
     underlineStyle={underlineStyle}
     validate={applyValidators(required ? [requiredValidator, ...validators] : validators)}
     normalize={normalize}
@@ -88,7 +88,8 @@ export const StyledDropdownField = ({ name, hintText, children, width, type, lab
     <Field
       name={name}
       component={SelectField}
-      {...labelStyle(label)}
+      floatingLabelText={label}
+      {...labelStyle}
       {/* validate={applyValidators(required ? [requiredValidator, ...validators] : validators)} */}
       type={type}
       underlineStyle={underlineStyle}
