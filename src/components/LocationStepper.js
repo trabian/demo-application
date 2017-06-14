@@ -12,14 +12,7 @@ const stepMap = {
   [APPLY]: 1
 };
 
-const getSelectedProducts = (selectedProducts) => {
-  return _.reduce(selectedProducts, (result, state) => {
-    if(state === SELECTED || state === HOVERED){
-      return result + 1;
-    }
-    return result;
-  }, 0);
-};
+
 
 const LocationStepper = ({location, selectedProducts}) => {
   const activeStep = stepMap[location];
@@ -51,6 +44,7 @@ const LocationStepper = ({location, selectedProducts}) => {
     />
   );
 }
+
 
 const mapStateToProps = state => {
   const pathname = state.router && state.router.location ? state.router.location.pathname : '/';
