@@ -2,11 +2,11 @@ import React from 'react';
 
 import { Flex, Inline, curry, Row} from 'jsxstyle';
 
-import SavingsCard from './components/SavingsCard.js';
-import SpendingCard from './components/SpendingCard.js';
-import CreditCard from './components/CreditCard.js';
+import SavingsCard from 'src/components/SavingsCard.js';
+import SpendingCard from 'src/components/SpendingCard.js';
+import CreditCard from 'src/components/CreditCard.js';
 
-import * as colors from './colors.js';
+import * as colors from 'src/helpers/colors.js';
 
 const Container = curry(Flex, {
   paddingTop: 30,

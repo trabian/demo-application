@@ -2,7 +2,7 @@ import React from 'react';
 import { RaisedButton } from 'material-ui';
 import _ from 'lodash';
 
-import * as colors from '../helpers/colors';
+import * as colors from 'src/helpers/colors';
 
 const forwardIconStyle = active => {
   return {

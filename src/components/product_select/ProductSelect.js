@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { RaisedButton } from 'material-ui';
 import { Link } from 'react-router-dom';
 import _ from 'lodash';
 
 import { Flex, Row, Col } from 'jsxstyle';
 
-import { SELECTED, HOVERED } from '../../reducers/selectionReducer';
-import ContinueButton from '../ContinueButton';
-import SavingsCard from './SavingsCard';
-import SpendingCard from './SpendingCard';
-import CreditCard from './CreditCard';
+import { SELECTED, HOVERED } from 'src/reducers/selectionReducer';
+import ContinueButton from 'src/components/ContinueButton';
+import SavingsCard from 'src/components/product_select/SavingsCard';
+import SpendingCard from 'src/components/product_select/SpendingCard';
+import CreditCard from 'src/components/product_select/CreditCard';
 
-import * as colors from '../../helpers/colors';
+import * as colors from 'src/helpers/colors';
 
 const getSelectedProductCount = (selectedProducts) => {
   return _.reduce(selectedProducts, (result, state) => {
@@ -35,30 +34,25 @@ const ApplyButton = connect(mapStateToProps)(({selected}) => {
   return disabled ? button : <Link to='/apply'>{button}</Link>;
 });
 
-class ProductSelect extends Component {
-  render() {
-    return (
-      <Col>
+const ProductSelect = () => (
+  <Col>
+    <Flex flexDirection='column' alignItems='center' style={{color: colors.basic, marginTop: 25}}>
+      <b style={{ fontSize: '1.5em' }}>Select your products</b>
+      <p>Which products would you like?</p>
+    </Flex>
 
-        <Flex flexDirection='column' alignItems='center' style={{color: colors.basic, marginTop: 25}}>
-          <b style={{ fontSize: '1.5em' }}>Select your products</b>
-          <p>Which products would you like?</p>
-        </Flex>
+    <Row alignSelf='center' style={{marginTop: 10}}>
+      <SavingsCard />
+      <SpendingCard />
+      <CreditCard />
+    </Row>
 
-        <Row alignSelf='center' style={{marginTop: 10}}>
-          <SavingsCard />
-          <SpendingCard />
-          <CreditCard />
-        </Row>
+    <Flex alignSelf='center' style={{color: colors.basic, marginTop: 20}}>
+      {"Once you submit your online application, we'll contact you within one business day to complete the membership process."}
+    </Flex>
 
-        <Flex alignSelf='center' style={{color: colors.basic, marginTop: 20}}>
-          {"Once you submit your online application, we'll contact you within one business day to complete the membership process."}
-        </Flex>
-
-        <ApplyButton />
-      </Col>
-    );
-  }
-}
+    <ApplyButton />
+  </Col>
+);
 
 export default ProductSelect;
