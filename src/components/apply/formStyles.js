@@ -5,15 +5,6 @@ import { Field } from 'redux-form';
 import _ from 'lodash';
 
 import * as colors from 'src/helpers/colors';
-// Will be added in the future
-{/* import { required as requiredValidator } from './form_validators'; */}
-
-/**
- * Applies all the provided validator functions to the input, returning the first rejection.
- */
-const applyValidators = validators => (input, lastInput) => {
-  return _.find(_.map(validators, validator => validator(input, lastInput)));
-}
 
 const sharedStyle = {
   height: 30,
@@ -61,7 +52,7 @@ const underlineStyle = {
   display: 'none',
 };
 
-export const StyledTextField = ({ hintText, name, width, label=' ', type='text', normalize, validators=[], required }) => (
+export const StyledTextField = ({ hintText, name, width, label=' ', type='text', normalize, required }) => (
   <Field
     name={name}
     component={TextField}
@@ -69,7 +60,6 @@ export const StyledTextField = ({ hintText, name, width, label=' ', type='text',
     floatingLabelText={label}
     {...labelStyle}
     underlineStyle={underlineStyle}
-    validate={applyValidators(required ? [requiredValidator, ...validators] : validators)}
     normalize={normalize}
     style={textFieldStyle(width)}
     inputStyle={{marginTop: 0}}
@@ -81,8 +71,8 @@ export const StyledTextField = ({ hintText, name, width, label=' ', type='text',
   />
 );
 
-export const StyledDropdownField = ({ name, hintText, children, width, type, label=' ', validators=[], required=false }) => {
-  const childrenItems = children.map(child => <MenuItem key={child} value={child} primaryText={child} />);
+export const StyledDropdownField = ({ name, hintText, children, width, type, label=' ', required=false }) => {
+const childrenItems = children.map(child => <MenuItem key={child} value={child} primaryText={child} />);
 
   return (
     <Field
@@ -90,7 +80,6 @@ export const StyledDropdownField = ({ name, hintText, children, width, type, lab
       component={SelectField}
       floatingLabelText={label}
       {...labelStyle}
-      {/* validate={applyValidators(required ? [requiredValidator, ...validators] : validators)} */}
       type={type}
       underlineStyle={underlineStyle}
       style={selectFieldStyle(width)}
