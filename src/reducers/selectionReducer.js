@@ -1,6 +1,6 @@
 import { getIn, set } from 'zaphod/compat';
 
-import { SELECT, HOVER_IN, HOVER_OUT } from '../actions';
+import { SELECT, HOVER_IN, HOVER_OUT } from 'src/actions';
 
 export const UNSELECTED = 'UNSELECTED';
 export const SELECTED = 'SELECTED';
@@ -18,14 +18,14 @@ const stateTransitions = {
   },
   [HOVER_IN]: {
     [UNSELECTED]: UNSELECTED,
-    [SELECTED] : HOVERED,
+    [SELECTED]: HOVERED,
     [HOVERED]: HOVERED,
   },
   [HOVER_OUT]: {
     [UNSELECTED]: UNSELECTED,
     [HOVERED]: SELECTED,
     [SELECTED]: SELECTED,
-  }
+  },
 };
 
 const initialState = {
@@ -35,6 +35,10 @@ const initialState = {
 };
 
 export default (state=initialState, { id: cardId, type }) => {
+  if(!cardId) {
+    return state;
+  }
+
   const currentCardState = state[cardId];
   const newCardState = getIn(stateTransitions, [type, currentCardState], state)
   return set(state, cardId, newCardState);
