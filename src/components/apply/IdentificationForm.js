@@ -1,6 +1,8 @@
 import React from 'react';
+
 import { Card } from 'material-ui/Card';
 import { Row, Col } from 'jsxstyle';
+
 
 import { StyledTextField, cardStyle } from 'src/components/apply/formStyles';
 import { normalizeSocialSecurity, normalizeMiddleInitial } from 'src/components/apply/formNormalizers';
@@ -9,13 +11,14 @@ const IdentificationForm = () => (
   <Card style={cardStyle}>
     <Col>
       <Row>
-        <StyledTextField label = 'Name' hintText='First Name' name='firstName' width={250} required />
+        <StyledTextField label ='Name' hintText='First Name' name='firstName' width={250} required />
         <StyledTextField
           hintText='Middle Initial'
           name='middleInitial'
           width={94}
           required
           normalize={normalizeMiddleInitial}
+          onBlur={ (e) => console.log(e.target.value) }
         />
         <StyledTextField hintText='Last Name' name='lastName' width={400}/>
       </Row>

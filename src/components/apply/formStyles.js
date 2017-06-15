@@ -49,6 +49,7 @@ const underlineStyle = {
   display: 'none',
 };
 
+
 export const StyledTextField = ({ hintText, name, width, label=' ', type='text', normalize, required }) => (
   <Field
     name={name}

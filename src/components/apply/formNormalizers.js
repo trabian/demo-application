@@ -14,7 +14,7 @@ const formatPhoneNumber = chars => {
     _.slice(chars, 6, 10)
   ]);
   return _.join(flattened, '');
-}
+};
 
 export const normalizePhoneNumber = (input, prevInput='') => {
   const chars = stripPhoneNumber(input).split('');
@@ -23,7 +23,7 @@ export const normalizePhoneNumber = (input, prevInput='') => {
     return formatPhoneNumber(_.initial(chars));
   }
   return formatPhoneNumber(chars);
-}
+};
 
 export const normalizeMiddleInitial = (input, prevInput='')=>{
     if( input.match(middleInitialRegEx) && input.length <= 1 ){
