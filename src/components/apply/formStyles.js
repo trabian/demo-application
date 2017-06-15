@@ -2,19 +2,16 @@ import React from 'react';
 import { TextField, SelectField } from 'redux-form-material-ui';
 import MenuItem from 'material-ui/MenuItem';
 import { Field } from 'redux-form';
-import _ from 'lodash';
 
 import * as colors from 'src/helpers/colors';
 
 const sharedStyle = {
   height: 30,
   fontSize: '12pt',
-  borderColor: '#33875c',
-  borderWidth: 1,
-  borderStyle: 'solid',
-  backgroundColor: colors.primary,
+  border: '1px solid #33875c',
+  backgroundColor: colors.basic,
   padding: '3px 12px 3px 12px',
-  margin: '10px 10px 32px 10px'
+  margin: '10px 10px 32px 10px',
 };
 
 const textFieldStyle = width => ({
