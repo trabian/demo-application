@@ -2,7 +2,7 @@ import React from 'react';
 import { reduxForm } from 'redux-form';
 
 // Will be added in the future
-// import IdentificationForm from 'src/components/apply/IdentificationForm';
+import IdentificationForm from 'src/components/apply/IdentificationForm';
 import ContactInfo from 'src/components/apply/ContactInfo';
 import ContinueButton from 'src/components/ContinueButton';
 
@@ -19,10 +19,9 @@ const SectionHeading = ({ children }) => <div style={headingStyle}>{children}</d
 
 const ApplicantForm = ({ handleSubmit }) => (
   <div style={{marginBottom: 12}}>
-    <form onSubmit={handleSubmit}>
+    <form style={{display:'flex', flexDirection: 'column', alignItems: 'center'}}>
       <SectionHeading>Your Identity</SectionHeading>
-      {/* <IdentificationForm /> */}
-      <br />
+      <IdentificationForm />
 
       <SectionHeading>Contact Information and Address</SectionHeading>
       <ContactInfo />
