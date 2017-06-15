@@ -1,4 +1,5 @@
 import { getIn, set } from 'zaphod/compat';
+import _ from 'lodash';
 
 import { SELECT, HOVER_IN, HOVER_OUT } from 'src/actions';
 
@@ -35,7 +36,7 @@ const initialState = {
 };
 
 export default (state=initialState, { id: cardId, type }) => {
-  if(!cardId) {
+  if(!_.includes([SELECT, HOVER_IN, HOVER_OUT], type)) {
     return state;
   }
 
