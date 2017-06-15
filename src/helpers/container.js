@@ -1,6 +1,6 @@
 import { curry, Inline, Flex } from 'jsxstyle';
 
-import * as colors from './colors';
+import * as colors from 'src/helpers/colors';
 
 export const Container = curry(Flex, {
   paddingTop: 30,
@@ -11,7 +11,7 @@ export const Container = curry(Flex, {
 });
 
 export const Heading = curry(Inline, {
-  color: colors.primary_text,
+  color: colors.basic,
   fontSize: '2.8em',
   alignSelf: 'flex-start'
 });

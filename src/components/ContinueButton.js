@@ -2,7 +2,8 @@ import React from 'react';
 import { RaisedButton } from 'material-ui';
 import _ from 'lodash';
 
-import * as colors from '../helpers/colors';
+import * as colors from 'src/helpers/colors';
+
 
 const forwardIconStyle = active => {
   return {
@@ -10,7 +11,7 @@ const forwardIconStyle = active => {
     marginBottom: 5,
     verticalAlign: 'middle',
     fontSize: 28,
-    color: (active ? colors.primary_text : '')
+    color: (active ? colors.basic : '')
   };
 }
 
@@ -33,14 +34,14 @@ const InnerButton = ({ color, fontColor, disabled, title, buttonProps, onClick=_
 
 const buttonStyle = disabled => {
   if(disabled) {
-    return {disabled, color: colors.disabled_button};
+    return {disabled, color: colors.inactive};
   } else {
-    return {disabled, color: colors.selected_button, fontColor: colors.primary_text};
+    return {disabled, color: colors.success, fontColor: colors.basic};
   }
 };
 
-export default ({ disabled=false, title, buttonProps={}, onClick, marginTop }) => (
-  <div style={{textAlign: 'center', marginTop: marginTop || 26}}>
+export default ({ disabled=false, title, buttonProps={}, onClick }) => (
+  <div style={{textAlign: 'center', marginTop: '26px'}}>
     <InnerButton {...buttonStyle(disabled)} title={title} buttonProps={buttonProps} onClick={onClick} />
   </div>
 );

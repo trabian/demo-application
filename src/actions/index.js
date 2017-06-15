@@ -1,8 +1,24 @@
-import { select } from '../action_types.js';
+export const SELECT = 'select';
+export const HOVER_IN = 'hoverIn';
+export const HOVER_OUT = 'hoverOut'
 
-export const selectAction = (cardTitle)=>{
+export const selectAction = (cardId) => {
   return {
-    type: select,
-    title: cardTitle
+    type: SELECT,
+    id: cardId
+  };
+};
+
+export const hoverInAction = (cardId) => {
+  return {
+    type: HOVER_IN,
+    id: cardId
+  };
+};
+
+export const hoverOutAction = (cardId) => {
+  return {
+    type: HOVER_OUT,
+    id: cardId
   };
 };

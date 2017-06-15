@@ -6,7 +6,7 @@ import Checkbox from 'material-ui/Checkbox';
 import IdentificationForm from './IdentificationForm';
 import ContactInfo from './ContactInfo';
 import ContinueButton from '../ContinueButton';
-import * as colors from '../../helpers/colors.js';
+import * as colors from 'src/helpers/colors';
 
 const headingStyle = {
   fontSize: '18pt',
@@ -30,8 +30,8 @@ const ApplicantForm = ({ handleSubmit }) => (
       <Flex alignSelf='center' width='40%' style={{marginLeft: 60, marginBottom: 0, marginTop: 30}}>
         <Checkbox
           label="Add joint applicant to my membership application"
-          labelStyle={{color: colors.primary_text}}
-          iconStyle={{fill: colors.primary_text}}
+          labelStyle={{color: colors.basic}}
+          iconStyle={{fill: colors.basic}}
         />
       </Flex>
       <center><ContinueButton title='KEEP GOING' buttonProps={{type: 'submit'}} marginTop={10}/></center>

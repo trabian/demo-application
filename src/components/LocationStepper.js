@@ -1,43 +1,41 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { PRODUCT_SELECT, APPLY } from '../router';
-import * as colors from '../helpers/colors.js';
-import Stepper from '../Stepper';
+import { PRODUCT_SELECT, APPLY } from 'src/router';
+import * as colors from 'src/helpers/colors';
+import Stepper from 'react-stepper-horizontal';
 
-const LocationStepper = ({location, selectedProducts}) => {
-  let activeStep;
-  switch(location) {
-    case PRODUCT_SELECT:
-      activeStep = 0;
-      break;
+const stepMap = {
+  [PRODUCT_SELECT]: 0,
+  [APPLY]: 1
+};
 
-    case APPLY:
-      activeStep = 1;
-      break;
+const LocationStepper = ({location, selectedProducts}) => (
+  <Stepper
+    style={{marginTop: 15}}
+    steps={ [{title: 'SELECT PRODUCTS'}, {title: 'APPLY'}, {title: 'DISCLOSURES'}, {title: 'WRAP UP'}] }
+    activeStep={stepMap[location]}
+    defaultTitleColor={colors.basic}
+    activeTitleColor={colors.basic}
+    completeTitleColor={colors.basic}
+    defaultColor={colors.transparent}
+    defaultBorderColor={colors.basic}
+    defaultBorderStyle='solid'
+    activeBorderColor={colors.basic}
+    activeBorderStyle='solid'
+    completeBorderColor={colors.basic}
+    completeBorderStyle='solid'
+    completeColor={colors.basic}
+    activeColor={colors.transparent}
+    defaultOpcaity='0.5'
+    defaultTitleOpacity='0.5'
+    barStyle='dashed'
+    completeBarColor={colors.basic}
+    defaultBarColor={colors.basic}
+  />
+);
 
-    default:
-  }
-
-  const stepOneTitle = activeStep === 0 ? 'SELECT PRODUCTS' : `SELECT PRODUCTS (${selectedProducts.length})`;
-
-  return (
-    <Stepper
-      style={{marginTop: 15}}
-      steps={ [{title: stepOneTitle}, {title: 'APPLY'}, {title: 'DISCLOSURES'}, {title: 'WRAP UP'}] }
-      activeStep={activeStep}
-      defaultTitleColor={colors.primary_text}
-      activeTitleColor={colors.primary_text}
-      completeTitleColor={colors.primary_text}
-      defaultColor={colors.primary_text}
-      completeColor={colors.primary_text}
-      activeColor={colors.transparent}
-      defaultOpacity='0.5'
-    />
-  );
-}
-
-const mapState = state => {
+const mapStateToProps = state => {
   const pathname = state.router && state.router.location ? state.router.location.pathname : '/';
   return {
     location: pathname,
@@ -45,4 +43,4 @@ const mapState = state => {
   };
 };
 
-export default connect(mapState)(LocationStepper);
+export default connect(mapStateToProps)(LocationStepper);

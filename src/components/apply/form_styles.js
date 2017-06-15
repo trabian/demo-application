@@ -4,8 +4,8 @@ import MenuItem from 'material-ui/MenuItem';
 import { Field } from 'redux-form';
 import _ from 'lodash';
 
-import * as colors from '../../helpers/colors';
-import { required as requiredValidator } from './form_validators';
+import * as colors from 'src/helpers/colors';
+import { required as requiredValidator } from 'src/components/apply/form_validators';
 
 /**
  * Applies all the provided validator functions to the input, returning the first rejection.
@@ -20,7 +20,7 @@ const sharedStyle = {
   borderColor: '#33875c',
   borderWidth: 1,
   borderStyle: 'solid',
-  backgroundColor: colors.primary_text,
+  backgroundColor: colors.basic,
   padding: '3px 12px 3px 12px',
   margin: '10px 10px 32px 10px'
 };

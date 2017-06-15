@@ -2,9 +2,9 @@ import React from 'react';
 import { Card } from 'material-ui/Card';
 import { Row, Col } from 'jsxstyle';
 
-import { StyledTextField, cardStyle } from './form_styles';
-import { middleInitial, socialDash } from './form_normalizers';
-import { valiDate, validateSocialSec } from './form_validators';
+import { StyledTextField, cardStyle } from 'src/components/apply/form_styles';
+import { middleInitial, socialDash } from 'src/components/apply/form_normalizers';
+import { valiDate, validateSocialSec } from 'src/components/apply/form_validators';
 
 const IdentificationForm = () => (
   <Card style={cardStyle}>

@@ -4,9 +4,9 @@ import { Row, Col } from 'jsxstyle';
 
 import usStates from '../../data/usStates';
 
-import { StyledTextField, StyledDropdownField, cardStyle } from './form_styles';
-import { normalizePhoneNumber, normalizeZipCode } from './form_normalizers';
-import { validateEmail, validatePhoneNumber, validateZipCode } from './form_validators';
+import { StyledTextField, StyledDropdownField, cardStyle } from 'src/components/apply/form_styles';
+import { normalizePhoneNumber, normalizeZipCode } from 'src/components/apply/form_normalizers';
+import { validateEmail, validatePhoneNumber, validateZipCode } from 'src/components/apply/form_validators';
 
 const LeftInput = () => (
   <Col style={{borderRight: '2px solid #999', height: 140, paddingBottom: 0}}>

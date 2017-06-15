@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ApplicantForm from './ApplicantForm';
+import ApplicantForm from 'src/components/apply/ApplicantForm';
 
 const Apply = () => (
   <div>

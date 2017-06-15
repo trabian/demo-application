@@ -5035,10 +5035,19 @@ react-scripts@1.0.7:
   optionalDependencies:
     fsevents "1.0.17"
 
-react-stepper-horizontal@^1.0.6:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/react-stepper-horizontal/-/react-stepper-horizontal-1.0.6.tgz#6c03a584425f2ba43ec3cae1137c92dd217fc056"
+react-stepper-horizontal@^1.0.9:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/react-stepper-horizontal/-/react-stepper-horizontal-1.0.9.tgz#048c206d3f641322ac3402c74ff5a75a17c0282c"
   dependencies:
+    prop-types "^15.5.10"
+    react "^15.3.2"
+    react-dom "^15.3.2"
+
+react-stepper@mu29/react-stepper:
+  version "1.0.9"
+  resolved "https://codeload.github.com/mu29/react-stepper/tar.gz/45278e2d3a8bb5ffaec5b6aa32d0f0263f081373"
+  dependencies:
+    prop-types "^15.5.10"
     react "^15.3.2"
     react-dom "^15.3.2"
 
@@ -6477,3 +6486,7 @@ yargs@~3.10.0:
     cliui "^2.1.0"
     decamelize "^1.0.0"
     window-size "0.1.0"
+
+zaphod@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/zaphod/-/zaphod-0.2.1.tgz#3193bf66a2cdfb6b4a2943512947d902f11b427b"
