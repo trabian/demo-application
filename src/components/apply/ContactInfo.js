@@ -2,7 +2,7 @@ import React from 'react';
 import { Card } from 'material-ui/Card';
 import { Row, Col } from 'jsxstyle';
 
-import usStates from '../../data/usStates';
+import usStates from 'src/data/usStates';
 
 import { StyledTextField, StyledDropdownField, cardStyle } from 'src/components/apply/form_styles';
 import { normalizePhoneNumber, normalizeZipCode } from 'src/components/apply/form_normalizers';

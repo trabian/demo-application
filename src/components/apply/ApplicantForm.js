@@ -3,9 +3,9 @@ import { reduxForm } from 'redux-form';
 
 import { Flex } from 'jsxstyle';
 import Checkbox from 'material-ui/Checkbox';
-import IdentificationForm from './IdentificationForm';
-import ContactInfo from './ContactInfo';
-import ContinueButton from '../ContinueButton';
+import IdentificationForm from 'src/components/apply/IdentificationForm';
+import ContactInfo from 'src/components/apply/ContactInfo';
+import ContinueButton from 'src/components/ContinueButton';
 import * as colors from 'src/helpers/colors';
 
 const headingStyle = {
