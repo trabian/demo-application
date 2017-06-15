@@ -3,6 +3,7 @@ import { Card } from 'material-ui/Card';
 import { Row, Col } from 'jsxstyle';
 
 import { StyledTextField, cardStyle } from 'src/components/apply/formStyles';
+import { normalizeSocialSecurity, normalizeMiddleInitial } from 'src/components/apply/formNormalizers';
 
 const IdentificationForm = () => (
   <Card style={cardStyle}>
@@ -14,6 +15,7 @@ const IdentificationForm = () => (
           name='middleInitial'
           width={94}
           required
+          normalize={normalizeMiddleInitial}
         />
         <StyledTextField hintText='Last Name' name='lastName' width={400}/>
       </Row>
@@ -24,6 +26,7 @@ const IdentificationForm = () => (
           name='soc'
           width={250}
           required
+          normalize={normalizeSocialSecurity}
         />
         <StyledTextField
           label='Date of Birth'
