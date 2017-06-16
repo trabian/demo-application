@@ -5,6 +5,7 @@ import { blur } from 'redux-form';
 import { blurFieldEntry } from 'src/reducers/formHelpers';
 import selectionReducer from 'src/reducers/selectionReducer';
 
+const blurType = blur().type;
 const applyFormReducer = (state, action) => {
   if(action.type === blurType) {
     return {
@@ -18,7 +19,6 @@ const applyFormReducer = (state, action) => {
   return state;
 };
 
-const blurType = blur().type;
 export default combineReducers({
   selected: selectionReducer,
   router: routerReducer,
