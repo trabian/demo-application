@@ -35,7 +35,7 @@ const blurMap = {
 };
 
 const blurFieldEntry = ( field, text ) => {
-  if( blurMap[field].validate(text) ){
+  if( blurMap[field] && blurMap[field].validate(text) ){
     return blurMap[field].normalize(text);
   }
   return text;
