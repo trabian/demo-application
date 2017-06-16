@@ -7,27 +7,8 @@ import { blur } from 'redux-form';
 import selectionReducer from 'src/reducers/selectionReducer';
 import { socialSecurity, phoneNumber } from 'src/helpers/fieldNames';
 
-
-const formatSocial = (soc) => {
-  if( soc.length === 9 ){
-    return soc.substr(0,3) + '-' + soc.substr(3,2) + '-' + soc.substr(5,4);
-  }
-  return soc;
-};
-
-const formatPhoneNumber = input => {
-  if(validatePhoneNumber(input)) {
-    return normalizePhoneNumber(input);
-  }
-  return input;
-}
-
-const validatePhoneNumber = input => /[0-9]+/.test(input) && input.length === 10;
-
-const stripPhoneNumber = input => _.replace(input, new RegExp('[^0-9]+', 'g'), '');
-
 const normalizePhoneNumber = input => {
-  const chars = stripPhoneNumber(input).split('');
+  const chars = _.replace(input, /[^0-9]+/, '');
   const flattened = _.flatten([
     chars.length !== 0 ? '(' : '',
     _.slice(chars, 0, 3),
@@ -40,14 +21,22 @@ const normalizePhoneNumber = input => {
   return _.join(flattened, '');
 };
 
-const normalizeMap = {
-  [socialSecurity]: formatSocial,
-  [phoneNumber]: formatPhoneNumber,
+// Defines a validator and normalizer that are applied when the field is blurred.  The normalizer is only applied
+// if the validator verifies the contents of the field as valid.
+const blurMap = {
+  [socialSecurity]: {
+    validate: (soc) => soc.length === 9,
+    normalize: (soc) => soc.substr(0,3) + '-' + soc.substr(3,2) + '-' + soc.substr(5,4),
+  },
+  [phoneNumber]: {
+    validate: input => /[0-9]+/.test(input) && input.length === 10,
+    normalize: normalizePhoneNumber,
+  },
 };
 
 const blurFieldEntry = ( field, text ) => {
-  if( normalizeMap[field] ){
-    return normalizeMap[field](text);
+  if( blurMap[field].validate(text) ){
+    return blurMap[field].normalize(text);
   }
   return text;
 };
@@ -58,15 +47,15 @@ export default combineReducers({
   selected: selectionReducer,
   router: routerReducer,
   form: formReducer.plugin({
-    apply: (state, action)=>{
-      if(action.type === blurType){
-          return {
-            ...state,
-              values:{
-                ...state.values,
-                [action.meta.field]: blurFieldEntry( action.meta.field, action.payload )
-              }
-          };
+    apply: (state, action) => {
+      if(action.type === blurType) {
+        return {
+          ...state,
+          values: {
+            ...state.values,
+            [action.meta.field]: blurFieldEntry( action.meta.field, action.payload )
+          }
+        };
       }
       return state;
     }
