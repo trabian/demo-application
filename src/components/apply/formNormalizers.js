@@ -33,12 +33,13 @@ export const normalizeMiddleInitial = (input, prevInput='')=>{
 };
 
 export const normalizeSocialSecurity = (input, prevInput='') => {
-  if( isNaN(stripSocialSec(input)) || input.length > 11 ){
+  if( isNaN(input) || input.length > 9 ){
       return prevInput;
   }
+  /*
   else if( (input.length % 3 === 0) && input.length !== 9 && input.length > prevInput.length ){
     return input+'-';
-  }
+  }*/
   return input;
 };
 
