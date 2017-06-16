@@ -3,9 +3,19 @@ import { reducer as formReducer } from 'redux-form';
 import { routerReducer } from 'react-router-redux';
 import { blur } from 'redux-form';
 import selectionReducer from 'src/reducers/selectionReducer';
+import { socialSecurity, phoneNumber } from 'src/helpers/fieldNames';
+
+const validationMap = {
+    [socialSecurity]: 
+    [phoneNumber]:
+};
+
+const normalizeMap = {
+  [socialSecurity]: /* social security format function */,
+  [phoneNumber]: /* phone number format function */
+};
 
 const blurType = blur().type;
-console.log(blurType);
 export default combineReducers({
   selected: selectionReducer,
   router: routerReducer,
@@ -17,7 +27,7 @@ export default combineReducers({
             ...state,
               values:{
                 ...state.values,
-                [action.meta.field]: 'testing'
+                [action.meta.field]: validationMap[action.meta.field](action.payload)
               }
           };
       }
