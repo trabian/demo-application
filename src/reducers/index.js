@@ -7,12 +7,9 @@ import { blur } from 'redux-form';
 import selectionReducer from 'src/reducers/selectionReducer';
 import { socialSecurity, phoneNumber } from 'src/helpers/fieldNames';
 
-const validateSocial = (soc) => {
-  return soc.length === 9;
-};
 
 const formatSocial = (soc) => {
-  if( validateSocial(soc) ){
+  if( soc.length === 9 ){
     return soc.substr(0,3) + '-' + soc.substr(3,2) + '-' + soc.substr(5,4);
   }
   return soc;
@@ -52,7 +49,7 @@ const normalizeMap = {
   [phoneNumber]: formatPhoneNumber,
 };
 
-const setFieldEntry = (field, text) => {
+const blurFieldEntry = ( field, text ) => {
   if( normalizeMap[field] ){
     return normalizeMap[field](text);
   }
@@ -60,6 +57,7 @@ const setFieldEntry = (field, text) => {
 };
 
 const blurType = blur().type;
+
 export default combineReducers({
   selected: selectionReducer,
   router: routerReducer,
@@ -70,7 +68,7 @@ export default combineReducers({
             ...state,
               values:{
                 ...state.values,
-                [action.meta.field]: setFieldEntry( action.meta.field, action.payload )
+                [action.meta.field]: blurFieldEntry( action.meta.field, action.payload )
               }
           };
       }

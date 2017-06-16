@@ -18,7 +18,6 @@ const IdentificationForm = () => (
           width={94}
           required
           normalize={normalizeMiddleInitial}
-          onBlur={ (e) => console.log(e.target.value) }
         />
         <StyledTextField hintText='Last Name' name='lastName' width={400}/>
       </Row>
