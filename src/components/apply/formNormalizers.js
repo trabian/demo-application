@@ -1,33 +1,16 @@
 import _ from 'lodash';
 
-export const maxLengthNormalizer = len => (input, prevInput) => {
-  if(input.length > len) {
-    return prevInput;
-  }
-  return input;
-};
+// pred is a function that accepts a value and returns true if it's valid and false otherwise.
+export const simpleNormalizer = pred => (input, prevInput) => pred(input) ? input : prevInput;
 
-/**
- * Returns true if none of the validators reject the input.
- */
-const applyValidators = (validators, input) => _.isUndefined(_.find(validators, validator => !validator(input)));
+export const maxLengthValidator = len => input => input.length < len;
 
-const simpleNormalizer = validators => (input, prevInput) => {
-  if(applyValidators(validators, input)) {
-    return input;
-  }
-  return prevInput;
-}
+export const numericalValidator = input => /[0-9]+/.test(input);
 
-const applyValidators = (input, validators) => _.map()
+export const stringValidator = input => /[A-z]+/.test(input);
 
-const numericalNormalizer = input => /[0-9]*/.test(input);
+// Returns a function that true if none of the validators reject the input.
+export const combineValidators = validators => input => _.isUndefined(_.find(validators, validator => !validator(input)));
 
-const stringNormalizer = input => /[A-z]*/.test(input);
-
-export const normalizeSocialSecurity = (input, prevInput='') => {
-  if( isNaN(input) || input.length > 9 ){
-    return prevInput;
-  }
-  return input;
-};
+// Applies each of the validators one after another, returning the new input if none reject and the old input if any of them do.
+export const validatorNormalizer = validators => simpleNormalizer(combineValidators(validators));

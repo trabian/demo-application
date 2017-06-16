@@ -3,7 +3,7 @@ import { Card } from 'material-ui/Card';
 import { Row, Col } from 'jsxstyle';
 
 import usStates from 'src/data/usStates';
-import { maxLengthNormalizer } from 'src/components/apply/formNormalizers';
+import { maxLengthValidator, simpleNormalizer } from 'src/components/apply/formNormalizers';
 
 import { StyledTextField, StyledDropdownField, cardStyle } from 'src/components/apply/formStyles';
 
@@ -17,7 +17,7 @@ const LeftInput = () => (
           hintText='(###) ###-####'
           width={250}
           required
-          normalize={maxLengthNormalizer(10)}
+          normalize={simpleNormalizer(maxLengthValidator(10))}
         />
       </Col>
       <Col>
@@ -84,7 +84,7 @@ const RightInput = () => (
           width={75}
           type='number'
           required
-          normalize={maxLengthNormalizer(5)}
+          normalize={simpleNormalizer(maxLengthValidator(5))}
         />
       </Col>
     </Row>
