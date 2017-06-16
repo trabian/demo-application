@@ -8,7 +8,7 @@ import { StyledTextField, cardStyle } from 'src/components/apply/formStyles';
 import { validatorNormalizer, maxLengthValidator, numericalValidator, stringValidator } from 'src/components/apply/formNormalizers';
 
 const IdentificationForm = () => (
-  <Card style={cardStyle}>
+  <Card style={{...cardStyle, paddingTop: 25}}>
     <Col>
       <Row>
         <StyledTextField label ='Name' hintText='First Name' name='firstName' width={314} required />

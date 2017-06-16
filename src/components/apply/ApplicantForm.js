@@ -19,10 +19,9 @@ const SectionHeading = ({ children }) => <div style={headingStyle}>{children}</d
 
 const ApplicantForm = ({ handleSubmit }) => (
   <div style={{marginBottom: 12}}>
-    <form style={{}}>
+    <form>
       <SectionHeading>Your Identity</SectionHeading>
       <IdentificationForm />
-
       <SectionHeading>Contact Information and Address</SectionHeading>
       <ContactInfo />
       <center><ContinueButton title='KEEP GOING' buttonProps={{type: 'submit'}} /></center>
