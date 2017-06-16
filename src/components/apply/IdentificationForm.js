@@ -1,19 +1,23 @@
 import React from 'react';
+
 import { Card } from 'material-ui/Card';
 import { Row, Col } from 'jsxstyle';
 
+
 import { StyledTextField, cardStyle } from 'src/components/apply/formStyles';
+import { validatorNormalizer, maxLengthValidator, numericalValidator, stringValidator } from 'src/components/apply/formNormalizers';
 
 const IdentificationForm = () => (
   <Card style={cardStyle}>
     <Col>
       <Row>
-        <StyledTextField label = 'Name' hintText='First Name' name='firstName' width={250} required />
+        <StyledTextField label ='Name' hintText='First Name' name='firstName' width={250} required />
         <StyledTextField
           hintText='Middle Initial'
           name='middleInitial'
           width={94}
           required
+          normalize={validatorNormalizer([maxLengthValidator(1), stringValidator])}
         />
         <StyledTextField hintText='Last Name' name='lastName' width={400}/>
       </Row>
@@ -24,6 +28,7 @@ const IdentificationForm = () => (
           name='soc'
           width={250}
           required
+          normalize={validatorNormalizer([maxLengthValidator(9), numericalValidator])}
         />
         <StyledTextField
           label='Date of Birth'
