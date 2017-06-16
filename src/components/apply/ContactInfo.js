@@ -17,6 +17,7 @@ const LeftInput = () => (
           hintText='(###) ###-####'
           width={250}
           required
+          normalize={maxLengthNormalizer(10)}
         />
       </Col>
       <Col>
