@@ -9,7 +9,7 @@ export const numericalValidator = input => !/[^0-9]/.test(input);
 
 export const stringValidator = input => !/[^A-z]/.test(input);
 
-// Returns a function that true if none of the validators reject the input.
+// Returns a function that returns true if none of the validators reject the input.
 export const combineValidators = validators => input => _.isUndefined(_.find(validators, validator => !validator(input)));
 
 // Applies each of the validators one after another, returning the new input if none reject and the old input if any of them do.

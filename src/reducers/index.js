@@ -5,22 +5,24 @@ import { blur } from 'redux-form';
 import { blurFieldEntry } from 'src/reducers/formHelpers';
 import selectionReducer from 'src/reducers/selectionReducer';
 
+const applyFormReducer = (state, action) => {
+  if(action.type === blurType) {
+    return {
+      ...state,
+      values: {
+        ...state.values,
+        [action.meta.field]: blurFieldEntry( action.meta.field, action.payload )
+      },
+    };
+  }
+  return state;
+};
+
 const blurType = blur().type;
 export default combineReducers({
   selected: selectionReducer,
   router: routerReducer,
   form: formReducer.plugin({
-    apply: (state, action) => {
-      if(action.type === blurType) {
-        return {
-          ...state,
-          values: {
-            ...state.values,
-            [action.meta.field]: blurFieldEntry( action.meta.field, action.payload )
-          }
-        };
-      }
-      return state;
-    }
-  })
+    apply: applyFormReducer,
+  }),
 });
