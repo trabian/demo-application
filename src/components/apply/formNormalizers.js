@@ -1,35 +1,20 @@
 import _ from 'lodash';
 
-export const stripPhoneNumber = input => _.replace(input, new RegExp('[^0-9]+', 'g'), '');
 export const stripSocialSec = input => _.replace(input, new RegExp('-','g'), '');
 const middleInitialRegEx = new RegExp('[a-zA-Z]?');
 
-const formatPhoneNumber = chars => {
-  const flattened = _.flatten([
-    chars.length !== 0 ? '(' : '',
-    _.slice(chars, 0, 3),
-    chars.length > 2 ? ') ' : '',
-    _.slice(chars, 3, 6),
-    chars.length > 5 ? '-' : '',
-    _.slice(chars, 6, 10)
-  ]);
-  return _.join(flattened, '');
-};
-
-export const normalizePhoneNumber = (input, prevInput='') => {
-  const chars = stripPhoneNumber(input).split('');
-  // handle backspacing with formatting characters
-  if(input.length < prevInput.length && _.replace(_.last(prevInput), /[^0-9]+/, '') === '') {
-    return formatPhoneNumber(_.initial(chars));
+export const maxLengthNormalizer = len => (input, prevInput) => {
+  if(input.length > len) {
+    return prevInput;
   }
-  return formatPhoneNumber(chars);
+  return input;
 };
 
 export const normalizeMiddleInitial = (input, prevInput='')=>{
-    if( input.match(middleInitialRegEx) && input.length <= 1 ){
-        return input;
-    }
-    return prevInput;
+  if( input.match(middleInitialRegEx) && input.length <= 1 ){
+    return input;
+  }
+  return prevInput;
 };
 
 export const normalizeSocialSecurity = (input, prevInput='') => {

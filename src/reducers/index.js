@@ -1,9 +1,12 @@
 import { combineReducers } from 'redux';
+import _ from 'lodash';
 import { reducer as formReducer } from 'redux-form';
 import { routerReducer } from 'react-router-redux';
 import { blur } from 'redux-form';
+
 import selectionReducer from 'src/reducers/selectionReducer';
 import { socialSecurity, phoneNumber } from 'src/helpers/fieldNames';
+
 const validateSocial = (soc) => {
   return soc.length === 9;
 };
@@ -15,9 +18,38 @@ const formatSocial = (soc) => {
   return soc;
 };
 
+const formatPhoneNumber = input => {
+  if(validatePhoneNumber(input)) {
+    return normalizePhoneNumber(input);
+  }
+  return input;
+}
+
+const validatePhoneNumber = input => /[0-9]+/.test(input) && input.length === 10;
+
+const stripPhoneNumber = input => _.replace(input, new RegExp('[^0-9]+', 'g'), '');
+
+const normalizePhoneNumber = (input, prevInput='') => {
+  const chars = stripPhoneNumber(input).split('');
+  // handle backspacing with formatting characters
+  if(input.length < prevInput.length && _.replace(_.last(prevInput), /[^0-9]+/, '') === '') {
+    const flattened = _.flatten([
+      chars.length !== 0 ? '(' : '',
+      _.slice(chars, 0, 3),
+      chars.length > 2 ? ') ' : '',
+      _.slice(chars, 3, 6),
+      chars.length > 5 ? '-' : '',
+      _.slice(chars, 6, 10)
+    ]);
+
+    return _.join(flattened, '');
+  }
+  return input;
+};
+
 const normalizeMap = {
   [socialSecurity]: formatSocial,
-  [phoneNumber]: ()=> console.log('phone'),
+  [phoneNumber]: formatPhoneNumber,
 };
 
 const setFieldEntry = (field, text) => {

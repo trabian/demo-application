@@ -70,7 +70,7 @@ export const StyledTextField = ({ hintText, name, width, label=' ', type='text',
 );
 
 export const StyledDropdownField = ({ name, hintText, children, width, type, label=' ', required=false }) => {
-const childrenItems = children.map(child => <MenuItem key={child} value={child} primaryText={child} />);
+  const childrenItems = children.map(child => <MenuItem key={child} value={child} primaryText={child} />);
 
   return (
     <Field

@@ -3,9 +3,9 @@ import { Card } from 'material-ui/Card';
 import { Row, Col } from 'jsxstyle';
 
 import usStates from 'src/data/usStates';
+import { maxLengthNormalizer } from 'src/components/apply/formNormalizers';
 
 import { StyledTextField, StyledDropdownField, cardStyle } from 'src/components/apply/formStyles';
-import { normalizePhoneNumber, normalizeZipCode } from 'src/components/apply/formNormalizers';
 
 const LeftInput = () => (
   <Col style={{borderRight: '2px solid #999', height: 140, paddingBottom: 0}}>
@@ -17,7 +17,6 @@ const LeftInput = () => (
           hintText='(###) ###-####'
           width={250}
           required
-          normalize={normalizePhoneNumber}
         />
       </Col>
       <Col>
@@ -84,7 +83,7 @@ const RightInput = () => (
           width={75}
           type='number'
           required
-          normalize={normalizeZipCode}
+          normalize={maxLengthNormalizer(5)}
         />
       </Col>
     </Row>
