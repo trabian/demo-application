@@ -11,7 +11,7 @@ const IdentificationForm = () => (
   <Card style={cardStyle}>
     <Col>
       <Row>
-        <StyledTextField label ='Name' hintText='First Name' name='firstName' width={250} required />
+        <StyledTextField label ='Name' hintText='First Name' name='firstName' width={314} required />
         <StyledTextField
           hintText='Middle Initial'
           name='middleInitial'
@@ -19,7 +19,7 @@ const IdentificationForm = () => (
           required
           normalize={validatorNormalizer([maxLengthValidator(1), stringValidator])}
         />
-        <StyledTextField hintText='Last Name' name='lastName' width={400}/>
+        <StyledTextField hintText='Last Name' name='lastName' width={351}/>
       </Row>
       <Row>
         <StyledTextField

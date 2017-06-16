@@ -98,4 +98,5 @@ export const cardStyle = {
   maxWidth: 1000,
   marginLeft: 'auto',
   marginRight: 'auto',
+  paddingLeft: 51
 };

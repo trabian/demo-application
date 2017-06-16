@@ -15,7 +15,7 @@ const LeftInput = () => (
           name='phoneNumber'
           label='Phone Number'
           hintText='(###) ###-####'
-          width={250}
+          width={204}
           required
           normalize={validatorNormalizer([maxLengthValidator(10), numericalValidator])}
         />
@@ -36,7 +36,7 @@ const LeftInput = () => (
         name='emailAddress'
         label='Email Address'
         hintText='you@amazing.rad'
-        width={444}
+        width={400}
         required
       />
     </Row>
@@ -51,7 +51,7 @@ const RightInput = () => (
           name='address'
           label='Physical Address'
           hintText='1600 Pennsylvania Ave'
-          width={400}
+          width={403}
           required
         />
       </Col>

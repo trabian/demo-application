@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import { socialSecurity, phoneNumber } from 'src/helpers/fieldNames';
 
 const normalizePhoneNumber = input => `(${input.substr(0, 3)}) ${input.substr(3, 3)}-${input.substr(6, 10)}`;
