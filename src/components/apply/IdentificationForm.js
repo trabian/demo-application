@@ -5,7 +5,7 @@ import { Row, Col } from 'jsxstyle';
 
 
 import { StyledTextField, cardStyle } from 'src/components/apply/formStyles';
-import { normalizeSocialSecurity, normalizeMiddleInitial } from 'src/components/apply/formNormalizers';
+import { simpleNormalizer, maxLengthNormalizer, stringNormalizer } from 'src/components/apply/formNormalizers';
 
 const IdentificationForm = () => (
   <Card style={cardStyle}>
@@ -17,7 +17,7 @@ const IdentificationForm = () => (
           name='middleInitial'
           width={94}
           required
-          normalize={normalizeMiddleInitial}
+          normalize={simpleNormalizer([maxLengthNormalizer(1), stringNormalizer])}
         />
         <StyledTextField hintText='Last Name' name='lastName' width={400}/>
       </Row>
