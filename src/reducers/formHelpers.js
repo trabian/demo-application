@@ -15,8 +15,8 @@ const blurMap = {
   },
 };
 
-export const blurFieldEntry = ( field, text ) => {
-  if( blurMap[field] && blurMap[field].validate(text) ){
+export const blurFieldEntry = (field, text) => {
+  if(blurMap[field] && blurMap[field].validate(text)){
     return blurMap[field].normalize(text);
   }
   return text;

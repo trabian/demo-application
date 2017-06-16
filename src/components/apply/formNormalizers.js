@@ -1,6 +1,5 @@
 import _ from 'lodash';
 
-// pred is a function that accepts a value and returns true if it's valid and false otherwise.
 export const simpleNormalizer = pred => (input, prevInput) => pred(input) || input === '' ? input : prevInput;
 
 export const maxLengthValidator = len => input => input.length <= len;
