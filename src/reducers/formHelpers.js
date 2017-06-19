@@ -1,6 +1,10 @@
+import { blur, focus } from 'redux-form';
 import _ from 'lodash';
 
 import { socialSecurity, phoneNumber } from 'src/helpers/fieldNames';
+
+const blurType = blur().type;
+const focusType = focus().type;
 
 const normalizePhoneNumber = input => `(${input.substr(0, 3)}) ${input.substr(3, 3)}-${input.substr(6, 10)}`;
 
@@ -8,21 +12,21 @@ const normalizePhoneNumber = input => `(${input.substr(0, 3)}) ${input.substr(3,
 // if the validator verifies the contents of the field as valid.
 const transformMap = {
   [socialSecurity]: {
-    blur: {
+    [blurType]: {
       validate: (soc) => soc.length === 9,
       normalize: (soc) => soc.substr(0,3) + '-' + soc.substr(3,2) + '-' + soc.substr(5,4),
     },
-    focus: {
+    [focusType]: {
       validate: (soc) => soc.length === 11,
-      normalize: (soc) => _.replace(soc, /[-]/g, '')
-    }
+      normalize: (soc) => _.replace(soc, /[-]/g, ''),
+    },
   },
   [phoneNumber]: {
-    blur: {
+    [blurType]: {
       validate: input => /[0-9]+/.test(input) && input.length === 10,
       normalize: normalizePhoneNumber,
     },
-    focus: {
+    [focusType]: {
       validate: input => input.length === 14,
       normalize: input => _.replace(input, /[^0-9]+/g, ''),
     },
@@ -30,6 +34,6 @@ const transformMap = {
 };
 
 export const transformFieldEntry = (field, eventType, text) => {
-    const transformers = transformMap[field] && transformMap[field][eventType];
-    return transformers && text && transformers.validate(text) ? transformers.normalize(text) : text;
+  const transformers = transformMap[field] && transformMap[field][eventType];
+  return transformers && text && transformers.validate(text) ? transformers.normalize(text) : text;
 };
