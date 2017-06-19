@@ -15,9 +15,28 @@ const blurMap = {
   },
 };
 
+const focusMap = {
+  [socialSecurity]:{
+    validate: (soc) => soc.length === 11,
+    normalize: (soc) => soc.substr(0,3) + soc.substr(4,2) + soc.substr(7,4)
+  },
+  [phoneNumber]:{
+
+  }
+};
+
 export const blurFieldEntry = (field, text) => {
-  if(blurMap[field] && blurMap[field].validate(text)){
-    return blurMap[field].normalize(text);
+  const blurMapVal = blurMap[field];
+  if(blurMapVal && blurMapVal.validate(text)){
+    return blurMapVal.normalize(text);
+  }
+  return text;
+};
+
+export const focusFieldEntry = (field, text) => {
+  const focusMapVal = focusMap[field];
+  if(focusMapVal && focusMapVal.validate(text)){
+    return focusMapVal.normalize(text);
   }
   return text;
 };
