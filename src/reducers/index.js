@@ -2,33 +2,30 @@ import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 import { routerReducer } from 'react-router-redux';
 import { blur, focus } from 'redux-form';
-import { blurFieldEntry, focusFieldEntry } from 'src/reducers/formHelpers';
+import { transformFieldEntry } from 'src/reducers/formHelpers';
 import selectionReducer from 'src/reducers/selectionReducer';
 
 const blurType = blur().type;
 const focusType = focus().type;
 
+const getEventData = (state, action) => ({
+  [blurType]: {eventType: 'blur', payload: action.payload},
+  [focusType]: {eventType: 'focus', payload: state && state.values && state.values[action.meta.field]},
+}[action.type]);
+
 const applyFormReducer = (state, action) => {
-  if(action.type === blurType) {
+  const eventData = getEventData(state, action);
+
+  if(eventData) {
     return {
       ...state,
       values: {
         ...state.values,
-        [action.meta.field]: blurFieldEntry(action.meta.field, action.payload)
+        [action.meta.field]: transformFieldEntry(action.meta.field, eventData.eventType, eventData.payload)
       },
     };
   }
-  else if(action.type === focusType){
-    if(state.values){
-      return{
-        ...state,
-        values:{
-          ...state.values,
-          [action.meta.field]: focusFieldEntry(action.meta.field, state.values[action.meta.field])
-        }
-      }
-    }
-  }
+
   return state;
 };
 
