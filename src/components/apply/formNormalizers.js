@@ -1,7 +1,12 @@
 import _ from 'lodash';
 
-export const simpleNormalizer = pred =>
-  (input, prevInput) => pred(input) || input === '' ? input : prevInput;
+export const simpleNormalizer = pred => (input, prevInput) => {
+  if(pred(input) || input === '') {
+    return input;
+  } else {
+    return prevInput;
+  }
+};
 
 export const maxLengthValidator = len =>
   input => input.length <= len;
