@@ -30,7 +30,6 @@ const transformMap = {
 };
 
 export const transformFieldEntry = (field, eventType, text) => {
-  const transformers = transformMap[field][eventType];
-  return transformers && text && transformers.validate(text) ? transformers.normalize(text) : text;
+    const transformers = transformMap[field] && transformMap[field][eventType];
+    return transformers && text && transformers.validate(text) ? transformers.normalize(text) : text;
 };
-
