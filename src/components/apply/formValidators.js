@@ -1,5 +1,7 @@
-validations = {
-  firstName: [required()],
+import { required, numericality, length, email } from 'redux-form-validators';
+
+const validations = {
+  firstName: [required(), length({is: 2})],
   lastName: [required()],
   middleInitial:[required()],
   soc: [required(), length({is: 11})],
@@ -11,11 +13,10 @@ validations = {
     numericality({ int: true }),
     numericality({ '>=': 18, msg: 'Must be 18 years or older to apply.' })
   ],
-
-
 };
 
-validate = (values) => {
+/* this is the default function used in redux-validator-form library */
+export const validate = (values) => {
   const errors = {}
   for (let field in validations) {
     let value = values[field]
