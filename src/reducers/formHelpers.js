@@ -1,4 +1,5 @@
 import _ from 'lodash';
+
 import { socialSecurity, phoneNumber } from 'src/helpers/fieldNames';
 
 const normalizePhoneNumber = input => `(${input.substr(0, 3)}) ${input.substr(3, 3)}-${input.substr(6, 10)}`;
@@ -17,13 +18,14 @@ const blurMap = {
 };
 
 const focusMap = {
-  [socialSecurity]:{
+  [socialSecurity]: {
     validate: (soc) => soc.length === 11,
     normalize: (soc) => _.replace(soc, /[-]/g, '')
   },
-  [phoneNumber]:{
-
-  }
+  [phoneNumber]: {
+    validate: input => input.length === 14,
+    normalize: input => _.replace(input, /[^0-9]+/g, ''),
+  },
 };
 
 export const blurFieldEntry = (field, text) => {
@@ -36,7 +38,8 @@ export const blurFieldEntry = (field, text) => {
 
 export const focusFieldEntry = (field, text) => {
   const focusMapVal = focusMap[field];
-  if(focusMapVal && focusMapVal.validate(text)){
+  console.log('field: ', field, 'text: ', text);
+  if(focusMapVal && text && focusMapVal.validate(text)){
     return focusMapVal.normalize(text);
   }
   return text;
