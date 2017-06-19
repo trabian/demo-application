@@ -1,5 +1,6 @@
-import { blur, focus } from 'redux-form';
 import _ from 'lodash';
+import { getIn } from 'zaphod/compat';
+import { blur, focus } from 'redux-form';
 
 import { socialSecurity, phoneNumber } from 'src/helpers/fieldNames';
 
@@ -34,6 +35,6 @@ const transformMap = {
 };
 
 export const transformFieldEntry = (field, eventType, text) => {
-  const transformers = transformMap[field] && transformMap[field][eventType];
+  const transformers = getIn(transformMap, [field, eventType]);
   return transformers && text && transformers.validate(text) ? transformers.normalize(text) : text;
 };
