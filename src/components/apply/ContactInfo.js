@@ -93,10 +93,12 @@ const RightInput = () => (
 
 const ContactInfo = () => (
   <Card style={cardStyle}>
+    <Col>
     <Row style={{paddingBottom: 20, paddingTop: 10}}>
       <LeftInput />
       <RightInput />
     </Row>
+  </Col>
   </Card>
 );
 

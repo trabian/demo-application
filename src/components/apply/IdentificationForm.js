@@ -9,6 +9,7 @@ import { validatorNormalizer, maxLengthValidator, numericalValidator, stringVali
 
 const IdentificationForm = () => (
   <Card style={{...cardStyle, paddingTop: 25}}>
+    <Row>
     <Col>
       <Row>
         <StyledTextField label ='Name' hintText='First Name' name='firstName' width={314} required />
@@ -39,6 +40,7 @@ const IdentificationForm = () => (
         />
       </Row>
     </Col>
+  </Row>
   </Card>
 );
 
