@@ -95,7 +95,7 @@ export const StyledDropdownField = ({ name, hintText, children, width, type, lab
 export const cardStyle = {
   backgroundColor: colors.formBackground,
   padding: '20px 20px 4px 20px',
-  maxWidth: 1000,
+  width: 1000,
   marginLeft: 'auto',
   marginRight: 'auto',
   paddingLeft: 51
