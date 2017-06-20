@@ -27,7 +27,6 @@ const requiredInput = required({msg: validationMsg('Required')});
 const validations = {
   firstName: [requiredInput],
   lastName:[requiredInput],
-  middleInitial: [requiredInput],
   soc:[requiredInput, validationWithLength({length: 11})],
   dob:[requiredInput, dobValidation()],
   phoneNumber: [requiredInput, validationWithLength({length: 14})],
@@ -36,7 +35,7 @@ const validations = {
   address:[requiredInput],
   city: [requiredInput],
   state:[requiredInput],
-  zipCode:[requiredInput]
+  zipCode:[requiredInput, validationWithLength({length: 5})]
 };
 
 // Applies all the validator functions to the input, returning the value of the first rejection
