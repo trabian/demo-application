@@ -16,10 +16,12 @@ const dobValidation = addValidator({
   }
 });
 
-const validationWithLength = addValidator({
+const stripFormatting = input => _.replace(input, /[^0-9]+/g, '');
+
+const numberValidationWithLength = addValidator({
   defaultMessage: validationMsg('Invalid Input'),
   validator: (options, value, allValues) =>{
-    return value.length === options.length;
+    return stripFormatting(value).length === options.length;
   }
 });
 
@@ -27,15 +29,15 @@ const requiredInput = required({msg: validationMsg('Required')});
 const validations = {
   firstName: [requiredInput],
   lastName:[requiredInput],
-  soc:[requiredInput, validationWithLength({length: 11})],
+  soc:[requiredInput, numberValidationWithLength({length: 9})],
   dob:[requiredInput, dobValidation()],
-  phoneNumber: [requiredInput, validationWithLength({length: 14})],
+  phoneNumber: [requiredInput, numberValidationWithLength({length: 10})],
   phoneNumberType:[requiredInput],
   emailAddress:[requiredInput, email({msg: validationMsg('Invalid Email')})],
   address:[requiredInput],
   city: [requiredInput],
   state:[requiredInput],
-  zipCode:[requiredInput, validationWithLength({length: 5})]
+  zipCode:[requiredInput, numberValidationWithLength({length: 5})]
 };
 
 // Applies all the validator functions to the input, returning the value of the first rejection
