@@ -1,6 +1,12 @@
+import React from 'react';
+import { FormattedMessage } from 'react-intl';
 import { required, email } from 'redux-form-validators';
-/* consider writing own required and email validators to avoid using redux-form-validators all together */
-const requiredInput = required({msg: 'Required'});
+
+const validationMsg = (message) => (
+  <FormattedMessage id='form.error' defaultMessage={message} />
+);
+
+const requiredInput = required({msg: validationMsg('Required')});
 const validations = {
   firstName: [requiredInput],
   lastName:[requiredInput],
@@ -9,7 +15,7 @@ const validations = {
   dob:[requiredInput],
   phoneNumber: [requiredInput],
   phoneNumberType:[requiredInput],
-  emailAddress:[requiredInput, email({msg: 'Inavlid Email'})],
+  emailAddress:[requiredInput, email({msg: validationMsg('Invalid Email')})],
   address:[requiredInput],
   city: [requiredInput],
   state:[requiredInput],
