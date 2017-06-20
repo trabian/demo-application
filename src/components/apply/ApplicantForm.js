@@ -22,7 +22,7 @@ const SectionHeading = ({ children }) => <div style={headingStyle}>{children}</d
 
 const ApplicantForm = ({ handleSubmit }) => (
   <div style={{marginBottom: 12}}>
-    <form onSubmit={handleSubmit} style={{display:'flex', flexDirection: 'column', alignItems: 'center'}}>
+    <form style={{display:'flex', flexDirection: 'column', alignItems: 'center'}}>
       <SectionHeading>Your Identity</SectionHeading>
       <IdentificationForm />
       <SectionHeading>Contact Information and Address</SectionHeading>
