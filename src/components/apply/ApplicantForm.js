@@ -1,10 +1,10 @@
 import React from 'react';
 import { reduxForm } from 'redux-form';
 
-// Will be added in the future
 import IdentificationForm from 'src/components/apply/IdentificationForm';
 import ContactInfo from 'src/components/apply/ContactInfo';
 import ContinueButton from 'src/components/ContinueButton';
+import { validate } from 'src/components/apply/formValidators';
 
 const headingStyle = {
   fontSize: '18pt',
@@ -29,4 +29,4 @@ const ApplicantForm = ({ handleSubmit }) => (
   </div>
 );
 
-export default reduxForm({form: 'apply'})(ApplicantForm);
+export default reduxForm({form: 'apply', validate})(ApplicantForm);

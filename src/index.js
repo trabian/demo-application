@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { compose, createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { routerMiddleware } from 'react-router-redux';
+import { IntlProvider } from 'react-intl';
 import createHistory from 'history/createBrowserHistory';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -29,7 +30,9 @@ const Root = () => {
   return (
     <MuiThemeProvider>
       <Provider store={store}>
-        <ApplicationPage history={history} />
+        <IntlProvider locale="en">
+          <ApplicationPage history={history} />
+        </IntlProvider>
       </Provider>
     </MuiThemeProvider>
   );
