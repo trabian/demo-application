@@ -1,20 +1,36 @@
 import React from 'react';
 import _ from 'lodash';
+
 import { FormattedMessage } from 'react-intl';
-import { required, email } from 'redux-form-validators';
+import { required, email, addValidator } from 'redux-form-validators';
 
 const validationMsg = (message) => (
   <FormattedMessage id='form.error' defaultMessage={message} />
 );
+
+const dobValidation = addValidator({
+  defaultMessage: validationMsg('Must be 18 years or older.'),
+  validator: (options, value) => {
+    let ageMs = Date.now() - new Date(value).getTime();
+    return (new Date(ageMs).getUTCFullYear() - 1970) >= 18;
+  }
+});
+
+const validationWithLength = addValidator({
+  defaultMessage: validationMsg('Invalid Input'),
+  validator: (options, value, allValues) =>{
+    return value.length === options.length;
+  }
+});
 
 const requiredInput = required({msg: validationMsg('Required')});
 const validations = {
   firstName: [requiredInput],
   lastName:[requiredInput],
   middleInitial: [requiredInput],
-  soc:[requiredInput],
-  dob:[requiredInput],
-  phoneNumber: [requiredInput],
+  soc:[requiredInput, validationWithLength({length: 11})],
+  dob:[requiredInput, dobValidation()],
+  phoneNumber: [requiredInput, validationWithLength({length: 14})],
   phoneNumberType:[requiredInput],
   emailAddress:[requiredInput, email({msg: validationMsg('Invalid Email')})],
   address:[requiredInput],
