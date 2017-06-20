@@ -1,5 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
+import moment from 'moment';
 
 import { FormattedMessage } from 'react-intl';
 import { required, email, addValidator } from 'redux-form-validators';
@@ -10,10 +11,7 @@ const validationMsg = (message) => (
 
 const dobValidation = addValidator({
   defaultMessage: validationMsg('Must be 18 years or older.'),
-  validator: (options, value) => {
-    let ageMs = Date.now() - new Date(value).getTime();
-    return (new Date(ageMs).getUTCFullYear() - 1970) >= 18;
-  }
+  validator: (options, value) => (moment().diff(value, 'years') >= 18),
 });
 
 const stripFormatting = input => _.replace(input, /[^0-9]+/g, '');

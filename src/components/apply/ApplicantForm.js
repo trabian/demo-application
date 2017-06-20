@@ -1,6 +1,6 @@
 import React from 'react';
 import { reduxForm } from 'redux-form';
-// Will be added in the future
+
 import IdentificationForm from 'src/components/apply/IdentificationForm';
 import ContactInfo from 'src/components/apply/ContactInfo';
 import ContinueButton from 'src/components/ContinueButton';
