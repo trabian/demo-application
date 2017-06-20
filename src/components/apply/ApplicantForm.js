@@ -34,7 +34,7 @@ const ApplicantForm = ({ handleSubmit }) => (
           iconStyle={{fill: colors.basic}}
         />
       </Flex>
-      <center><ContinueButton title='KEEP GOING' buttonProps={{type: 'submit'}} marginTop={10}/></center>
+      <center><ContinueButton title='KEEP GOING' buttonProps={{type: 'submit'}} style={{ marginTop: 10 }}/></center>
     </form>
   </div>
 );
