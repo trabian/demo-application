@@ -1,10 +1,13 @@
 import React from 'react';
 import { reduxForm } from 'redux-form';
+import { Flex } from 'jsxstyle';
+import Checkbox from 'material-ui/Checkbox';
 
 import IdentificationForm from 'src/components/apply/IdentificationForm';
 import ContactInfo from 'src/components/apply/ContactInfo';
 import ContinueButton from 'src/components/ContinueButton';
 import { validate } from 'src/components/apply/formValidators';
+import * as colors from 'src/helpers/colors';
 
 const headingStyle = {
   fontSize: '18pt',
@@ -19,12 +22,19 @@ const SectionHeading = ({ children }) => <div style={headingStyle}>{children}</d
 
 const ApplicantForm = ({ handleSubmit }) => (
   <div style={{marginBottom: 12}}>
-    <form>
+    <form onSubmit={handleSubmit} style={{display:'flex', flexDirection: 'column', alignItems: 'center'}}>
       <SectionHeading>Your Identity</SectionHeading>
       <IdentificationForm />
       <SectionHeading>Contact Information and Address</SectionHeading>
       <ContactInfo />
-      <center><ContinueButton title='KEEP GOING' buttonProps={{type: 'submit'}} /></center>
+      <Flex alignSelf='center' width='40%' style={{marginLeft: 60, marginBottom: 0, marginTop: 30}}>
+        <Checkbox
+          label="Add joint applicant to my membership application"
+          labelStyle={{color: colors.basic}}
+          iconStyle={{fill: colors.basic}}
+        />
+      </Flex>
+      <center><ContinueButton title='KEEP GOING' buttonProps={{type: 'submit'}} marginTop={10}/></center>
     </form>
   </div>
 );
