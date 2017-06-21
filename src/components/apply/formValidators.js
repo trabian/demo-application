@@ -5,9 +5,7 @@ import moment from 'moment';
 import { FormattedMessage } from 'react-intl';
 import { required, email, addValidator } from 'redux-form-validators';
 
-const validationMsg = (message) => (
-  <FormattedMessage id='form.error' defaultMessage={message} />
-);
+const validationMsg = (message) => <FormattedMessage id='form.error' defaultMessage={message} />;
 
 const dobValidation = addValidator({
   defaultMessage: validationMsg('Must be 18 years or older.'),
@@ -18,9 +16,9 @@ const stripFormatting = input => _.replace(input, /[^0-9]+/g, '');
 
 const numberValidationWithLength = addValidator({
   defaultMessage: validationMsg('Invalid Input'),
-  validator: (options, value, allValues) =>{
+  validator: (options, value, allValues) => {
     return stripFormatting(value).length === options.length;
-  }
+  },
 });
 
 const requiredInput = required({msg: validationMsg('Required')});
@@ -35,26 +33,24 @@ const validations = {
   address:[requiredInput],
   city: [requiredInput],
   state:[requiredInput],
-  zipCode:[requiredInput, numberValidationWithLength({length: 5})]
+  zipCode:[requiredInput, numberValidationWithLength({length: 5})],
 };
 
 // Applies all the validator functions to the input, returning the value of the first rejection
 // or `undefined`.
-const applyValidators = (validators, value, values) => _.find(_.map(validators, validator => validator(value, values)));
+const applyValidators = (validators, value, values) =>
+  _.find(_.map(validators, validator => validator(value, values)));
 
-/* This function is adapted from code from redux-form-validators
-   that runs redux-form inputs through their corresponding
-   validators and adds an error message to the errors
-   object if one of the validators fails. (returns
-   error message from first validator to error).
-*/
+/**
+ * This function is adapted from code from redux-form-validators
+ * that runs redux-form inputs through their corresponding
+ * validators and adds an error message to the errors
+ * object if one of the validators fails. (returns
+ * error message from first validator to error).
+ */
 export const validate = values => {
-  return _.reduce(values, (acc, val, key) => {
-    const errorMsg = validations[key] && applyValidators(validations[key], val, values);
-    if(errorMsg) {
-      return {...acc, [key]: errorMsg};
-    } else {
-      return acc;
-    }
-  }, {});
+  const validated = _.mapValues(values, (val, key) => {
+    return validations[key] && applyValidators(validations[key], val, values);
+  });
+  return _.omitBy(validated, _.isUndefined);
 };
