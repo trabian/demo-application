@@ -15,7 +15,7 @@ const headingStyle = {
   textAlign: 'center',
   marginBottom: 10,
   marginTop: 22,
-  fontWeight: 'bold'
+  fontWeight: 'bold',
 };
 
 const SectionHeading = ({ children }) => <div style={headingStyle}>{children}</div>;
