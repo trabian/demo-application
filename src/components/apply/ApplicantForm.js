@@ -22,7 +22,11 @@ const SectionHeading = ({ children }) => <div style={headingStyle}>{children}</d
 
 const ApplicantForm = ({ handleSubmit }) => (
   <div style={{marginBottom: 12}}>
-    <form onSubmit={handleSubmit((values) => console.log(values))} style={{display:'flex', flexDirection: 'column', alignItems: 'center'}}>
+    <form onSubmit={handleSubmit((values) =>{
+        console.log(values);
+        window.location.assign('/disclosures')
+      })}
+      style={{display:'flex', flexDirection: 'column', alignItems: 'center'}}>
       <SectionHeading>Your Identity</SectionHeading>
       <IdentificationForm />
       <SectionHeading>Contact Information and Address</SectionHeading>
@@ -36,7 +40,9 @@ const ApplicantForm = ({ handleSubmit }) => (
             iconStyle={{fill: colors.basic, marginLeft: 10}}
         />
       </Flex>
-      <center><ContinueButton title='KEEP GOING' buttonProps={{type: 'submit'}} style={{ marginTop: 10 }}/></center>
+      <center>
+          <ContinueButton title='KEEP GOING' buttonProps={{type: 'submit'}} style={{ marginTop: 10 }}/>
+      </center>
     </form>
   </div>
 );

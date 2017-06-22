@@ -8,12 +8,14 @@ import NotFound from 'src/components/NotFound';
 
 export const PRODUCT_SELECT = '/';
 export const APPLY = '/apply';
+export const DISCLOSURES = '/disclosures';
 
 export const CoreRouter = ({history}) => (
   <ConnectedRouter history={history}>
     <Switch>
       <Route exact path={PRODUCT_SELECT} component={IndexPage} />
       <Route exact path={APPLY} component={Apply} />
+      <Route exact path={DISCLOSURES} component={IndexPage} />
       <Route path='*' component={NotFound} />
     </Switch>
   </ConnectedRouter>
