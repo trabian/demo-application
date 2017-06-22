@@ -1,5 +1,6 @@
 import React from 'react';
-import { reduxForm, Field } from 'redux-form';
+import { connect } from 'react-redux';
+import { reduxForm, Field, formValueSelector } from 'redux-form';
 import { Flex } from 'jsxstyle';
 import { Checkbox } from 'redux-form-material-ui';
 
@@ -20,11 +21,13 @@ const headingStyle = {
 
 const SectionHeading = ({ children }) => <div style={headingStyle}>{children}</div>;
 
-const ApplicantForm = ({ handleSubmit }) => (
+const ApplicantForm = ({ handleSubmit, addJointApplicant }) => (
   <div style={{marginBottom: 12}}>
     <form onSubmit={handleSubmit((values) =>{
         console.log(values);
-        window.location.assign('/disclosures')
+        if(!addJointApplicant){
+          window.location.assign('/disclosures');
+        }
       })}
       style={{display:'flex', flexDirection: 'column', alignItems: 'center'}}>
       <SectionHeading>Your Identity</SectionHeading>
@@ -47,4 +50,13 @@ const ApplicantForm = ({ handleSubmit }) => (
   </div>
 );
 
-export default reduxForm({form: 'apply', validate})(ApplicantForm);
+const selector = formValueSelector('apply');
+const ApplicantFormWithValues = connect(
+  state => {
+    const jointApplication = selector(state, 'addJointApplicant')
+    return {
+      addJointApplicant: jointApplication
+    };
+  }
+)(ApplicantForm);
+export default reduxForm({form: 'apply', validate})(ApplicantFormWithValues);
