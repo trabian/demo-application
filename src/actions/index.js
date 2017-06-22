@@ -1,6 +1,7 @@
 export const SELECT = 'select';
 export const HOVER_IN = 'hoverIn';
 export const HOVER_OUT = 'hoverOut'
+export const CHECKED = 'checked';
 
 export const selectAction = (cardId) => {
   return {
@@ -21,4 +22,10 @@ export const hoverOutAction = (cardId) => {
     type: HOVER_OUT,
     id: cardId
   };
+};
+
+export const checkedJointAccount = () => {
+  return {
+    type: CHECKED
+  }
 };

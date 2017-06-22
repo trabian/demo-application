@@ -5,6 +5,7 @@ import { getIn, updateIn } from 'zaphod/compat';
 
 import { transformFieldEntry } from 'src/reducers/formHelpers';
 import selectionReducer from 'src/reducers/selectionReducer';
+import checkedReducer from 'src/reducers/checkedReducer';
 
 const blurType = blur().type;
 const focusType = focus().type;
@@ -21,6 +22,7 @@ const applyFormReducer = (state, action={}) => {
 export default combineReducers({
   selected: selectionReducer,
   router: routerReducer,
+  checked: checkedReducer,
   form: formReducer.plugin({
     apply: applyFormReducer,
   }),
