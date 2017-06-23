@@ -1,6 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { reduxForm, Field, formValueSelector } from 'redux-form';
+import { reduxForm, Field } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 import { Flex } from 'jsxstyle';
 import { Checkbox } from 'redux-form-material-ui';
@@ -20,16 +19,19 @@ const headingStyle = {
   fontWeight: 'bold',
 };
 
-const SectionHeading = ({ children }) => <div style={headingStyle}>{children}</div>;
-
-const ApplicantForm = ({ handleSubmit, addJointApplicant, history }) => (
-  <div style={{marginBottom: 12}}>
-    <form onSubmit={handleSubmit((values) =>{
-      console.log(values);
-      if(!addJointApplicant){
+const formSubmit = (history) => {
+  return (values) =>{
+      if(!values.addJointApplicant){
         history.push('/disclosures');
       }
-    })}
+  };
+};
+
+const SectionHeading = ({ children }) => <div style={headingStyle}>{children}</div>;
+
+const ApplicantForm = ({ handleSubmit, history }) => (
+  <div style={{marginBottom: 12}}>
+    <form onSubmit={handleSubmit(formSubmit(history))}
     style={{display:'flex', flexDirection: 'column', alignItems: 'center'}}>
     <SectionHeading>Your Identity</SectionHeading>
     <IdentificationForm />
@@ -51,13 +53,4 @@ const ApplicantForm = ({ handleSubmit, addJointApplicant, history }) => (
 </div>
 );
 
-const selector = formValueSelector('apply');
-const ApplicantFormWithValues = connect(
-  state => {
-    const jointApplication = selector(state, 'addJointApplicant')
-    return {
-      addJointApplicant: jointApplication
-    };
-  }
-)(ApplicantForm);
-export default withRouter(reduxForm({form: 'apply', validate})(ApplicantFormWithValues));
+export default withRouter(reduxForm({form: 'apply', validate})(ApplicantForm));
