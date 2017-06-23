@@ -1,13 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { PRODUCT_SELECT, APPLY } from 'src/router';
+import { PRODUCT_SELECT, APPLY, DISCLOSURES } from 'src/router';
 import * as colors from 'src/helpers/colors';
 import Stepper from 'react-stepper-horizontal';
 
 const stepMap = {
   [PRODUCT_SELECT]: 0,
-  [APPLY]: 1
+  [APPLY]: 1,
+  [DISCLOSURES]: 2
 };
 
 const LocationStepper = ({location, selectedProducts}) => (

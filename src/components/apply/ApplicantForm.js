@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Field, formValueSelector } from 'redux-form';
+import { withRouter } from 'react-router-dom';
 import { Flex } from 'jsxstyle';
 import { Checkbox } from 'redux-form-material-ui';
 
@@ -21,33 +22,33 @@ const headingStyle = {
 
 const SectionHeading = ({ children }) => <div style={headingStyle}>{children}</div>;
 
-const ApplicantForm = ({ handleSubmit, addJointApplicant }) => (
+const ApplicantForm = ({ handleSubmit, addJointApplicant, history }) => (
   <div style={{marginBottom: 12}}>
     <form onSubmit={handleSubmit((values) =>{
-        console.log(values);
-        if(!addJointApplicant){
-          window.location.assign('/disclosures');
-        }
-      })}
-      style={{display:'flex', flexDirection: 'column', alignItems: 'center'}}>
-      <SectionHeading>Your Identity</SectionHeading>
-      <IdentificationForm />
-      <SectionHeading>Contact Information and Address</SectionHeading>
-      <ContactInfo />
-      <Flex alignSelf='center' width='45%' style={{marginLeft: 80, marginBottom: 0, marginTop: 30}}>
-        <Field
-            name="addJointApplicant"
-            component={Checkbox}
-            label="Add joint applicant to my membership application"
-            labelStyle={{color: colors.basic}}
-            iconStyle={{fill: colors.basic, marginLeft: 10}}
-        />
-      </Flex>
-      <center>
-          <ContinueButton title='KEEP GOING' buttonProps={{type: 'submit'}} style={{ marginTop: 10 }}/>
-      </center>
-    </form>
-  </div>
+      console.log(values);
+      if(!addJointApplicant){
+        history.push('/disclosures');
+      }
+    })}
+    style={{display:'flex', flexDirection: 'column', alignItems: 'center'}}>
+    <SectionHeading>Your Identity</SectionHeading>
+    <IdentificationForm />
+    <SectionHeading>Contact Information and Address</SectionHeading>
+    <ContactInfo />
+    <Flex alignSelf='center' width='45%' style={{marginLeft: 80, marginBottom: 0, marginTop: 30}}>
+      <Field
+        name="addJointApplicant"
+        component={Checkbox}
+        label="Add joint applicant to my membership application"
+        labelStyle={{color: colors.basic}}
+        iconStyle={{fill: colors.basic, marginLeft: 10}}
+      />
+    </Flex>
+    <center>
+      <ContinueButton title='KEEP GOING' buttonProps={{type: 'submit'}} style={{ marginTop: 10 }}/>
+    </center>
+  </form>
+</div>
 );
 
 const selector = formValueSelector('apply');
@@ -59,4 +60,4 @@ const ApplicantFormWithValues = connect(
     };
   }
 )(ApplicantForm);
-export default reduxForm({form: 'apply', validate})(ApplicantFormWithValues);
+export default withRouter(reduxForm({form: 'apply', validate})(ApplicantFormWithValues));
