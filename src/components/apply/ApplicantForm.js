@@ -1,5 +1,6 @@
 import React from 'react';
-import { reduxForm, Field } from 'redux-form';
+import { connect } from 'react-redux';
+import { reduxForm, Field, FieldArray, formValueSelector } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 import { Flex } from 'jsxstyle';
 import { Checkbox } from 'redux-form-material-ui';
@@ -21,22 +22,37 @@ const headingStyle = {
 
 const formSubmit = (history) => {
   return (values) =>{
+      console.log('submitted.');
       if(!values.addJointApplicant){
         history.push('/disclosures');
       }
   };
 };
 
-const SectionHeading = ({ children }) => <div style={headingStyle}>{children}</div>;
+const singleApplicationForm = () => {
+  return(
+    <div>
+      <SectionHeading>Your Identity</SectionHeading>
+      <IdentificationForm />
+      <SectionHeading>Contact Information and Address</SectionHeading>
+      <ContactInfo />
+    </div>
+  );
+};
 
-const ApplicantForm = ({ handleSubmit, history }) => (
+const SectionHeading = ({ children }) => <div style={headingStyle}>{children}</div>;
+const buttonType = (addJointApplicant) => {
+  if(addJointApplicant){
+    return 'button';
+  }
+  return 'submit';
+};
+
+const ApplicantForm = ({ handleSubmit, history, addJointApplicant }) => (
   <div style={{marginBottom: 12}}>
     <form onSubmit={handleSubmit(formSubmit(history))}
     style={{display:'flex', flexDirection: 'column', alignItems: 'center'}}>
-    <SectionHeading>Your Identity</SectionHeading>
-    <IdentificationForm />
-    <SectionHeading>Contact Information and Address</SectionHeading>
-    <ContactInfo />
+    <FieldArray name="applications'" component={singleApplicationForm} />
     <Flex alignSelf='center' width='45%' style={{marginLeft: 80, marginBottom: 0, marginTop: 30}}>
       <Field
         name="addJointApplicant"
@@ -47,10 +63,21 @@ const ApplicantForm = ({ handleSubmit, history }) => (
       />
     </Flex>
     <center>
-      <ContinueButton title='KEEP GOING' buttonProps={{type: 'submit'}} style={{ marginTop: 10 }}/>
+      <ContinueButton title='KEEP GOING' buttonProps={{type: buttonType(addJointApplicant)}} style={{ marginTop: 10 }}/>
     </center>
   </form>
 </div>
 );
 
-export default withRouter(reduxForm({form: 'apply', validate})(ApplicantForm));
+
+const selector = formValueSelector('apply');
+const ApplicantFormWithValues = connect(
+  state => {
+    const addJointApplicant = selector(state, 'addJointApplicant');
+    return {
+      addJointApplicant
+    };
+  }
+)(ApplicantForm)
+
+export default withRouter(reduxForm({form: 'apply', validate})(ApplicantFormWithValues));
