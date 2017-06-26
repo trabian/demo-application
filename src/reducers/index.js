@@ -5,9 +5,12 @@ import { getIn, updateIn } from 'zaphod/compat';
 
 import { transformFieldEntry } from 'src/reducers/formHelpers';
 import selectionReducer from 'src/reducers/selectionReducer';
+import { selectedApplicantReducer } from 'src/reducers/selectedApplicant';
 
 const blurType = blur().type;
 const focusType = focus().type;
+
+console.log(selectedApplicantReducer);
 
 const applyFormReducer = (state, action={}) => {
   if (action.type !== blurType && action.type !== focusType) {
@@ -24,4 +27,5 @@ export default combineReducers({
   form: formReducer.plugin({
     apply: applyFormReducer,
   }),
+  selectedApplicant: selectedApplicantReducer.build(), // Creates a reducer function out of the Simr reducer
 });

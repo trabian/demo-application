@@ -21,11 +21,11 @@ const headingStyle = {
 };
 
 const formSubmit = (history) => {
-  return (values) =>{
-      console.log('submitted.');
-      if(!values.addJointApplicant){
-        history.push('/disclosures');
-      }
+  return (values) => {
+    console.log('submitted.');
+    if(!values.addJointApplicant){
+      history.push('/disclosures');
+    }
   };
 };
 const selector = formValueSelector('apply');
@@ -37,7 +37,7 @@ const mapStateToProps = state => {
 };
 
 const singleApplicationForm = connect(mapStateToProps)(({ fields, addJointApplicant }) => {
-  return(
+  return (
     <div style={{display:'flex', flexDirection: 'column', alignItems: 'center'}}>
       <SectionHeading>Your Identity</SectionHeading>
       <IdentificationForm />
@@ -45,15 +45,19 @@ const singleApplicationForm = connect(mapStateToProps)(({ fields, addJointApplic
       <ContactInfo />
       <Flex alignSelf='center' width='45%' style={{marginBottom: 0, marginTop: 30}}>
         <Field
-            name="addJointApplicant"
-            component={Checkbox}
-            label="Add joint applicant to my membership application"
-            labelStyle={{color: colors.basic}}
-            iconStyle={{fill: colors.basic, marginLeft: 10}}
+          name="addJointApplicant"
+          component={Checkbox}
+          label="Add joint applicant to my membership application"
+          labelStyle={{color: colors.basic}}
+          iconStyle={{fill: colors.basic, marginLeft: 10}}
         />
       </Flex>
       <center>
-          <ContinueButton title='KEEP GOING' buttonProps={{type: buttonType(addJointApplicant)}} style={{ marginTop: 10 }}/>
+        <ContinueButton
+          title='KEEP GOING'
+          buttonProps={{type: buttonType(addJointApplicant)}}
+          style={{ marginTop: 10 }}
+        />
       </center>
     </div>
   );
@@ -69,8 +73,10 @@ const buttonType = (addJointApplicant) => {
 
 const ApplicantForm = ({ handleSubmit, history }) => (
   <div style={{marginBottom: 12}}>
-    <form onSubmit={handleSubmit(formSubmit(history))}
-      style={{display:'flex', flexDirection: 'column', alignItems: 'center'}}>
+    <form
+      onSubmit={handleSubmit(formSubmit(history))}
+      style={{display:'flex', flexDirection: 'column', alignItems: 'center'}}
+    >
       <FieldArray name="applications'" component={singleApplicationForm} />
     </form>
   </div>
