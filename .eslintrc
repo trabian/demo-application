@@ -1,3 +1,8 @@
 {
-  "extends": "react-app"
+  "extends": "react-app",
+  "rules": {
+    "linebreak-style": [2, "unix"],
+    "no-var": 2,
+    "prefer-const": 1
+  }
 }
