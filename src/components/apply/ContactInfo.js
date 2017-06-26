@@ -7,12 +7,12 @@ import { maxLengthValidator, numericalValidator, simpleNormalizer, validatorNorm
 
 import { StyledTextField, StyledDropdownField, cardStyle } from 'src/components/apply/formStyles';
 
-const LeftInput = () => (
+const LeftInput = ({namePrefix}) => (
   <Col style={{borderRight: '2px solid #999', height: 140, paddingBottom: 0}}>
     <Row>
       <Col>
         <StyledTextField
-          name='phoneNumber'
+          name={`${namePrefix}.phoneNumber`}
           label='Phone Number'
           hintText='(###) ###-####'
           width={204}
@@ -22,7 +22,7 @@ const LeftInput = () => (
       </Col>
       <Col>
         <StyledDropdownField
-          name='phoneNumberType'
+          name={`${namePrefix}.phoneNumberType`}
           hintText='Phone Type'
           width={148}
           children={['Home', 'Phone', 'Work']}
@@ -33,7 +33,7 @@ const LeftInput = () => (
 
     <Row>
       <StyledTextField
-        name='emailAddress'
+        name={`${namePrefix}.emailAddress`}
         label='Email Address'
         hintText='you@amazing.rad'
         width={400}
@@ -43,12 +43,12 @@ const LeftInput = () => (
   </Col>
 );
 
-const RightInput = () => (
+const RightInput = ({namePrefix}) => (
   <Col style={{height: 140}}>
     <Row>
       <Col>
         <StyledTextField
-          name='address'
+          name={`${namePrefix}.address`}
           label='Physical Address'
           hintText='1600 Pennsylvania Ave'
           width={403}
@@ -59,7 +59,7 @@ const RightInput = () => (
     <Row>
       <Col>
         <StyledTextField
-          name='city'
+          name={`${namePrefix}.city`}
           label='City Name'
           hintText='Washington DC'
           width={175}
@@ -68,7 +68,7 @@ const RightInput = () => (
       </Col>
       <Col>
         <StyledDropdownField
-          name='state'
+          name={`${namePrefix}.state`}
           label='State'
           hintText='DC'
           width={60}
@@ -78,7 +78,7 @@ const RightInput = () => (
       </Col>
       <Col>
         <StyledTextField
-          name='zipCode'
+          name={`${namePrefix}.zipCode`}
           label='Zip Code'
           hintText='20500'
           width={75}
@@ -91,12 +91,12 @@ const RightInput = () => (
   </Col>
 );
 
-const ContactInfo = () => (
+const ContactInfo = ({fieldArrayName, namePrefix}) => (
   <Card style={cardStyle}>
     <Col>
     <Row style={{paddingBottom: 20, paddingTop: 10}}>
-      <LeftInput />
-      <RightInput />
+      <LeftInput namePrefix={namePrefix} />
+      <RightInput namePrefix={namePrefix} />
     </Row>
   </Col>
   </Card>
