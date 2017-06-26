@@ -28,17 +28,36 @@ const formSubmit = (history) => {
       }
   };
 };
+const selector = formValueSelector('apply');
+const mapStateToProps = state => {
+  const addJointApplicant = selector(state, 'addJointApplicant');
+  return {
+    addJointApplicant
+  };
+};
 
-const singleApplicationForm = () => {
+const singleApplicationForm = connect(mapStateToProps)(({ fields, addJointApplicant }) => {
   return(
-    <div>
+    <div style={{display:'flex', flexDirection: 'column', alignItems: 'center'}}>
       <SectionHeading>Your Identity</SectionHeading>
       <IdentificationForm />
       <SectionHeading>Contact Information and Address</SectionHeading>
       <ContactInfo />
+      <Flex alignSelf='center' width='45%' style={{marginBottom: 0, marginTop: 30}}>
+        <Field
+            name="addJointApplicant"
+            component={Checkbox}
+            label="Add joint applicant to my membership application"
+            labelStyle={{color: colors.basic}}
+            iconStyle={{fill: colors.basic, marginLeft: 10}}
+        />
+      </Flex>
+      <center>
+          <ContinueButton title='KEEP GOING' buttonProps={{type: buttonType(addJointApplicant)}} style={{ marginTop: 10 }}/>
+      </center>
     </div>
   );
-};
+});
 
 const SectionHeading = ({ children }) => <div style={headingStyle}>{children}</div>;
 const buttonType = (addJointApplicant) => {
@@ -48,36 +67,13 @@ const buttonType = (addJointApplicant) => {
   return 'submit';
 };
 
-const ApplicantForm = ({ handleSubmit, history, addJointApplicant }) => (
+const ApplicantForm = ({ handleSubmit, history }) => (
   <div style={{marginBottom: 12}}>
     <form onSubmit={handleSubmit(formSubmit(history))}
-    style={{display:'flex', flexDirection: 'column', alignItems: 'center'}}>
-    <FieldArray name="applications'" component={singleApplicationForm} />
-    <Flex alignSelf='center' width='45%' style={{marginLeft: 80, marginBottom: 0, marginTop: 30}}>
-      <Field
-        name="addJointApplicant"
-        component={Checkbox}
-        label="Add joint applicant to my membership application"
-        labelStyle={{color: colors.basic}}
-        iconStyle={{fill: colors.basic, marginLeft: 10}}
-      />
-    </Flex>
-    <center>
-      <ContinueButton title='KEEP GOING' buttonProps={{type: buttonType(addJointApplicant)}} style={{ marginTop: 10 }}/>
-    </center>
-  </form>
-</div>
+      style={{display:'flex', flexDirection: 'column', alignItems: 'center'}}>
+      <FieldArray name="applications'" component={singleApplicationForm} />
+    </form>
+  </div>
 );
 
-
-const selector = formValueSelector('apply');
-const ApplicantFormWithValues = connect(
-  state => {
-    const addJointApplicant = selector(state, 'addJointApplicant');
-    return {
-      addJointApplicant
-    };
-  }
-)(ApplicantForm)
-
-export default withRouter(reduxForm({form: 'apply', validate})(ApplicantFormWithValues));
+export default withRouter(reduxForm({form: 'apply', validate})(ApplicantForm));

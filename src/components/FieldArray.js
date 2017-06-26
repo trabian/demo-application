@@ -17,7 +17,9 @@ const renderMembers = ({ fields, meta: { touched, error, submitFailed } }) => (
       <button type="button" onClick={() => fields.push({})}>Add Member</button>
       {(touched || submitFailed) && error && <span>{error}</span>}
     </li>
-    {fields.map((member, index) => (
+    {fields.map((member, index) => {
+      console.log(member);
+      return (
       <li key={index}>
         <h4>Member #{index + 1}</h4>
         <Field
@@ -33,7 +35,8 @@ const renderMembers = ({ fields, meta: { touched, error, submitFailed } }) => (
           label="Last Name"
         />
       </li>
-    ))}
+    );
+  })}
   </ul>
 );
 
@@ -51,6 +54,7 @@ const FieldArraysForm = props => {
     </form>
   );
 };
+
 export default reduxForm({
   form: 'fieldArrays'
 })(FieldArraysForm);
