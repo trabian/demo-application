@@ -29,6 +29,7 @@ const formSubmit = (history) => {
   };
 };
 const selector = formValueSelector('apply');
+
 const mapStateToProps = state => {
   const addJointApplicant = selector(state, 'addJointApplicant');
   return {
@@ -36,28 +37,38 @@ const mapStateToProps = state => {
   };
 };
 
-const singleApplicationForm = connect(mapStateToProps)(({ fields, addJointApplicant }) => {
-  return(
-    <div style={{display:'flex', flexDirection: 'column', alignItems: 'center'}}>
-      <SectionHeading>Your Identity</SectionHeading>
-      <IdentificationForm />
-      <SectionHeading>Contact Information and Address</SectionHeading>
-      <ContactInfo />
-      <Flex alignSelf='center' width='45%' style={{marginBottom: 0, marginTop: 30}}>
-        <Field
-            name="addJointApplicant"
-            component={Checkbox}
-            label="Add joint applicant to my membership application"
-            labelStyle={{color: colors.basic}}
-            iconStyle={{fill: colors.basic, marginLeft: 10}}
-        />
-      </Flex>
-      <center>
-          <ContinueButton title='KEEP GOING' buttonProps={{type: buttonType(addJointApplicant)}} style={{ marginTop: 10 }}/>
-      </center>
-    </div>
-  );
-});
+const singleApplicationForm = ({ fields, addJointApplicant }) => {
+  if( fields.length === 0 ){
+    fields.push({});
+  }
+  return (
+  <div>
+    {fields.map((member, index) => {
+        return(
+          <div style={{display:'flex', flexDirection: 'column', alignItems: 'center'}} key={index}>
+            <SectionHeading>Your Identity</SectionHeading>
+            <IdentificationForm member={member} />
+            <SectionHeading>Contact Information and Address</SectionHeading>
+            <ContactInfo member={member} />
+            <Flex alignSelf='center' width='45%' style={{marginLeft: 20, marginBottom: 0, marginTop: 30}}>
+              <Field
+                  name="addJointApplicant"
+                  component={Checkbox}
+                  label="Add joint applicant to my membership application"
+                  labelStyle={{color: colors.basic}}
+                  iconStyle={{fill: colors.basic, marginLeft: 10}}
+              />
+            </Flex>
+            <center>
+                <ContinueButton title='KEEP GOING' onClick={() => fields.push({})} buttonProps={{type: buttonType(addJointApplicant)}} style={{ marginTop: 10 }}/>
+            </center>
+          </div>
+        );
+    })}
+  </div>
+); };
+
+const singleAppArrayEntry = connect(mapStateToProps)(singleApplicationForm);
 
 const SectionHeading = ({ children }) => <div style={headingStyle}>{children}</div>;
 const buttonType = (addJointApplicant) => {
@@ -71,7 +82,7 @@ const ApplicantForm = ({ handleSubmit, history }) => (
   <div style={{marginBottom: 12}}>
     <form onSubmit={handleSubmit(formSubmit(history))}
       style={{display:'flex', flexDirection: 'column', alignItems: 'center'}}>
-      <FieldArray name="applications'" component={singleApplicationForm} />
+      <FieldArray name="applications'" component={singleAppArrayEntry} />
     </form>
   </div>
 );

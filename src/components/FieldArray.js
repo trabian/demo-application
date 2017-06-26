@@ -18,7 +18,7 @@ const renderMembers = ({ fields, meta: { touched, error, submitFailed } }) => (
       {(touched || submitFailed) && error && <span>{error}</span>}
     </li>
     {fields.map((member, index) => {
-      console.log(member);
+      
       return (
       <li key={index}>
         <h4>Member #{index + 1}</h4>
