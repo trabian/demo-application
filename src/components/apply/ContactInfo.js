@@ -91,7 +91,7 @@ const RightInput = ({namePrefix}) => (
   </Col>
 );
 
-const ContactInfo = ({fieldArrayName, namePrefix}) => (
+const ContactInfo = ({namePrefix}) => (
   <Card style={cardStyle}>
     <Col>
     <Row style={{paddingBottom: 20, paddingTop: 10}}>

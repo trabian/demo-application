@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer, blur, focus } from 'redux-form';
 import { routerReducer } from 'react-router-redux';
+import _ from 'lodash';
 import { getIn, updateIn } from 'zaphod/compat';
 
 import { transformFieldEntry } from 'src/reducers/formHelpers';
@@ -10,15 +11,25 @@ import { selectedApplicantReducer } from 'src/reducers/selectedApplicant';
 const blurType = blur().type;
 const focusType = focus().type;
 
-console.log(selectedApplicantReducer);
+/**
+ * Removes the dot-and-bracket notation from the name fields, returning the index of the field in the applicants `FieldArray`
+ * and the actual name of the field.
+ *
+ * For example, it converts 'applicants[0].firstName' into {index: 0, field: 'firstName'}.
+ */
+const stripFieldNamePrefix = name => ({
+  field: _.last(_.split(name, '.')),
+  index: _.split(name, /[[\]]/g)[1],
+});
 
 const applyFormReducer = (state, action={}) => {
   if (action.type !== blurType && action.type !== focusType) {
     return state;
   }
 
-  const fieldName = getIn(action, ['meta', 'field']);
-  return updateIn(state, ['values', fieldName], transformFieldEntry(fieldName, action.type));
+  const nestedField = getIn(action, ['meta', 'field']);
+  const {index, field} = stripFieldNamePrefix(nestedField);
+  return updateIn(state, ['values', 'applications', index, field], transformFieldEntry(field, action.type));
 };
 
 export default combineReducers({
