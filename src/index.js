@@ -13,6 +13,7 @@ import registerServiceWorker from 'src/registerServiceWorker';
 import 'src/index.css';
 import reducers from 'src/reducers';
 import ApplicationPage from 'src/components/ApplicationPage';
+import { trabian } from 'src/utils/devTools';
 
 injectTapEventPlugin(); //needed for material-ui
 
@@ -25,6 +26,9 @@ const store = createStore(
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 );
+
+// set up the Trabian dev tools
+window.trabian = trabian(store);
 
 const Root = () => {
   return (
