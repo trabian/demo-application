@@ -22,7 +22,7 @@ const headingStyle = {
 
 const formSubmit = (history) => {
   return (values) => {
-    console.log('submitted.');
+    console.log('submitted.'); // TODO
     if(!values.addJointApplicant){
       history.push('/disclosures');
     }
@@ -38,7 +38,6 @@ const SectionHeading = ({ children }) => <div style={headingStyle}>{children}</d
 const singleApplicationForm = connect(mapStateToProps)(({ selectedApplicantId, fields }) => {
   if(fields.length === 0 || fields.length === selectedApplicantId) {
     fields.push({});
-    return <span />;
   }
 
   const fieldMapper = (member, memberIndex) => {
@@ -67,12 +66,25 @@ const singleApplicationForm = connect(mapStateToProps)(({ selectedApplicantId, f
     <div>
       {fields.map(fieldMapper)}
     </div>
-    );
+  );
 });
 
+const tabStyle = {
+  fontSize: '11pt',
+  paddingRight: 5,
+  paddingLeft: 5,
+  fontWeight: 400,
+};
+
 const ApplicantForm = ({ selectedApplicantId, jointApplicantCount, setSelectedApplicant, setJointApplicantCount, handleSubmit, history }) => {
-  const applicantTabs = _.map(_.range(jointApplicantCount), i => <Tab label={`Joint Applicant ${i + 1}`} key={i} value={i} />);
-  const allTabs = [...applicantTabs, <Tab label={'Add Joint Applicant'} key={applicantTabs.length} value={applicantTabs.length} />];
+  const applicantTabs = _.map(_.range(jointApplicantCount), i => {
+    return <Tab style={tabStyle} label={`Joint Applicant ${i + 1}`} key={i} value={i} />;
+  });
+  // Add an additional tab at the end to add additional joint applicants
+  const allTabs = [
+    ...applicantTabs,
+    <Tab style={tabStyle} label={'+ Add Joint Applicant'} key={applicantTabs.length} value={applicantTabs.length} />
+  ];
 
   const handleTabClick = index => {
     if(index === jointApplicantCount) {
@@ -89,6 +101,7 @@ const ApplicantForm = ({ selectedApplicantId, jointApplicantCount, setSelectedAp
         style={{display:'flex', flexDirection: 'column', alignItems: 'center'}}
       >
         <Tabs
+          style={{width: '100%', marginTop: 26}}
           onChange={handleTabClick}
           value={selectedApplicantId}
         >
@@ -106,4 +119,8 @@ const mapApplicantFormState = state => ({
   jointApplicantCount: state.selectedApplicant.count,
 });
 
-export default connect(mapApplicantFormState, {setSelectedApplicant, setJointApplicantCount})(withRouter(reduxForm({form: 'apply', validate})(ApplicantForm)));
+export default connect(mapApplicantFormState, {setSelectedApplicant, setJointApplicantCount})(
+  withRouter(
+    reduxForm({form: 'apply', validate})(ApplicantForm)
+  )
+);
