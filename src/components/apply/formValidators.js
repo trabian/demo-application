@@ -48,9 +48,11 @@ const applyValidators = (validators, value, values) =>
  * object if one of the validators fails. (returns
  * error message from first validator to error).
  */
-export const validate = values => {
-  const validated = _.mapValues(values, (val, key) => {
-    return validations[key] && applyValidators(validations[key], val, values);
-  });
-  return _.omitBy(validated, _.isUndefined);
-};
+
+/* TODO: Need to re-write this to support FieldArray. */
+ export const validate = values => {
+   const validated = _.mapValues(values, (val, key) => {
+     return validations[key] && applyValidators(validations[key], val, values);
+   });
+   return _.omitBy(validated, _.isUndefined);
+ };

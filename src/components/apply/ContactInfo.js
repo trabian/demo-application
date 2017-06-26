@@ -12,7 +12,7 @@ const LeftInput = ({ member }) => (
     <Row>
       <Col>
         <StyledTextField
-          name={'phoneNumber'}
+          name={`${member}.phoneNumber`}
           label='Phone Number'
           hintText='(###) ###-####'
           width={204}
@@ -22,7 +22,7 @@ const LeftInput = ({ member }) => (
       </Col>
       <Col>
         <StyledDropdownField
-          name={'phoneNumberType'}
+          name={`${member}.phoneNumberType`}
           hintText='Phone Type'
           width={148}
           children={['Home', 'Phone', 'Work']}
@@ -33,7 +33,7 @@ const LeftInput = ({ member }) => (
 
     <Row>
       <StyledTextField
-        name={'emailAddress'}
+        name={`${member}.emailAddress`}
         label='Email Address'
         hintText='you@amazing.rad'
         width={400}
@@ -48,7 +48,7 @@ const RightInput = ({ member }) => (
     <Row>
       <Col>
         <StyledTextField
-          name={'address'}
+          name={`${member}.address`}
           label='Physical Address'
           hintText='1600 Pennsylvania Ave'
           width={403}
@@ -59,7 +59,7 @@ const RightInput = ({ member }) => (
     <Row>
       <Col>
         <StyledTextField
-          name={'city'}
+          name={`${member}.city`}
           label='City Name'
           hintText='Washington DC'
           width={175}
@@ -68,7 +68,7 @@ const RightInput = ({ member }) => (
       </Col>
       <Col>
         <StyledDropdownField
-          name={'state'}
+          name={`${member}.state`}
           label='State'
           hintText='DC'
           width={60}
@@ -78,7 +78,7 @@ const RightInput = ({ member }) => (
       </Col>
       <Col>
         <StyledTextField
-          name={'zipCode'}
+          name={`${member}.zipCode`}
           label='Zip Code'
           hintText='20500'
           width={75}

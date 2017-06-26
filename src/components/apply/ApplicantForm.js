@@ -37,10 +37,9 @@ const mapStateToProps = state => {
   };
 };
 
-const singleApplicationForm = ({ fields, addJointApplicant }) => {
-  if( fields.length === 0 ){
-    fields.push({});
-  }
+const singleApplicationForm = ({ fields, addJointApplicant, meta }) => {
+  if( fields.length === 0 ){ fields.push({}); }
+
   return (
   <div>
     {fields.map((member, index) => {
@@ -60,7 +59,12 @@ const singleApplicationForm = ({ fields, addJointApplicant }) => {
               />
             </Flex>
             <center>
-                <ContinueButton title='KEEP GOING' onClick={() => fields.push({})} buttonProps={{type: buttonType(addJointApplicant)}} style={{ marginTop: 10 }}/>
+                <ContinueButton
+                  title='KEEP GOING'
+                  onClick={() => fields.push({})}
+                  buttonProps={{type: buttonType(addJointApplicant)}}
+                  style={{ marginTop: 10 }}
+                />
             </center>
           </div>
         );
