@@ -84,11 +84,20 @@ const ApplicantForm = ({selectedApplicantId, jointApplicantCount, setSelectedApp
 
   const handleTabClick = index => {
     if(index === jointApplicantCount) {
-      // the "Add New Applicant" tab was clicked, so add a new applicant to the list
-      setJointApplicantCount(jointApplicantCount + 1);
+      if(jointApplicantCount < 4){
+        setJointApplicantCount(jointApplicantCount + 1);
+      }
     }
     setSelectedApplicant(index);
   };
+  
+  const removeAddOption = (tabs) => {
+    if(tabs.length > 4){
+      return tabs.slice(0, 4);
+    }
+    return tabs;
+  }
+
   return(
     <div style={{marginBottom: 12}}>
       <form onSubmit={handleSubmit(formSubmit(history))}
@@ -98,7 +107,7 @@ const ApplicantForm = ({selectedApplicantId, jointApplicantCount, setSelectedApp
           onChange={handleTabClick}
           value={selectedApplicantId}
           >
-            {allTabs}
+            {removeAddOption(allTabs)}
           </Tabs>
           <FieldArray name="applications" component={singleApplicationForm} />
         </form>
@@ -112,7 +121,5 @@ const ApplicantForm = ({selectedApplicantId, jointApplicantCount, setSelectedApp
   });
 
   export default connect(mapApplicantFormState, {setSelectedApplicant, setJointApplicantCount})(
-    withRouter(
-      reduxForm({form: 'apply', validate})(ApplicantForm)
-    )
+    withRouter(reduxForm({form: 'apply', validate})(ApplicantForm))
   );
