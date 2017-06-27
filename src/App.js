@@ -28,8 +28,8 @@ const App = ()=>(
     <Heading>Member Application</Heading>
 
     <Flex flexDirection='column' alignItems='center' style={{color: colors.basic}}>
-        <b style={{ fontSize: '1.5em' }}>Select your products</b>
-        <p>Which products would you like?</p>
+      <b style={{ fontSize: '1.5em' }}>Select your products</b>
+      <p>Which products would you like?</p>
     </Flex>
 
     <Row alignSelf='center'>
@@ -40,6 +40,5 @@ const App = ()=>(
 
   </Container>
 );
-
 
 export default App;

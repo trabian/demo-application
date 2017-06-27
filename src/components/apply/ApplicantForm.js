@@ -29,10 +29,10 @@ const tabStyle = {
 
 const formSubmit = (history) => {
   return (values) =>{
-      console.log('submitted.');
-      if(!values.addJointApplicant){
-        history.push('/disclosures');
-      }
+    console.log('submitted.');
+    if(!values.addJointApplicant){
+      history.push('/disclosures');
+    }
   };
 };
 
@@ -47,6 +47,7 @@ const singleApplicationForm = connect(mapStateToProps)(({ selectedApplicantId, f
     if(memberIndex !== selectedApplicantId) {
       return null; // only display the currently selected applicant
     }
+
     return (
       <div style={{display:'flex', flexDirection: 'column', alignItems: 'center'}} key={memberIndex}>
         <SectionHeading>Your Identity</SectionHeading>
@@ -63,6 +64,7 @@ const singleApplicationForm = connect(mapStateToProps)(({ selectedApplicantId, f
       </div>
     );
   };
+
   return (
     <div>
       {fields.map(fieldMapper)}
@@ -90,7 +92,7 @@ const ApplicantForm = ({selectedApplicantId, jointApplicantCount, setSelectedApp
     }
     setSelectedApplicant(index);
   };
-  
+
   const removeAddOption = (tabs) => {
     if(tabs.length > 4){
       return tabs.slice(0, 4);
@@ -98,7 +100,7 @@ const ApplicantForm = ({selectedApplicantId, jointApplicantCount, setSelectedApp
     return tabs;
   }
 
-  return(
+  return (
     <div style={{marginBottom: 12}}>
       <form onSubmit={handleSubmit(formSubmit(history))}
         style={{display:'flex', flexDirection: 'column', alignItems: 'center'}}>
@@ -106,20 +108,20 @@ const ApplicantForm = ({selectedApplicantId, jointApplicantCount, setSelectedApp
           style={{width: '100%', marginTop: 26}}
           onChange={handleTabClick}
           value={selectedApplicantId}
-          >
-            {removeAddOption(allTabs)}
-          </Tabs>
-          <FieldArray name="applications" component={singleApplicationForm} />
-        </form>
-      </div>
-    );
-  };
-
-  const mapApplicantFormState = state => ({
-    selectedApplicantId: state.selectedApplicant.id,
-    jointApplicantCount: state.selectedApplicant.count,
-  });
-
-  export default connect(mapApplicantFormState, {setSelectedApplicant, setJointApplicantCount})(
-    withRouter(reduxForm({form: 'apply', validate})(ApplicantForm))
+        >
+          {removeAddOption(allTabs)}
+        </Tabs>
+        <FieldArray name="applications" component={singleApplicationForm} />
+      </form>
+    </div>
   );
+};
+
+const mapApplicantFormState = state => ({
+  selectedApplicantId: state.selectedApplicant.id,
+  jointApplicantCount: state.selectedApplicant.count,
+});
+
+export default connect(mapApplicantFormState, {setSelectedApplicant, setJointApplicantCount})(
+  withRouter(reduxForm({form: 'apply', validate})(ApplicantForm))
+);

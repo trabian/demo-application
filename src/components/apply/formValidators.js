@@ -43,7 +43,7 @@ const applyValidators = (validators, value) =>{
 }
 
 const requiredContents = ['firstName', 'lastName', 'phoneNumber', 'phoneNumberType', 'emailAddress', 'city', 'state', 'zipCode',
-                  'soc', 'dob', 'address'];
+  'soc', 'dob', 'address'];
 
 const requireFields = (application) => {
   return requiredContents.reduce((acc, val) => {
@@ -55,23 +55,23 @@ const requireFields = (application) => {
 };
 
 export const validate = values => {
-    const applicationErrors = _.reduce(values.applications,
+  const applicationErrors = _.reduce(values.applications,
       (result, application, applicationIndex) => {
-      const fieldErrors = requireFields(application);
-      _.mapValues(application, (value, key) => {
-        const errorMessage = applyValidators(validations[key], value);
-        if(errorMessage){
-          fieldErrors[key] = errorMessage;
-        }
-      });
-      result[applicationIndex] = fieldErrors;
-      return result;
-    }, []);
+        const fieldErrors = requireFields(application);
+        _.mapValues(application, (value, key) => {
+          const errorMessage = applyValidators(validations[key], value);
+          if(errorMessage){
+            fieldErrors[key] = errorMessage;
+          }
+        });
+        result[applicationIndex] = fieldErrors;
+        return result;
+      }, []);
 
-    const errors = {};
-    if(applicationErrors.length > 0){
-      errors.applications = applicationErrors;
-    }
+  const errors = {};
+  if(applicationErrors.length > 0){
+    errors.applications = applicationErrors;
+  }
 
-    return errors;
+  return errors;
 };
