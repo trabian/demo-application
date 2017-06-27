@@ -23,7 +23,7 @@ const numberValidationWithLength = addValidator({
 
 const requiredInput = required({msg: validationMsg('Required')});
 const validations = {
-  firstName: [required()],
+  firstName: [requiredInput],
   lastName:[requiredInput],
   soc:[requiredInput, numberValidationWithLength({length: 9})],
   dob:[requiredInput, dobValidation()],
@@ -74,4 +74,4 @@ export const validate = values => {
     }
 
     return errors;
-  };
+};
