@@ -38,19 +38,40 @@ const validations = {
 
 // Applies all the validator functions to the input, returning the value of the first rejection
 // or `undefined`.
-const applyValidators = (validators, value, values) =>
-  _.find(_.map(validators, validator => validator(value, values)));
+const applyValidators = (validators, value) =>{
+  return _.find(_.map(validators, validator => validator(value)));
+}
 
-/**
- * This function is adapted from code from redux-form-validators
- * that runs redux-form inputs through their corresponding
- * validators and adds an error message to the errors
- * object if one of the validators fails. (returns
- * error message from first validator to error).
- */
+const requiredContents = ['firstName', 'lastName', 'phoneNumber', 'phoneNumberType', 'emailAddress', 'city', 'state', 'zipCode',
+                  'soc', 'dob', 'address'];
+
+const requireFields = (application) => {
+  return requiredContents.reduce((acc, val) => {
+    if(!application[val]){
+      return {...acc, [val]: 'Required'};
+    }
+    return acc;
+  }, {});
+};
+
 export const validate = values => {
-  const validated = _.mapValues(values, (val, key) => {
-    return validations[key] && applyValidators(validations[key], val, values);
-  });
-  return _.omitBy(validated, _.isUndefined);
+    const applicationErrors = _.reduce(values.applications,
+      (result, application, applicationIndex) => {
+      const fieldErrors = requireFields(application);
+      _.mapValues(application, (value, key) => {
+        const errorMessage = applyValidators(validations[key], value);
+        if(errorMessage){
+          fieldErrors[key] = errorMessage;
+        }
+      });
+      result[applicationIndex] = fieldErrors;
+      return result;
+    }, []);
+
+    const errors = {};
+    if(applicationErrors.length > 0){
+      errors.applications = applicationErrors;
+    }
+
+    return errors;
 };
