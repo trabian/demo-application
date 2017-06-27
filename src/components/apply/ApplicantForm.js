@@ -110,7 +110,7 @@ const ApplicantForm = ({selectedApplicantId, jointApplicantCount, setSelectedApp
           onChange={handleTabClick}
           value={selectedApplicantId}
           >
-          {removeAddOption(allTabs)}
+            {removeAddOption(allTabs)}
           </Tabs>
           <FieldArray name="applications" component={singleApplicationForm} />
         </form>
@@ -118,11 +118,11 @@ const ApplicantForm = ({selectedApplicantId, jointApplicantCount, setSelectedApp
     );
   };
 
-const mapApplicantFormState = state => ({
-  selectedApplicantId: state.selectedApplicant.id,
-  jointApplicantCount: state.selectedApplicant.count,
-});
+  const mapApplicantFormState = state => ({
+    selectedApplicantId: state.selectedApplicant.id,
+    jointApplicantCount: state.selectedApplicant.count,
+  });
 
-export default connect(mapApplicantFormState, {setSelectedApplicant, setJointApplicantCount})(
-  withRouter(reduxForm({form: 'apply', validate})(ApplicantForm))
-);
+  export default connect(mapApplicantFormState, {setSelectedApplicant, setJointApplicantCount})(
+    withRouter(reduxForm({form: 'apply', validate})(ApplicantForm))
+  );
