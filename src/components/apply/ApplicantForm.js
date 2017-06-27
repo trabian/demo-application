@@ -4,12 +4,16 @@ import _ from 'lodash';
 import { reduxForm, FieldArray } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 import { Tabs, Tab } from 'material-ui/Tabs';
+import { Flex } from 'jsxstyle';
+import { Checkbox } from 'redux-form-material-ui';
 
 import IdentificationForm from 'src/components/apply/IdentificationForm';
 import ContactInfo from 'src/components/apply/ContactInfo';
 import ContinueButton from 'src/components/ContinueButton';
 import { validate } from 'src/components/apply/formValidators';
 import { setSelectedApplicant, setJointApplicantCount } from 'src/reducers/selectedApplicant';
+import * as colors from 'src/helpers/colors';
+
 
 const headingStyle = {
   fontSize: '18pt',
