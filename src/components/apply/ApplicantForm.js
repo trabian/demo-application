@@ -86,7 +86,7 @@ const ApplicantForm = ({ handleSubmit, history }) => (
   <div style={{marginBottom: 12}}>
     <form onSubmit={handleSubmit(formSubmit(history))}
       style={{display:'flex', flexDirection: 'column', alignItems: 'center'}}>
-      <FieldArray name="applications'" component={singleAppArrayEntry} />
+      <FieldArray name="applications" component={singleAppArrayEntry} />
     </form>
   </div>
 );

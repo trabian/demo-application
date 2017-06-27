@@ -20,8 +20,8 @@ const numberValidationWithLength = addValidator({
     return stripFormatting(value).length === options.length;
   },
 });
-
-const requiredInput = required({msg: validationMsg('Required')});
+const requiredInput = (val) => (val.length === 0 ? 'Required' : '');
+//const requiredInput = required({msg: validationMsg('Required')});
 const validations = {
   firstName: [requiredInput],
   lastName:[requiredInput],
@@ -38,8 +38,14 @@ const validations = {
 
 // Applies all the validator functions to the input, returning the value of the first rejection
 // or `undefined`.
+/*
 const applyValidators = (validators, value, values) =>
   _.find(_.map(validators, validator => validator(value, values)));
+
+*/
+const applyValidators = (validators, value) =>{
+  return _.find(_.map(validators, validator => validator(value)));
+}
 
 /**
  * This function is adapted from code from redux-form-validators
@@ -48,11 +54,86 @@ const applyValidators = (validators, value, values) =>
  * object if one of the validators fails. (returns
  * error message from first validator to error).
  */
+/*
+export const validate = values => {
+  const errors = {};
+    const applicationsArrayErrors = []
+    values.applications.forEach((member, memberIndex) => {
+      console.log(memberIndex)
+      const memberErrors = {};
+      if (!member || !member.firstName) {
+        memberErrors.firstName = 'Required'
+        applicationsArrayErrors[memberIndex] = memberErrors
+      }
+      if (!member || !member.lastName) {
+        memberErrors.lastName = 'Required'
+        applicationsArrayErrors[memberIndex] = memberErrors
+      }
+      if (!member || !member.middleInitial) {
+        memberErrors.middleInitial = 'Required'
+        applicationsArrayErrors[memberIndex] = memberErrors
+      }
 
-/* TODO: Need to re-write this to support FieldArray. */
+      return memberErrors;
+    });
+
+    if(applicationsArrayErrors.length) {
+      errors.applications = applicationsArrayErrors
+    }
+  }
+  return errors;
+}
+*/
+const requiredContents = ['firstName', 'lastName', 'phoneNumber', 'phoneNumberType', 'emailAddress', 'city', 'state', 'zipCode',
+                  'soc', 'dob', 'address'];
+
+const requireFields = (application) => {
+  return requiredContents.reduce((acc, val) => {
+    if(!application || !application[val]){
+      return {...acc, [val]: 'Required'};
+    }
+    return acc;
+  }, {});
+};
+
+export const validate = values => {
+  const errors = {};
+  if (values.applications) {
+    const applicationErrors = [];
+    values.applications.forEach((application, applicationIndex) => {
+      /* go through all values filled out in application. */
+      const fieldErrors = requireFields(application);
+      _.mapValues(application, (value, key) => {
+        const errorMessage = applyValidators(validations[key], value) || requiredInput(value);
+        if(errorMessage){
+          fieldErrors[key] = errorMessage;
+        }
+      });
+      applicationErrors[applicationIndex] = fieldErrors;
+    });
+    if(applicationErrors.length > 0){
+      errors.applications = applicationErrors;
+    }
+  }
+  return errors;
+}
+
+/*
  export const validate = values => {
-   const validated = _.mapValues(values, (val, key) => {
-     return validations[key] && applyValidators(validations[key], val, values);
+
+  if(values.applications){
+  let applicationErrors = [];
+   values.applications.forEach((member, index) => {
+     const errors = _.mapValues(member, (something, key)=>{
+          return validations[key] && applyValidators(validations[key], something, values);
+     });
+     console.log("individual err: ", errors);
+     applicationErrors[index] = errors;
    });
-   return _.omitBy(validated, _.isUndefined);
- };
+   if(applicationErrors.length > 0){
+     errors.applications = applicationErrors;
+   }
+  }
+  console.log("Errors: ", errors);
+  return errors;
+};*/

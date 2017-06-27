@@ -13,9 +13,9 @@ const applyFormReducer = (state, action={}) => {
   if (action.type !== blurType && action.type !== focusType) {
     return state;
   }
-
   const fieldName = getIn(action, ['meta', 'field']);
-  return updateIn(state, ['values', fieldName], transformFieldEntry(fieldName, action.type));
+  const newFieldName = fieldName.substr(fieldName.indexOf('.') + 1);
+  return updateIn(state, ['values', fieldName], transformFieldEntry(newFieldName, action.type));
 };
 
 export default combineReducers({
