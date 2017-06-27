@@ -23,9 +23,10 @@ const Apply = ({selectedApplicantId, jointApplicantCount, addJointApplicant, sel
     <Tab style={tabStyle} label={'+ Add Joint Applicant'} key={applicantTabs.length} value={applicantTabs.length} />
   ];
 
+  const numberOfApplicantsAllowed = 4;
   const handleTabClick = index => {
     if(index === jointApplicantCount) {
-      if(jointApplicantCount < 4){
+      if(jointApplicantCount < numberOfApplicantsAllowed){
         addJointApplicant();
       }
     }
@@ -33,8 +34,8 @@ const Apply = ({selectedApplicantId, jointApplicantCount, addJointApplicant, sel
   };
 
   const removeAddOption = (tabs) => {
-    if(tabs.length > 4){
-      return tabs.slice(0, 4);
+    if(tabs.length > numberOfApplicantsAllowed){
+      return tabs.slice(0, numberOfApplicantsAllowed);
     }
     return tabs;
   };

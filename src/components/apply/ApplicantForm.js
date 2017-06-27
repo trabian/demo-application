@@ -1,14 +1,11 @@
 import React from 'react';
-import { reduxForm, Field } from 'redux-form';
+import { reduxForm } from 'redux-form';
 import { withRouter } from 'react-router-dom';
-import { Flex } from 'jsxstyle';
-import { Checkbox } from 'redux-form-material-ui';
 
 import IdentificationForm from 'src/components/apply/IdentificationForm';
 import ContactInfo from 'src/components/apply/ContactInfo';
 import ContinueButton from 'src/components/ContinueButton';
 import { validate } from 'src/components/apply/formValidators';
-import * as colors from 'src/helpers/colors';
 
 const headingStyle = {
   fontSize: '18pt',
@@ -21,9 +18,7 @@ const headingStyle = {
 
 const formSubmit = (history) => {
   return (values) =>{
-    if(!values.addJointApplicant){
       history.push('/disclosures');
-    }
   };
 };
 
@@ -37,15 +32,6 @@ const ApplicantForm = ({ handleSubmit, history, load }) => (
         <IdentificationForm />
         <SectionHeading>Contact Information and Address</SectionHeading>
         <ContactInfo />
-        <Flex alignSelf='center' width='45%' style={{marginLeft: 80, marginBottom: 0, marginTop: 30}}>
-          <Field
-            name="addJointApplicant"
-            component={Checkbox}
-            label="Add joint applicant to my membership application"
-            labelStyle={{color: colors.basic}}
-            iconStyle={{fill: colors.basic, marginLeft: 10}}
-          />
-        </Flex>
         <center>
           <ContinueButton title='KEEP GOING' buttonProps={{type: 'submit'}} style={{ marginTop: 10 }}/>
         </center>
