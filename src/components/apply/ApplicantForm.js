@@ -49,7 +49,7 @@ const singleApplicationForm = connect(mapStateToProps)(({ selectedApplicantId, f
     }
 
     return (
-      <div style={{display:'flex', flexDirection: 'column', alignItems: 'center'}}>
+      <div style={{display:'flex', flexDirection: 'column', alignItems: 'center'}} key={memberIndex}>
         <SectionHeading>Your Identity</SectionHeading>
         <IdentificationForm member={member} />
         <SectionHeading>Contact Information and Address</SectionHeading>
