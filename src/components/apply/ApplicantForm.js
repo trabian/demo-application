@@ -21,9 +21,9 @@ const headingStyle = {
 
 const formSubmit = (history) => {
   return (values) =>{
-      if(!values.addJointApplicant){
-        history.push('/disclosures');
-      }
+    if(!values.addJointApplicant){
+      history.push('/disclosures');
+    }
   };
 };
 
@@ -33,24 +33,24 @@ const ApplicantForm = ({ handleSubmit, history }) => (
   <div style={{marginBottom: 12}}>
     <form onSubmit={handleSubmit(formSubmit(history))}
     style={{display:'flex', flexDirection: 'column', alignItems: 'center'}}>
-    <SectionHeading>Your Identity</SectionHeading>
-    <IdentificationForm />
-    <SectionHeading>Contact Information and Address</SectionHeading>
-    <ContactInfo />
-    <Flex alignSelf='center' width='45%' style={{marginLeft: 80, marginBottom: 0, marginTop: 30}}>
-      <Field
+      <SectionHeading>Your Identity</SectionHeading>
+      <IdentificationForm />
+      <SectionHeading>Contact Information and Address</SectionHeading>
+      <ContactInfo />
+      <Flex alignSelf='center' width='45%' style={{marginLeft: 80, marginBottom: 0, marginTop: 30}}>
+        <Field
         name="addJointApplicant"
         component={Checkbox}
         label="Add joint applicant to my membership application"
         labelStyle={{color: colors.basic}}
         iconStyle={{fill: colors.basic, marginLeft: 10}}
       />
-    </Flex>
-    <center>
-      <ContinueButton title='KEEP GOING' buttonProps={{type: 'submit'}} style={{ marginTop: 10 }}/>
-    </center>
-  </form>
-</div>
+      </Flex>
+      <center>
+        <ContinueButton title='KEEP GOING' buttonProps={{type: 'submit'}} style={{ marginTop: 10 }}/>
+      </center>
+    </form>
+  </div>
 );
 
 export default withRouter(reduxForm({form: 'apply', validate})(ApplicantForm));

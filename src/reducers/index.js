@@ -5,6 +5,7 @@ import { getIn, updateIn } from 'zaphod/compat';
 
 import { transformFieldEntry } from 'src/reducers/formHelpers';
 import selectionReducer from 'src/reducers/selectionReducer';
+import formArrayReducer from 'src/reducers/formArrayReducer';
 
 const blurType = blur().type;
 const focusType = focus().type;
@@ -24,4 +25,5 @@ export default combineReducers({
   form: formReducer.plugin({
     apply: applyFormReducer,
   }),
+  applicants: formArrayReducer,
 });
