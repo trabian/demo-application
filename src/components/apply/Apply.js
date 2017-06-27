@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { getFormValues, initialize } from 'redux-form';
 import _ from 'lodash';
 import { Tabs, Tab } from 'material-ui/Tabs';
 
@@ -13,7 +14,7 @@ const tabStyle = {
   fontWeight: 400,
 };
 
-const Apply = ({selectedApplicantId, jointApplicantCount, addJointApplicant, selectJointApplicant}) => {
+const Apply = ({curValues, jointApplicantData, selectedApplicantId, jointApplicantCount, addJointApplicant, selectJointApplicant, initialize}) => {
   const applicantTabs = _.map(_.range(jointApplicantCount), i => {
     return <Tab style={tabStyle} label={`Joint Applicant ${i + 1}`} key={i} value={i} />;
   });
@@ -30,7 +31,11 @@ const Apply = ({selectedApplicantId, jointApplicantCount, addJointApplicant, sel
         addJointApplicant();
       }
     }
-    selectJointApplicant(index);
+
+    console.log('curValues: ', curValues);
+
+    selectJointApplicant(index, curValues);
+    initialize('apply', jointApplicantData[index], false);
   };
 
   const removeAddOption = (tabs) => {
@@ -54,9 +59,13 @@ const Apply = ({selectedApplicantId, jointApplicantCount, addJointApplicant, sel
   );
 };
 
+const applicantValuesSelector = getFormValues('apply');
+
 const mapStateToProps = state => ({
   selectedApplicantId: state.applicants.cursor,
   jointApplicantCount: state.applicants.forms.length,
+  jointApplicantData: state.applicants.forms,
+  curValues: applicantValuesSelector(state),
 });
 
-export default connect(mapStateToProps, {addJointApplicant, selectJointApplicant})(Apply);
+export default connect(mapStateToProps, {addJointApplicant, selectJointApplicant, initialize})(Apply);

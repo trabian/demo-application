@@ -31,7 +31,8 @@ export const removeJointApplicant = () => ({
   type: REMOVE_APPLICANT,
 });
 
-export const selectJointApplicant = id => ({
+export const selectJointApplicant = (newId, curValues) => ({
   type: SELECT_APPLICANT,
-  payload: id,
-})
+  curValues,
+  newId,
+});

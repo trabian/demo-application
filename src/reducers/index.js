@@ -6,6 +6,7 @@ import { getIn, updateIn } from 'zaphod/compat';
 import { transformFieldEntry } from 'src/reducers/formHelpers';
 import selectionReducer from 'src/reducers/selectionReducer';
 import formArrayReducer from 'src/reducers/formArrayReducer';
+import { SELECT_APPLICANT } from 'src/actions';
 
 const blurType = blur().type;
 const focusType = focus().type;
