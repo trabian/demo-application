@@ -32,6 +32,13 @@ const Apply = ({selectedApplicantId, jointApplicantCount, addJointApplicant, sel
     selectJointApplicant(index);
   };
 
+  const removeAddOption = (tabs) => {
+    if(tabs.length > 4){
+      return tabs.slice(0, 4);
+    }
+    return tabs;
+  };
+
   return (
     <div>
       <Tabs
@@ -39,7 +46,7 @@ const Apply = ({selectedApplicantId, jointApplicantCount, addJointApplicant, sel
         onChange={handleTabClick}
         value={selectedApplicantId}
       >
-        {allTabs}
+        {removeAddOption(allTabs)}
       </Tabs>
       <ApplicantForm />
     </div>
