@@ -43,7 +43,7 @@ const applyValidators = (validators, value) =>{
 }
 
 const requiredContents = ['firstName', 'lastName', 'phoneNumber', 'phoneNumberType', 'emailAddress', 'city', 'state', 'zipCode',
-  'soc', 'dob', 'address'];
+                          'soc', 'dob', 'address'];
 
 const requireFields = (application) => {
   return requiredContents.reduce((acc, val) => {

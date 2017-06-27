@@ -49,7 +49,7 @@ const singleApplicationForm = connect(mapStateToProps)(({ selectedApplicantId, f
     }
 
     return (
-      <div style={{display:'flex', flexDirection: 'column', alignItems: 'center'}} key={memberIndex}>
+      <div style={{display:'flex', flexDirection: 'column', alignItems: 'center'}}>
         <SectionHeading>Your Identity</SectionHeading>
         <IdentificationForm member={member} />
         <SectionHeading>Contact Information and Address</SectionHeading>
@@ -93,12 +93,13 @@ const ApplicantForm = ({selectedApplicantId, jointApplicantCount, setSelectedApp
     setSelectedApplicant(index);
   };
 
+  /* Removes 'Add Joint Applicant' option once the length has reached 4 */
   const removeAddOption = (tabs) => {
     if(tabs.length > 4){
       return tabs.slice(0, 4);
     }
     return tabs;
-  }
+  };
 
   return (
     <div style={{marginBottom: 12}}>
@@ -108,14 +109,14 @@ const ApplicantForm = ({selectedApplicantId, jointApplicantCount, setSelectedApp
           style={{width: '100%', marginTop: 26}}
           onChange={handleTabClick}
           value={selectedApplicantId}
-        >
+          >
           {removeAddOption(allTabs)}
-        </Tabs>
-        <FieldArray name="applications" component={singleApplicationForm} />
-      </form>
-    </div>
-  );
-};
+          </Tabs>
+          <FieldArray name="applications" component={singleApplicationForm} />
+        </form>
+      </div>
+    );
+  };
 
 const mapApplicantFormState = state => ({
   selectedApplicantId: state.selectedApplicant.id,
