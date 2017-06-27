@@ -58,10 +58,7 @@ const singleApplicationForm = connect(mapStateToProps)(({ selectedApplicantId, f
         return null; // only display the currently selected applicant
       }
       return (
-        <div key={memberIndex}>
-          {fields.map((member, index) => {
-            return(
-              <div style={{display:'flex', flexDirection: 'column', alignItems: 'center'}} key={index}>
+              <div style={{display:'flex', flexDirection: 'column', alignItems: 'center'}} key={memberIndex}>
                 <SectionHeading>Your Identity</SectionHeading>
                 <IdentificationForm member={member} />
                 <SectionHeading>Contact Information and Address</SectionHeading>
@@ -85,17 +82,13 @@ const singleApplicationForm = connect(mapStateToProps)(({ selectedApplicantId, f
                 </center>
               </div>
             );
-          })}
-        </div>
-      );
-    };
-
-    return (
-      <div>
-        {fields.map(fieldMapper)}
-      </div>
-    );
-});
+          };
+          return (
+            <div>
+              {fields.map(fieldMapper)}
+            </div>
+          );
+      });
 
       const SectionHeading = ({ children }) => <div style={headingStyle}>{children}</div>;
       const buttonType = (addJointApplicant) => {
