@@ -48,13 +48,9 @@ const createFormSubmitHandler = (jointApplicantData, curData, curApplicantIndex,
     const errors = validate(mergedDatum);
 
     if(_.keys(errors).length !== 0) {
-      console.log(`Errors in applicant #${index + 1}: `, errors);
       // switch to the first tab that has errors on it
-      return switchToTab(mergedDatum)(index);
+      switchToTab(mergedDatum, index);
     }
-
-    // all tabs validated successfully, so go ahead and display the next page.
-    console.log('App tabs successfully validated!'); // TODO
   });
 };
 
@@ -72,14 +68,12 @@ const Apply = ({
   ];
 
   const numberOfApplicantsAllowed = 4;
-  const switchToTab = newData => index => {
+  const switchToTab = (newData, index) => {
     if(index === jointApplicantCount) {
       if(jointApplicantCount < numberOfApplicantsAllowed){
         addJointApplicant();
       }
     }
-
-    console.log('curValues: ', curValues);
 
     selectJointApplicant(index, curValues);
     initializeApplyForm(newData, touch, blur);
@@ -96,7 +90,7 @@ const Apply = ({
     <div>
       <Tabs
         style={{width: '100%', marginTop: 26}}
-        onChange={index => switchToTab(jointApplicantData[index])(index)}
+        onChange={index => switchToTab(jointApplicantData[index], index)}
         value={selectedApplicantId}
       >
         {removeAddOption(allTabs)}
