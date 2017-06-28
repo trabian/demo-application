@@ -14,9 +14,10 @@ const focusType = focus().type;
 const applyFormReducer = (state, action={}) => {
   switch(action.type) {
   case focusType:
-  case blurType:
+  case blurType: {
     const fieldName = getIn(action, ['meta', 'field']);
     return updateIn(state, ['values', fieldName], transformFieldEntry(fieldName, action.type));
+  }
   case SELECT_APPLICANT:
     break;
   default:
