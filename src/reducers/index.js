@@ -11,12 +11,18 @@ const blurType = blur().type;
 const focusType = focus().type;
 
 const applyFormReducer = (state, action={}) => {
-  if (action.type !== blurType && action.type !== focusType) {
+  switch(action.type) {
+  case focusType:
+  case blurType: {
+    const fieldName = getIn(action, ['meta', 'field']);
+    return updateIn(state, ['values', fieldName], transformFieldEntry(fieldName, action.type));
+  }
+  case SELECT_APPLICANT:
+    break;
+  default:
     return state;
   }
 
-  const fieldName = getIn(action, ['meta', 'field']);
-  return updateIn(state, ['values', fieldName], transformFieldEntry(fieldName, action.type));
 };
 
 export default combineReducers({
