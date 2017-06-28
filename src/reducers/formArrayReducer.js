@@ -13,13 +13,12 @@ export default (state = initialState, action) => {
     return {...state, forms: state.forms.splice(action.payload, 1)};
   case SELECT_APPLICANT:
     const {curValues, newId} = action;
-    // TODO: Fix mutation
-    state.forms[state.cursor] = curValues;
-
+    const updatedForms = state.forms;
+    updatedForms[state.cursor] = curValues;
     return {
       ...state,
       cursor: newId,
-      forms: [...state.forms],
+      forms: updatedForms
     };
   default:
     return state;

@@ -32,8 +32,6 @@ const Apply = ({curValues, jointApplicantData, selectedApplicantId, jointApplica
       }
     }
 
-    console.log('curValues: ', curValues);
-
     selectJointApplicant(index, curValues);
     initialize('apply', jointApplicantData[index], false);
   };
