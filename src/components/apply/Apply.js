@@ -38,7 +38,7 @@ const initializeApplyForm = (formData, touchActionDispatcher, blurActionDispatch
  * Returns a function that validates each of the forms individually, switching to any invalid applicant tabs
  * in the case of an error and only actually submitting the form if they all all validate successfully.
  */
-const createFormSubmitHandler = (jointApplicantData, curData, curApplicantIndex) => () => {
+const createFormSubmitHandler = (jointApplicantData, curData, curApplicantIndex, switchToTab) => () => {
   // manually assign the current form data into the joint applicant data array
   jointApplicantData[curApplicantIndex] = curData;
   // manually validate the data from each of the applicant tabs
@@ -49,7 +49,12 @@ const createFormSubmitHandler = (jointApplicantData, curData, curApplicantIndex)
 
     if(_.keys(errors).length !== 0) {
       console.log(`Errors in applicant #${index + 1}: `, errors);
+      // switch to the first tab that has errors on it
+      return switchToTab(mergedDatum)(index);
     }
+
+    // all tabs validated successfully, so go ahead and display the next page.
+    console.log('App tabs successfully validated!'); // TODO
   });
 };
 
@@ -67,7 +72,7 @@ const Apply = ({
   ];
 
   const numberOfApplicantsAllowed = 4;
-  const handleTabClick = index => {
+  const switchToTab = newData => index => {
     if(index === jointApplicantCount) {
       if(jointApplicantCount < numberOfApplicantsAllowed){
         addJointApplicant();
@@ -77,7 +82,7 @@ const Apply = ({
     console.log('curValues: ', curValues);
 
     selectJointApplicant(index, curValues);
-    initializeApplyForm(jointApplicantData[index], touch, blur);
+    initializeApplyForm(newData, touch, blur);
   };
 
   const removeAddOption = (tabs) => {
@@ -91,7 +96,7 @@ const Apply = ({
     <div>
       <Tabs
         style={{width: '100%', marginTop: 26}}
-        onChange={handleTabClick}
+        onChange={index => switchToTab(jointApplicantData[index])(index)}
         value={selectedApplicantId}
       >
         {removeAddOption(allTabs)}
@@ -104,7 +109,7 @@ const Apply = ({
           title='KEEP GOING'
           buttonProps={{type: 'submit'}}
           style={{ marginTop: 10 }}
-          onClick={createFormSubmitHandler(jointApplicantData, curValues, selectedApplicantId)}
+          onClick={createFormSubmitHandler(jointApplicantData, curValues, selectedApplicantId, switchToTab)}
         />
       </center>
     </div>
