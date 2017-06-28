@@ -4,8 +4,13 @@ import { getFormValues, initialize, touch, blur } from 'redux-form';
 import _ from 'lodash';
 import { Tabs, Tab } from 'material-ui/Tabs';
 
+import ContinueButton from 'src/components/ContinueButton';
 import ApplicantForm from 'src/components/apply/ApplicantForm';
 import { addJointApplicant, selectJointApplicant } from 'src/actions';
+import { validate } from 'src/components/apply/formValidators';
+import * as fieldNames from 'src/helpers/fieldNames';
+
+const blankApplicantForm = () => _.fromPairs(_.map(_.values(fieldNames), fieldName => [fieldName, '']));
 
 const tabStyle = {
   fontSize: '11pt',
@@ -26,6 +31,25 @@ const initializeApplyForm = (formData, touchActionDispatcher, blurActionDispatch
   _.each(formData, (fieldValue, fieldName) => {
     touchActionDispatcher('apply', fieldName);
     blurActionDispatcher('apply', fieldName, fieldValue);
+  });
+};
+
+/**
+ * Returns a function that validates each of the forms individually, switching to any invalid applicant tabs
+ * in the case of an error and only actually submitting the form if they all all validate successfully.
+ */
+const createFormSubmitHandler = (jointApplicantData, curData, curApplicantIndex) => () => {
+  // manually assign the current form data into the joint applicant data array
+  jointApplicantData[curApplicantIndex] = curData;
+  // manually validate the data from each of the applicant tabs
+  _.each(jointApplicantData, (datum, index) => {
+    // combine the data from the state with a blank application so empty fields are validated
+    const mergedDatum = _.assign(blankApplicantForm(), datum);
+    const errors = validate(mergedDatum);
+
+    if(_.keys(errors).length !== 0) {
+      console.log(`Errors in applicant #${index + 1}: `, errors);
+    }
   });
 };
 
@@ -72,7 +96,17 @@ const Apply = ({
       >
         {removeAddOption(allTabs)}
       </Tabs>
+
       <ApplicantForm />
+
+      <center>
+        <ContinueButton
+          title='KEEP GOING'
+          buttonProps={{type: 'submit'}}
+          style={{ marginTop: 10 }}
+          onClick={createFormSubmitHandler(jointApplicantData, curValues, selectedApplicantId)}
+        />
+      </center>
     </div>
   );
 };
