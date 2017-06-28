@@ -18,9 +18,9 @@ const tabStyle = {
  * Helper function that initializes the form with the new values provided and executes the validators/normalizers
  * for each untouched field as soon as its loaded, causing error messages to be displayed immediately.
  */
-const initializeApplyForm = (formData, touchActionDispatcher, blurActionDispatcher) => {
+const initializeApplyForm = (formData, initializeActionDispatcher, touchActionDispatcher, blurActionDispatcher) => {
   // Actually insert the new values into the form
-  initialize('apply', formData, false);
+  initializeActionDispatcher('apply', formData, false);
 
   // for each field that has values, simulate a `BLUR` event to trigger validators and normalizers
   _.each(formData, (fieldValue, fieldName) => {
@@ -29,43 +29,44 @@ const initializeApplyForm = (formData, touchActionDispatcher, blurActionDispatch
   });
 };
 
-const Apply = ({
-  curValues, jointApplicantData, selectedApplicantId, jointApplicantCount,
-  addJointApplicant, selectJointApplicant, initialize, touch, blur
-}) => {
+const MAX_JOINT_APPLICANT_COUNT = 4;
+const createTabClickHandler = ({
+  jointApplicantCount, selectJointApplicant, curValues, jointApplicantData, addJointApplicant,
+  initialize, touch, blur
+}) => index => {
+  if(index === jointApplicantCount && jointApplicantCount < MAX_JOINT_APPLICANT_COUNT){
+    addJointApplicant();
+  }
+
+  selectJointApplicant(index, curValues);
+  initializeApplyForm(jointApplicantData[index], initialize, touch, blur);
+};
+
+const removeAddOption = (tabs) => {
+  if(tabs.length > MAX_JOINT_APPLICANT_COUNT){
+    return tabs.slice(0, MAX_JOINT_APPLICANT_COUNT);
+  }
+  return tabs;
+};
+
+const Apply = (props) => {
+  const { jointApplicantCount, selectedApplicantId } = props;
+
   const applicantTabs = _.map(_.range(jointApplicantCount), i => {
     return <Tab style={tabStyle} label={`Joint Applicant ${i + 1}`} key={i} value={i} />;
   });
-  // Add an additional tab at the end to add additional joint applicants
-  const allTabs = [
+
+  // Add an additional tab at the end to add additional joint applicants if there are less than `MAX_JOINT_APPLICANT_COUNT` tabs
+  const allTabs = applicantTabs.length > MAX_JOINT_APPLICANT_COUNT ? applicantTabs : [
     ...applicantTabs,
     <Tab style={tabStyle} label={'+ Add Joint Applicant'} key={applicantTabs.length} value={applicantTabs.length} />
   ];
-
-  const numberOfApplicantsAllowed = 4;
-  const handleTabClick = index => {
-    if(index === jointApplicantCount) {
-      if(jointApplicantCount < numberOfApplicantsAllowed){
-        addJointApplicant();
-      }
-    }
-
-    selectJointApplicant(index, curValues);
-    initializeApplyForm(jointApplicantData[index], touch, blur);
-  };
-
-  const removeAddOption = (tabs) => {
-    if(tabs.length > numberOfApplicantsAllowed){
-      return tabs.slice(0, numberOfApplicantsAllowed);
-    }
-    return tabs;
-  };
 
   return (
     <div>
       <Tabs
         style={{width: '100%', marginTop: 26}}
-        onChange={handleTabClick}
+        onChange={createTabClickHandler(props)}
         value={selectedApplicantId}
       >
         {removeAddOption(allTabs)}

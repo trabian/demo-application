@@ -5,6 +5,9 @@
     "linebreak-style": [2, "unix"],
     "no-var": 2,
     "prefer-const": 1,
-    "react/jsx-indent": [1, 2]
+    "react/jsx-indent": [1, 2],
+    "react/jsx-no-bind": [2, {
+      "allowArrowFunctions": false,
+    }]
   }
 }

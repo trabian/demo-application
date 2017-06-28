@@ -17,12 +17,9 @@ const applyFormReducer = (state, action={}) => {
     const fieldName = getIn(action, ['meta', 'field']);
     return updateIn(state, ['values', fieldName], transformFieldEntry(fieldName, action.type));
   }
-  case SELECT_APPLICANT:
-    break;
   default:
     return state;
   }
-
 };
 
 export default combineReducers({

@@ -1,3 +1,5 @@
+import { set } from 'zaphod/compat';
+
 import { ADD_APPLICANT, REMOVE_APPLICANT, SELECT_APPLICANT } from 'src/actions';
 
 const initialState = {
@@ -12,13 +14,12 @@ export default (state = initialState, action) => {
   case REMOVE_APPLICANT:
     return {...state, forms: state.forms.splice(action.payload, 1)};
   case SELECT_APPLICANT:
-    const {curValues, newId} = action;
-    const updatedForms = state.forms;
-    updatedForms[state.cursor] = curValues;
+    const { curValues, newId } = action;
+
     return {
       ...state,
       cursor: newId,
-      forms: updatedForms
+      forms: set(state.forms, state.cursor, curValues),
     };
   default:
     return state;
