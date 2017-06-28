@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getFormValues, initialize } from 'redux-form';
+import { getFormValues, initialize, touch, blur } from 'redux-form';
 import _ from 'lodash';
 import { Tabs, Tab } from 'material-ui/Tabs';
 
@@ -14,7 +14,25 @@ const tabStyle = {
   fontWeight: 400,
 };
 
-const Apply = ({curValues, jointApplicantData, selectedApplicantId, jointApplicantCount, addJointApplicant, selectJointApplicant, initialize}) => {
+/**
+ * Helper function that initializes the form with the new values provided and executes the validators/normalizers
+ * for each untouched field as soon as its loaded, causing error messages to be displayed immediately.
+ */
+const initializeApplyForm = (formData, touchActionDispatcher, blurActionDispatcher) => {
+  // Actually insert the new values into the form
+  initialize('apply', formData, false);
+
+  // for each field that has values, simulate a `BLUR` event to trigger validators and normalizers
+  _.each(formData, (fieldValue, fieldName) => {
+    touchActionDispatcher('apply', fieldName);
+    blurActionDispatcher('apply', fieldName, fieldValue);
+  });
+};
+
+const Apply = ({
+  curValues, jointApplicantData, selectedApplicantId, jointApplicantCount,
+  addJointApplicant, selectJointApplicant, initialize, touch, blur
+}) => {
   const applicantTabs = _.map(_.range(jointApplicantCount), i => {
     return <Tab style={tabStyle} label={`Joint Applicant ${i + 1}`} key={i} value={i} />;
   });
@@ -35,7 +53,7 @@ const Apply = ({curValues, jointApplicantData, selectedApplicantId, jointApplica
     console.log('curValues: ', curValues);
 
     selectJointApplicant(index, curValues);
-    initialize('apply', jointApplicantData[index], false);
+    initializeApplyForm(jointApplicantData[index], touch, blur);
   };
 
   const removeAddOption = (tabs) => {
@@ -68,4 +86,4 @@ const mapStateToProps = state => ({
   curValues: applicantValuesSelector(state),
 });
 
-export default connect(mapStateToProps, {addJointApplicant, selectJointApplicant, initialize})(Apply);
+export default connect(mapStateToProps, {addJointApplicant, selectJointApplicant, initialize, touch, blur})(Apply);
