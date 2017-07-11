@@ -5,17 +5,21 @@ import { getIn, updateIn } from 'zaphod/compat';
 
 import { transformFieldEntry } from 'src/reducers/formHelpers';
 import selectionReducer from 'src/reducers/selectionReducer';
+import formArrayReducer from 'src/reducers/formArrayReducer';
 
 const blurType = blur().type;
 const focusType = focus().type;
 
 const applyFormReducer = (state, action={}) => {
-  if (action.type !== blurType && action.type !== focusType) {
+  switch(action.type) {
+  case focusType:
+  case blurType: {
+    const fieldName = getIn(action, ['meta', 'field']);
+    return updateIn(state, ['values', fieldName], transformFieldEntry(fieldName, action.type));
+  }
+  default:
     return state;
   }
-
-  const fieldName = getIn(action, ['meta', 'field']);
-  return updateIn(state, ['values', fieldName], transformFieldEntry(fieldName, action.type));
 };
 
 export default combineReducers({
@@ -24,4 +28,5 @@ export default combineReducers({
   form: formReducer.plugin({
     apply: applyFormReducer,
   }),
+  applicants: formArrayReducer,
 });
