@@ -7,7 +7,7 @@ import { getIn, updateIn } from 'zaphod/compat';
 import { transformFieldEntry } from 'src/reducers/formHelpers';
 import selectionReducer from 'src/reducers/selectionReducer';
 import { selectedApplicantReducer } from 'src/reducers/selectedApplicant';
-
+import { REMOVE_JOINT_APPLICATION } from 'src/actions/formActions';
 const blurType = blur().type;
 const focusType = focus().type;
 
@@ -23,8 +23,16 @@ const stripFieldNamePrefix = name => ({
 });
 
 const applyFormReducer = (state, action={}) => {
-  if (action.type !== blurType && action.type !== focusType) {
+  if (action.type !== blurType && action.type !== focusType && action.type !== REMOVE_JOINT_APPLICATION) {
     return state;
+  }
+
+  else if(action.type === REMOVE_JOINT_APPLICATION){
+    const { index } = action.payload;
+    const removeEntry = arr => {
+      return arr.splice(index, 1);
+    }
+    return updateIn(state, ['values', 'applications'], removeEntry);
   }
 
   const nestedField = getIn(action, ['meta', 'field']);

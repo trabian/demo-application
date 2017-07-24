@@ -11,7 +11,7 @@ import ContactInfo from 'src/components/apply/ContactInfo';
 import ContinueButton from 'src/components/ContinueButton';
 import { validate } from 'src/components/apply/formValidators';
 import { setSelectedApplicant, setJointApplicantCount } from 'src/reducers/selectedApplicant';
-
+import { REMOVE_JOINT_APPLICATION, removeJointApplicant } from 'src/actions/formActions';
 
 const headingStyle = {
   fontSize: '18pt',
@@ -95,7 +95,7 @@ const tabLabel = (index, removeJointApplicant) => (
 const ApplicantForm = ({ selectedApplicantId, jointApplicantCount, setSelectedApplicant, setJointApplicantCount, removeJointApplicant, handleSubmit, history }) => {
 
   const applicantTabs = _.map(_.range(jointApplicantCount), i => {
-    return <Tab style={tabStyle} label={tabLabel(i)} key={i} value={i} />;
+    return <Tab style={tabStyle} label={tabLabel(i, removeJointApplicant)} key={i} value={i} />;
   });
   // Add an additional tab at the end to add additional joint applicants
   const allTabs = [
@@ -136,7 +136,7 @@ const mapApplicantFormState = state => ({
   jointApplicantCount: state.selectedApplicant.count,
 });
 
-export default connect(mapApplicantFormState, {setSelectedApplicant, setJointApplicantCount})(
+export default connect(mapApplicantFormState, {setSelectedApplicant, setJointApplicantCount, removeJointApplicant})(
   withRouter(
     reduxForm({form: 'apply', validate})(ApplicantForm)
   )

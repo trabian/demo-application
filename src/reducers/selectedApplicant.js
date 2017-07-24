@@ -14,5 +14,3 @@ selectedApplicantReducer.addSetter('count');
 export const setSelectedApplicant = index => Simr.actions.setOn('selectedApplicant', 'id', index);
 
 export const setJointApplicantCount = count => Simr.actions.setOn('selectedApplicant', 'count', count);
-
-export const removeJointApplicant = index => Simr.actions
