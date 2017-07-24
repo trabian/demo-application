@@ -23,19 +23,19 @@ const stripFieldNamePrefix = name => ({
 });
 
 const applyFormReducer = (state, action={}) => {
-  if (action.type !== blurType && action.type !== focusType && action.type !== REMOVE_JOINT_APPLICATION) {
-    return state;
+
+  if(action.type === REMOVE_JOINT_APPLICATION){
+    const index = action.payload;
+    const removeEntry = arr => {
+      const splicedArray = [...arr];
+      splicedArray.splice(index, 1);
+      return splicedArray;
+    }
+    return updateIn(state, ['values', 'applications'], removeEntry);
   }
 
-  else if(action.type === REMOVE_JOINT_APPLICATION){
-    const { index } = action.payload;
-
-    const removeEntry = arr => {
-      return arr.slice().splice(index, 1);
-    }
-    console.log(state.values.applications);
-    console.log(state.values.applications.slice().splice(index, 1))
-    return updateIn(state, ['values', 'applications'], removeEntry);
+  if (action.type !== blurType && action.type !== focusType) {
+    return state;
   }
 
   const nestedField = getIn(action, ['meta', 'field']);

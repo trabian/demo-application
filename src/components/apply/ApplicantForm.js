@@ -11,7 +11,7 @@ import ContactInfo from 'src/components/apply/ContactInfo';
 import ContinueButton from 'src/components/ContinueButton';
 import { validate } from 'src/components/apply/formValidators';
 import { setSelectedApplicant, setJointApplicantCount } from 'src/reducers/selectedApplicant';
-import { REMOVE_JOINT_APPLICATION, removeJointApplicant } from 'src/actions/formActions';
+import { removeJointApplicant } from 'src/actions/formActions';
 
 const headingStyle = {
   fontSize: '18pt',
@@ -80,33 +80,31 @@ const tabStyle = {
 
 const removeTab = (index, jointApplicantCount,setJointApplicantCount, setSelectedApplicant, removeJointApplicant) => (
  () => {
-  if(index !== 0){
-    setJointApplicantCount(jointApplicantCount - 1);
-    setSelectedApplicant(1);
-    removeJointApplicant(index);
-  }
+      removeJointApplicant(index);
+      const newSelected = index === 0 ? 0 : index - 1;
+      setSelectedApplicant(newSelected);
+      setJointApplicantCount(jointApplicantCount-1);
 });
 
 const displayDeleteButton = (index, jointApplicantCount, setJointApplicantCount, setSelectedApplicant, removeJointApplicant) => {
-  if( index > 0){
+  if(jointApplicantCount > 1){
     return(
-      <div style={{position: 'absolute', right: 10, bottom: 15}}
-        onClick={removeTab(index, jointApplicantCount, setJointApplicantCount, setSelectedApplicant, removeJointApplicant)}>
-        X
-      </div>
+        <div style={{position: 'absolute', right: 10, bottom: 15}}
+          onClick={removeTab(index, jointApplicantCount, setJointApplicantCount, setSelectedApplicant, removeJointApplicant)}>
+          X
+        </div>
     );
   }
 }
 
-const tabLabel = (index, jointApplicantCount, setJointApplicantCount, removeJointApplicant) => (
+const tabLabel = (index, jointApplicantCount, setJointApplicantCount, setSelectedApplicant, removeJointApplicant) => (
   <Row alignItems='center'>
     {`Joint Applicant ${index + 1}`}
-    {displayDeleteButton(index,jointApplicantCount, setJointApplicantCount, setSelectedApplicant, removeJointApplicant)}
+    {displayDeleteButton(index, jointApplicantCount, setJointApplicantCount, setSelectedApplicant, removeJointApplicant)}
   </Row>
 );
 
 const ApplicantForm = ({ selectedApplicantId, jointApplicantCount, setSelectedApplicant, setJointApplicantCount, removeJointApplicant, handleSubmit, history }) => {
-
   const applicantTabs = _.map(_.range(jointApplicantCount), i => {
     return <Tab style={tabStyle}
       label={tabLabel(i, jointApplicantCount, setJointApplicantCount, setSelectedApplicant, removeJointApplicant)}
