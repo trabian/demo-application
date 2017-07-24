@@ -7,7 +7,7 @@ import { getIn, updateIn } from 'zaphod/compat';
 import { transformFieldEntry } from 'src/reducers/formHelpers';
 import selectionReducer from 'src/reducers/selectionReducer';
 import { selectedApplicantReducer } from 'src/reducers/selectedApplicant';
-import { REMOVE_JOINT_APPLICATION } from 'src/actions/formActions';
+import { REMOVE_JOINT_APPLICATION } from 'src/actions/';
 const blurType = blur().type;
 const focusType = focus().type;
 

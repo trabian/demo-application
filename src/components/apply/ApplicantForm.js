@@ -11,7 +11,10 @@ import ContactInfo from 'src/components/apply/ContactInfo';
 import ContinueButton from 'src/components/ContinueButton';
 import { validate } from 'src/components/apply/formValidators';
 import { setSelectedApplicant, setJointApplicantCount } from 'src/reducers/selectedApplicant';
-import { removeJointApplicant } from 'src/actions/formActions';
+import { removeJointApplicant } from 'src/actions/';
+
+//maximum number of applications allowed.
+const MAX_APPLICANTS = 4;
 
 const headingStyle = {
   fontSize: '18pt',
@@ -77,22 +80,28 @@ const tabStyle = {
   paddingLeft: 5,
   fontWeight: 400,
 };
+const updatedSelectedIndex = (index, jointApplicantCount) => {
+  if(index === 0){
+    return 0;
+  }
+  else if(jointApplicantCount-1 === index){
+    return index - 1;
+  }
+  return index;
+}
 
-const removeTab = (index, jointApplicantCount,setJointApplicantCount, setSelectedApplicant, removeJointApplicant) => (
- () => {
-      removeJointApplicant(index);
-      const newSelected = index === 0 ? 0 : index - 1;
-      setSelectedApplicant(newSelected);
-      setJointApplicantCount(jointApplicantCount-1);
-});
+const removeTab = (index, jointApplicantCount, setJointApplicantCount, setSelectedApplicant, removeJointApplicant) =>(
+  () => {
+        removeJointApplicant(index);
+        setSelectedApplicant(updatedSelectedIndex(index, jointApplicantCount));
+        setJointApplicantCount(jointApplicantCount-1);
+  }
+);
 
-const displayDeleteButton = (index, jointApplicantCount, setJointApplicantCount, setSelectedApplicant, removeJointApplicant) => {
+const displayDeleteButton = (jointApplicantCount, onClick) => {
   if(jointApplicantCount > 1){
     return(
-        <div style={{position: 'absolute', right: 10, bottom: 15}}
-          onClick={removeTab(index, jointApplicantCount, setJointApplicantCount, setSelectedApplicant, removeJointApplicant)}>
-          X
-        </div>
+        <div style={{position: 'absolute', right: 10, bottom: 15}} onClick={onClick}>X</div>
     );
   }
 }
@@ -100,9 +109,16 @@ const displayDeleteButton = (index, jointApplicantCount, setJointApplicantCount,
 const tabLabel = (index, jointApplicantCount, setJointApplicantCount, setSelectedApplicant, removeJointApplicant) => (
   <Row alignItems='center'>
     {`Joint Applicant ${index + 1}`}
-    {displayDeleteButton(index, jointApplicantCount, setJointApplicantCount, setSelectedApplicant, removeJointApplicant)}
+    {displayDeleteButton(jointApplicantCount, removeTab(index, jointApplicantCount, setJointApplicantCount, setSelectedApplicant, removeJointApplicant))}
   </Row>
 );
+
+const displayTabs = (tabs) => {
+  if(tabs.length < MAX_APPLICANTS){
+    return tabs;
+  }
+  return tabs.slice(0, MAX_APPLICANTS);
+}
 
 const ApplicantForm = ({ selectedApplicantId, jointApplicantCount, setSelectedApplicant, setJointApplicantCount, removeJointApplicant, handleSubmit, history }) => {
   const applicantTabs = _.map(_.range(jointApplicantCount), i => {
@@ -117,7 +133,7 @@ const ApplicantForm = ({ selectedApplicantId, jointApplicantCount, setSelectedAp
   ];
 
   const handleTabClick = index => {
-    if(index === jointApplicantCount) {
+    if(index === jointApplicantCount && jointApplicantCount < MAX_APPLICANTS) {
       // the "Add New Applicant" tab was clicked, so add a new applicant to the list
       setJointApplicantCount(jointApplicantCount + 1);
     }
@@ -135,7 +151,7 @@ const ApplicantForm = ({ selectedApplicantId, jointApplicantCount, setSelectedAp
           onChange={handleTabClick}
           value={selectedApplicantId}
         >
-          {allTabs}
+          {displayTabs(allTabs)}
         </Tabs>
 
         <FieldArray name="applications" component={singleApplicationForm} />
