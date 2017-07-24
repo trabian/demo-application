@@ -12,7 +12,7 @@ import ContinueButton from 'src/components/ContinueButton';
 import { validate } from 'src/components/apply/formValidators';
 import { setSelectedApplicant, setJointApplicantCount } from 'src/reducers/selectedApplicant';
 import { removeJointApplicant } from 'src/actions/';
-
+import * as colors from 'src/helpers/colors';
 //maximum number of applications allowed.
 const MAX_APPLICANTS = 4;
 
@@ -79,7 +79,11 @@ const tabStyle = {
   paddingRight: 5,
   paddingLeft: 5,
   fontWeight: 400,
+  borderRightWidth: 1,
+  borderRightColor: colors.basic,
+  borderRightStyle: 'solid'
 };
+
 const updatedSelectedIndex = (index, jointApplicantCount) => {
   if(index === 0){
     return 0;
@@ -150,6 +154,8 @@ const ApplicantForm = ({ selectedApplicantId, jointApplicantCount, setSelectedAp
           style={{width: '100%', marginTop: 26}}
           onChange={handleTabClick}
           value={selectedApplicantId}
+          tabItemContainerStyle={{backgroundColor: colors.transparent, borderColor: colors.basic, borderStyle: 'solid', borderWidth: 1}}
+          inkBarStyle={{backgroundColor: colors.basic, marginTop: 2}}
         >
           {displayTabs(allTabs)}
         </Tabs>
