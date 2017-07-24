@@ -78,24 +78,39 @@ const tabStyle = {
   fontWeight: 400,
 };
 
-const removeTab = (index, removeJointApplicant) => (
+const removeTab = (index, jointApplicantCount,setJointApplicantCount, setSelectedApplicant, removeJointApplicant) => (
  () => {
   if(index !== 0){
+    setJointApplicantCount(jointApplicantCount - 1);
+    setSelectedApplicant(1);
     removeJointApplicant(index);
   }
 });
 
-const tabLabel = (index, removeJointApplicant) => (
+const displayDeleteButton = (index, jointApplicantCount, setJointApplicantCount, setSelectedApplicant, removeJointApplicant) => {
+  if( index > 0){
+    return(
+      <div style={{position: 'absolute', right: 10, bottom: 15}}
+        onClick={removeTab(index, jointApplicantCount, setJointApplicantCount, setSelectedApplicant, removeJointApplicant)}>
+        X
+      </div>
+    );
+  }
+}
+
+const tabLabel = (index, jointApplicantCount, setJointApplicantCount, removeJointApplicant) => (
   <Row alignItems='center'>
     {`Joint Applicant ${index + 1}`}
-    <div style={{position: 'absolute', right: 10, bottom: 15}} onClick={removeTab(index, removeJointApplicant)}>X</div>
+    {displayDeleteButton(index,jointApplicantCount, setJointApplicantCount, setSelectedApplicant, removeJointApplicant)}
   </Row>
 );
 
 const ApplicantForm = ({ selectedApplicantId, jointApplicantCount, setSelectedApplicant, setJointApplicantCount, removeJointApplicant, handleSubmit, history }) => {
 
   const applicantTabs = _.map(_.range(jointApplicantCount), i => {
-    return <Tab style={tabStyle} label={tabLabel(i, removeJointApplicant)} key={i} value={i} />;
+    return <Tab style={tabStyle}
+      label={tabLabel(i, jointApplicantCount, setJointApplicantCount, setSelectedApplicant, removeJointApplicant)}
+      key={i} value={i} />;
   });
   // Add an additional tab at the end to add additional joint applicants
   const allTabs = [
