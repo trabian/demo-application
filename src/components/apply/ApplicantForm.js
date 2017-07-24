@@ -4,15 +4,13 @@ import _ from 'lodash';
 import { reduxForm, FieldArray } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 import { Tabs, Tab } from 'material-ui/Tabs';
-import { Flex } from 'jsxstyle';
-import { Checkbox } from 'redux-form-material-ui';
+import { Row } from 'jsxstyle';
 
 import IdentificationForm from 'src/components/apply/IdentificationForm';
 import ContactInfo from 'src/components/apply/ContactInfo';
 import ContinueButton from 'src/components/ContinueButton';
 import { validate } from 'src/components/apply/formValidators';
 import { setSelectedApplicant, setJointApplicantCount } from 'src/reducers/selectedApplicant';
-import * as colors from 'src/helpers/colors';
 
 
 const headingStyle = {
@@ -80,9 +78,24 @@ const tabStyle = {
   fontWeight: 400,
 };
 
-const ApplicantForm = ({ selectedApplicantId, jointApplicantCount, setSelectedApplicant, setJointApplicantCount, handleSubmit, history }) => {
+const removeTab = (index, removeJointApplicant) => (
+ () => {
+  if(index !== 0){
+    removeJointApplicant(index);
+  }
+});
+
+const tabLabel = (index, removeJointApplicant) => (
+  <Row alignItems='center'>
+    {`Joint Applicant ${index + 1}`}
+    <div style={{position: 'absolute', right: 10, bottom: 15}} onClick={removeTab(index, removeJointApplicant)}>X</div>
+  </Row>
+);
+
+const ApplicantForm = ({ selectedApplicantId, jointApplicantCount, setSelectedApplicant, setJointApplicantCount, removeJointApplicant, handleSubmit, history }) => {
+
   const applicantTabs = _.map(_.range(jointApplicantCount), i => {
-    return <Tab style={tabStyle} label={`Joint Applicant ${i + 1}`} key={i} value={i} />;
+    return <Tab style={tabStyle} label={tabLabel(i)} key={i} value={i} />;
   });
   // Add an additional tab at the end to add additional joint applicants
   const allTabs = [
